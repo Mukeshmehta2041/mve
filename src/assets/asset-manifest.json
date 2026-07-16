@@ -1,0 +1,1090 @@
+[
+  {
+    "file": "images/branding/logo-home-concept.png",
+    "label": "Homepage concept logo",
+    "source": "home",
+    "source_file": "industrial_fabrication_ui_ux_design_mockup.png",
+    "crop_box": [
+      258,
+      12,
+      402,
+      65
+    ],
+    "size": [
+      288,
+      106
+    ],
+    "notes": "Raster crop from concept board; recreate as SVG before production."
+  },
+  {
+    "file": "images/branding/logo-dark-header.png",
+    "label": "Dark header logo",
+    "source": "about",
+    "source_file": "modern_corporate_ui_ux_website_design_mockup.png",
+    "crop_box": [
+      30,
+      14,
+      218,
+      55
+    ],
+    "size": [
+      376,
+      82
+    ],
+    "notes": "Raster crop from About page concept."
+  },
+  {
+    "file": "images/ui/homepage-desktop-reference.png",
+    "label": "Homepage desktop design reference",
+    "source": "home",
+    "source_file": "industrial_fabrication_ui_ux_design_mockup.png",
+    "crop_box": [
+      226,
+      5,
+      985,
+      1070
+    ],
+    "size": [
+      759,
+      1065
+    ],
+    "notes": "Reference crop of the approved modern homepage concept."
+  },
+  {
+    "file": "images/ui/homepage-mobile-reference.png",
+    "label": "Homepage mobile design reference",
+    "source": "home",
+    "source_file": "industrial_fabrication_ui_ux_design_mockup.png",
+    "crop_box": [
+      1154,
+      145,
+      1345,
+      1000
+    ],
+    "size": [
+      191,
+      855
+    ],
+    "notes": "Reference crop of approved mobile direction."
+  },
+  {
+    "file": "images/hero/home-industrial-hero.jpg",
+    "label": "Homepage industrial hero",
+    "source": "home",
+    "source_file": "industrial_fabrication_ui_ux_design_mockup.png",
+    "crop_box": [
+      548,
+      68,
+      980,
+      303
+    ],
+    "size": [
+      864,
+      470
+    ],
+    "notes": "Concept crop; may include generated details. Replace with licensed high-resolution photography for production."
+  },
+  {
+    "file": "images/hero/about-industrial-hero.jpg",
+    "label": "About page industrial hero",
+    "source": "about",
+    "source_file": "modern_corporate_ui_ux_website_design_mockup.png",
+    "crop_box": [
+      10,
+      60,
+      878,
+      265
+    ],
+    "size": [
+      868,
+      205
+    ],
+    "notes": "Wide hero crop with text-free center/right areas; use as concept reference."
+  },
+  {
+    "file": "images/hero/products-industrial-hero.jpg",
+    "label": "Products page hero",
+    "source": "products",
+    "source_file": "industrial_product_listing_page_mockup.png",
+    "crop_box": [
+      288,
+      56,
+      1086,
+      230
+    ],
+    "size": [
+      798,
+      174
+    ],
+    "notes": "Dark industrial factory hero background."
+  },
+  {
+    "file": "images/hero/custom-fabrication-hero.jpg",
+    "label": "Custom fabrication hero",
+    "source": "fabrication",
+    "source_file": "web_design_mockup_for_custom_fabrication_site.png",
+    "crop_box": [
+      510,
+      51,
+      1084,
+      263
+    ],
+    "size": [
+      1148,
+      424
+    ],
+    "notes": "Welder and fabricated vessel crop."
+  },
+  {
+    "file": "images/hero/projects-industrial-hero.jpg",
+    "label": "Projects page hero",
+    "source": "projects",
+    "source_file": "industrial_ui_ux_website_design_showcase.png",
+    "crop_box": [
+      590,
+      49,
+      1084,
+      250
+    ],
+    "size": [
+      988,
+      402
+    ],
+    "notes": "Industrial steel structure crop."
+  },
+  {
+    "file": "images/hero/quality-welding-hero.jpg",
+    "label": "Quality page welding hero",
+    "source": "quality",
+    "source_file": "corporate_website_design_mockup_with_mobile_previe.png",
+    "crop_box": [
+      525,
+      65,
+      1024,
+      300
+    ],
+    "size": [
+      998,
+      470
+    ],
+    "notes": "Welder with sparks; concept asset."
+  },
+  {
+    "file": "images/facilities/company-building.jpg",
+    "label": "Company building exterior",
+    "source": "about",
+    "source_file": "modern_corporate_ui_ux_website_design_mockup.png",
+    "crop_box": [
+      118,
+      281,
+      466,
+      478
+    ],
+    "size": [
+      696,
+      394
+    ],
+    "notes": "Concept-only company exterior with generated signage."
+  },
+  {
+    "file": "images/facilities/factory-building-home.jpg",
+    "label": "Factory building homepage",
+    "source": "home",
+    "source_file": "industrial_fabrication_ui_ux_design_mockup.png",
+    "crop_box": [
+      255,
+      360,
+      575,
+      508
+    ],
+    "size": [
+      640,
+      296
+    ],
+    "notes": "Concept-only factory exterior."
+  },
+  {
+    "file": "images/facilities/manufacturing-facility.jpg",
+    "label": "Manufacturing facility interior",
+    "source": "about",
+    "source_file": "modern_corporate_ui_ux_website_design_mockup.png",
+    "crop_box": [
+      428,
+      752,
+      793,
+      865
+    ],
+    "size": [
+      730,
+      226
+    ],
+    "notes": "Factory workshop interior."
+  },
+  {
+    "file": "images/products/resin-glue-kettle.jpg",
+    "label": "Resin Glue Kettle",
+    "source": "products",
+    "source_file": "industrial_product_listing_page_mockup.png",
+    "crop_box": [
+      319,
+      282,
+      484,
+      405
+    ],
+    "size": [
+      495,
+      369
+    ],
+    "notes": "Product image extracted from Products page concept."
+  },
+  {
+    "file": "images/products/storage-tank.jpg",
+    "label": "Storage Tank",
+    "source": "products",
+    "source_file": "industrial_product_listing_page_mockup.png",
+    "crop_box": [
+      499,
+      282,
+      662,
+      405
+    ],
+    "size": [
+      489,
+      369
+    ],
+    "notes": "Product image extracted from Products page concept."
+  },
+  {
+    "file": "images/products/shuttering-plate.jpg",
+    "label": "Shuttering Plate",
+    "source": "products",
+    "source_file": "industrial_product_listing_page_mockup.png",
+    "crop_box": [
+      681,
+      282,
+      856,
+      405
+    ],
+    "size": [
+      525,
+      369
+    ],
+    "notes": "Product image extracted from Products page concept."
+  },
+  {
+    "file": "images/products/hopper.jpg",
+    "label": "Hopper",
+    "source": "products",
+    "source_file": "industrial_product_listing_page_mockup.png",
+    "crop_box": [
+      872,
+      282,
+      1052,
+      405
+    ],
+    "size": [
+      540,
+      369
+    ],
+    "notes": "Product image extracted from Products page concept."
+  },
+  {
+    "file": "images/products/industrial-chimney.jpg",
+    "label": "Industrial Chimney",
+    "source": "products",
+    "source_file": "industrial_product_listing_page_mockup.png",
+    "crop_box": [
+      398,
+      524,
+      570,
+      625
+    ],
+    "size": [
+      516,
+      303
+    ],
+    "notes": "Product image extracted from Products page concept."
+  },
+  {
+    "file": "images/products/hot-water-generator.jpg",
+    "label": "Hot Water Generator",
+    "source": "products",
+    "source_file": "industrial_product_listing_page_mockup.png",
+    "crop_box": [
+      579,
+      524,
+      753,
+      625
+    ],
+    "size": [
+      522,
+      303
+    ],
+    "notes": "Product image extracted from Products page concept."
+  },
+  {
+    "file": "images/products/railway-height-gauge.jpg",
+    "label": "Railway Height Gauge",
+    "source": "products",
+    "source_file": "industrial_product_listing_page_mockup.png",
+    "crop_box": [
+      769,
+      524,
+      942,
+      625
+    ],
+    "size": [
+      519,
+      303
+    ],
+    "notes": "Product image extracted from Products page concept."
+  },
+  {
+    "file": "images/products/storage-tank-main.jpg",
+    "label": "Storage Tank main image",
+    "source": "product_detail",
+    "source_file": "industrial_product_page_ui_mockup.png",
+    "crop_box": [
+      358,
+      92,
+      684,
+      309
+    ],
+    "size": [
+      652,
+      434
+    ],
+    "notes": "Primary product-detail image."
+  },
+  {
+    "file": "images/products/storage-tank-thumb-1.jpg",
+    "label": "Storage Tank thumbnail 1",
+    "source": "product_detail",
+    "source_file": "industrial_product_page_ui_mockup.png",
+    "crop_box": [
+      296,
+      92,
+      345,
+      137
+    ],
+    "size": [
+      196,
+      180
+    ],
+    "notes": "Thumbnail extracted from vertical gallery."
+  },
+  {
+    "file": "images/products/storage-tank-thumb-2.jpg",
+    "label": "Storage Tank thumbnail 2",
+    "source": "product_detail",
+    "source_file": "industrial_product_page_ui_mockup.png",
+    "crop_box": [
+      296,
+      142,
+      345,
+      188
+    ],
+    "size": [
+      196,
+      184
+    ],
+    "notes": "Thumbnail extracted from vertical gallery."
+  },
+  {
+    "file": "images/products/storage-tank-thumb-3.jpg",
+    "label": "Storage Tank thumbnail 3",
+    "source": "product_detail",
+    "source_file": "industrial_product_page_ui_mockup.png",
+    "crop_box": [
+      296,
+      193,
+      345,
+      239
+    ],
+    "size": [
+      196,
+      184
+    ],
+    "notes": "Thumbnail extracted from vertical gallery."
+  },
+  {
+    "file": "images/products/storage-tank-thumb-4.jpg",
+    "label": "Storage Tank thumbnail 4",
+    "source": "product_detail",
+    "source_file": "industrial_product_page_ui_mockup.png",
+    "crop_box": [
+      296,
+      245,
+      345,
+      302
+    ],
+    "size": [
+      196,
+      228
+    ],
+    "notes": "Thumbnail extracted from vertical gallery."
+  },
+  {
+    "file": "images/products/storage-tank-gallery-1.jpg",
+    "label": "Storage Tank gallery 1",
+    "source": "product_detail",
+    "source_file": "industrial_product_page_ui_mockup.png",
+    "crop_box": [
+      298,
+      744,
+      425,
+      817
+    ],
+    "size": [
+      381,
+      219
+    ],
+    "notes": "Gallery crop from product detail concept."
+  },
+  {
+    "file": "images/products/storage-tank-gallery-2.jpg",
+    "label": "Storage Tank gallery 2",
+    "source": "product_detail",
+    "source_file": "industrial_product_page_ui_mockup.png",
+    "crop_box": [
+      430,
+      744,
+      555,
+      817
+    ],
+    "size": [
+      375,
+      219
+    ],
+    "notes": "Gallery crop from product detail concept."
+  },
+  {
+    "file": "images/products/storage-tank-gallery-3.jpg",
+    "label": "Storage Tank gallery 3",
+    "source": "product_detail",
+    "source_file": "industrial_product_page_ui_mockup.png",
+    "crop_box": [
+      561,
+      744,
+      686,
+      817
+    ],
+    "size": [
+      375,
+      219
+    ],
+    "notes": "Gallery crop from product detail concept."
+  },
+  {
+    "file": "images/products/storage-tank-gallery-4.jpg",
+    "label": "Storage Tank gallery 4",
+    "source": "product_detail",
+    "source_file": "industrial_product_page_ui_mockup.png",
+    "crop_box": [
+      692,
+      744,
+      817,
+      817
+    ],
+    "size": [
+      375,
+      219
+    ],
+    "notes": "Gallery crop from product detail concept."
+  },
+  {
+    "file": "images/products/storage-tank-gallery-5.jpg",
+    "label": "Storage Tank gallery 5",
+    "source": "product_detail",
+    "source_file": "industrial_product_page_ui_mockup.png",
+    "crop_box": [
+      822,
+      744,
+      948,
+      817
+    ],
+    "size": [
+      378,
+      219
+    ],
+    "notes": "Gallery crop from product detail concept."
+  },
+  {
+    "file": "images/products/storage-tank-gallery-6.jpg",
+    "label": "Storage Tank gallery 6",
+    "source": "product_detail",
+    "source_file": "industrial_product_page_ui_mockup.png",
+    "crop_box": [
+      953,
+      744,
+      1067,
+      817
+    ],
+    "size": [
+      342,
+      219
+    ],
+    "notes": "Gallery crop from product detail concept."
+  },
+  {
+    "file": "images/products/related-pressure-vessel.jpg",
+    "label": "Pressure Vessel",
+    "source": "product_detail",
+    "source_file": "industrial_product_page_ui_mockup.png",
+    "crop_box": [
+      297,
+      847,
+      435,
+      903
+    ],
+    "size": [
+      414,
+      168
+    ],
+    "notes": "Related product concept crop."
+  },
+  {
+    "file": "images/products/related-chemical-reactor.jpg",
+    "label": "Chemical Reactor",
+    "source": "product_detail",
+    "source_file": "industrial_product_page_ui_mockup.png",
+    "crop_box": [
+      444,
+      847,
+      580,
+      903
+    ],
+    "size": [
+      408,
+      168
+    ],
+    "notes": "Related product concept crop."
+  },
+  {
+    "file": "images/products/related-heat-exchanger.jpg",
+    "label": "Heat Exchanger",
+    "source": "product_detail",
+    "source_file": "industrial_product_page_ui_mockup.png",
+    "crop_box": [
+      590,
+      847,
+      728,
+      903
+    ],
+    "size": [
+      414,
+      168
+    ],
+    "notes": "Related product concept crop."
+  },
+  {
+    "file": "images/products/related-industrial-silo.jpg",
+    "label": "Industrial Silo",
+    "source": "product_detail",
+    "source_file": "industrial_product_page_ui_mockup.png",
+    "crop_box": [
+      738,
+      847,
+      877,
+      903
+    ],
+    "size": [
+      417,
+      168
+    ],
+    "notes": "Related product concept crop."
+  },
+  {
+    "file": "images/fabrication/products-page-welding-banner.jpg",
+    "label": "Products page welding banner",
+    "source": "products",
+    "source_file": "industrial_product_listing_page_mockup.png",
+    "crop_box": [
+      802,
+      731,
+      1086,
+      835
+    ],
+    "size": [
+      568,
+      208
+    ],
+    "notes": "Welder image used in custom fabrication CTA."
+  },
+  {
+    "file": "images/fabrication/home-welding-banner.jpg",
+    "label": "Homepage custom fabrication welding",
+    "source": "home",
+    "source_file": "industrial_fabrication_ui_ux_design_mockup.png",
+    "crop_box": [
+      253,
+      658,
+      458,
+      753
+    ],
+    "size": [
+      615,
+      285
+    ],
+    "notes": "Compact welding crop."
+  },
+  {
+    "file": "images/fabrication/materials-metal-pipes.jpg",
+    "label": "Materials: metal pipes",
+    "source": "fabrication",
+    "source_file": "web_design_mockup_for_custom_fabrication_site.png",
+    "crop_box": [
+      209,
+      632,
+      354,
+      753
+    ],
+    "size": [
+      435,
+      363
+    ],
+    "notes": "Concept image for materials section."
+  },
+  {
+    "file": "images/fabrication/fabrication-welding.jpg",
+    "label": "Fabrication process welding",
+    "source": "fabrication",
+    "source_file": "web_design_mockup_for_custom_fabrication_site.png",
+    "crop_box": [
+      522,
+      632,
+      709,
+      753
+    ],
+    "size": [
+      561,
+      363
+    ],
+    "notes": "Concept welding image."
+  },
+  {
+    "file": "images/fabrication/quality-inspection.jpg",
+    "label": "Quality inspection",
+    "source": "fabrication",
+    "source_file": "web_design_mockup_for_custom_fabrication_site.png",
+    "crop_box": [
+      809,
+      632,
+      979,
+      753
+    ],
+    "size": [
+      510,
+      363
+    ],
+    "notes": "Technician inspecting fabricated component."
+  },
+  {
+    "file": "images/projects/fabrication-custom-reactor-vessel.jpg",
+    "label": "Custom Reactor Vessel",
+    "source": "fabrication",
+    "source_file": "web_design_mockup_for_custom_fabrication_site.png",
+    "crop_box": [
+      78,
+      790,
+      230,
+      857
+    ],
+    "size": [
+      456,
+      201
+    ],
+    "notes": "Project image extracted from Custom Fabrication page."
+  },
+  {
+    "file": "images/projects/fabrication-heat-exchanger.jpg",
+    "label": "Heat Exchanger",
+    "source": "fabrication",
+    "source_file": "web_design_mockup_for_custom_fabrication_site.png",
+    "crop_box": [
+      239,
+      790,
+      390,
+      857
+    ],
+    "size": [
+      453,
+      201
+    ],
+    "notes": "Project image extracted from Custom Fabrication page."
+  },
+  {
+    "file": "images/projects/fabrication-storage-tank.jpg",
+    "label": "Storage Tank",
+    "source": "fabrication",
+    "source_file": "web_design_mockup_for_custom_fabrication_site.png",
+    "crop_box": [
+      399,
+      790,
+      550,
+      857
+    ],
+    "size": [
+      453,
+      201
+    ],
+    "notes": "Project image extracted from Custom Fabrication page."
+  },
+  {
+    "file": "images/projects/fabrication-piping-skid.jpg",
+    "label": "Piping Skid",
+    "source": "fabrication",
+    "source_file": "web_design_mockup_for_custom_fabrication_site.png",
+    "crop_box": [
+      560,
+      790,
+      710,
+      857
+    ],
+    "size": [
+      450,
+      201
+    ],
+    "notes": "Project image extracted from Custom Fabrication page."
+  },
+  {
+    "file": "images/projects/fabrication-hopper-screw-conveyor.jpg",
+    "label": "Hopper Screw Conveyor",
+    "source": "fabrication",
+    "source_file": "web_design_mockup_for_custom_fabrication_site.png",
+    "crop_box": [
+      720,
+      790,
+      870,
+      857
+    ],
+    "size": [
+      450,
+      201
+    ],
+    "notes": "Project image extracted from Custom Fabrication page."
+  },
+  {
+    "file": "images/projects/fabrication-pressure-vessel.jpg",
+    "label": "Pressure Vessel",
+    "source": "fabrication",
+    "source_file": "web_design_mockup_for_custom_fabrication_site.png",
+    "crop_box": [
+      880,
+      790,
+      1029,
+      857
+    ],
+    "size": [
+      447,
+      201
+    ],
+    "notes": "Project image extracted from Custom Fabrication page."
+  },
+  {
+    "file": "images/projects/featured-bitumen-storage.jpg",
+    "label": "Featured project: Bitumen Storage & Heating",
+    "source": "projects",
+    "source_file": "industrial_ui_ux_website_design_showcase.png",
+    "crop_box": [
+      311,
+      287,
+      611,
+      456
+    ],
+    "size": [
+      600,
+      338
+    ],
+    "notes": "Featured project concept crop."
+  },
+  {
+    "file": "images/projects/crude-oil-storage-tank.jpg",
+    "label": "Crude Oil Storage Tank",
+    "source": "projects",
+    "source_file": "industrial_ui_ux_website_design_showcase.png",
+    "crop_box": [
+      315,
+      527,
+      488,
+      591
+    ],
+    "size": [
+      519,
+      192
+    ],
+    "notes": "Project card image extracted from Projects page."
+  },
+  {
+    "file": "images/projects/pressure-vessel.jpg",
+    "label": "Pressure Vessel",
+    "source": "projects",
+    "source_file": "industrial_ui_ux_website_design_showcase.png",
+    "crop_box": [
+      498,
+      527,
+      665,
+      591
+    ],
+    "size": [
+      501,
+      192
+    ],
+    "notes": "Project card image extracted from Projects page."
+  },
+  {
+    "file": "images/projects/heat-exchanger-skid.jpg",
+    "label": "Heat Exchanger Skid",
+    "source": "projects",
+    "source_file": "industrial_ui_ux_website_design_showcase.png",
+    "crop_box": [
+      675,
+      527,
+      845,
+      591
+    ],
+    "size": [
+      510,
+      192
+    ],
+    "notes": "Project card image extracted from Projects page."
+  },
+  {
+    "file": "images/projects/cement-silo.jpg",
+    "label": "Cement Silo",
+    "source": "projects",
+    "source_file": "industrial_ui_ux_website_design_showcase.png",
+    "crop_box": [
+      855,
+      527,
+      1030,
+      591
+    ],
+    "size": [
+      525,
+      192
+    ],
+    "notes": "Project card image extracted from Projects page."
+  },
+  {
+    "file": "images/projects/asphalt-plant-structure.jpg",
+    "label": "Asphalt Plant Structure",
+    "source": "projects",
+    "source_file": "industrial_ui_ux_website_design_showcase.png",
+    "crop_box": [
+      315,
+      675,
+      488,
+      736
+    ],
+    "size": [
+      519,
+      183
+    ],
+    "notes": "Project card image extracted from Projects page."
+  },
+  {
+    "file": "images/projects/bitumen-melting-unit.jpg",
+    "label": "Bitumen Melting Unit",
+    "source": "projects",
+    "source_file": "industrial_ui_ux_website_design_showcase.png",
+    "crop_box": [
+      498,
+      675,
+      665,
+      736
+    ],
+    "size": [
+      501,
+      183
+    ],
+    "notes": "Project card image extracted from Projects page."
+  },
+  {
+    "file": "images/projects/stainless-storage-tank.jpg",
+    "label": "Stainless Storage Tank",
+    "source": "projects",
+    "source_file": "industrial_ui_ux_website_design_showcase.png",
+    "crop_box": [
+      675,
+      675,
+      845,
+      736
+    ],
+    "size": [
+      510,
+      183
+    ],
+    "notes": "Project card image extracted from Projects page."
+  },
+  {
+    "file": "images/projects/hopper-conveyor-structure.jpg",
+    "label": "Hopper Conveyor Structure",
+    "source": "projects",
+    "source_file": "industrial_ui_ux_website_design_showcase.png",
+    "crop_box": [
+      855,
+      675,
+      1030,
+      736
+    ],
+    "size": [
+      525,
+      183
+    ],
+    "notes": "Project card image extracted from Projects page."
+  },
+  {
+    "file": "images/quality/material-inspection.jpg",
+    "label": "Material Inspection",
+    "source": "quality",
+    "source_file": "corporate_website_design_mockup_with_mobile_previe.png",
+    "crop_box": [
+      115,
+      556,
+      259,
+      626
+    ],
+    "size": [
+      432,
+      210
+    ],
+    "notes": "Quality process concept image."
+  },
+  {
+    "file": "images/quality/welding-checks.jpg",
+    "label": "Welding Checks",
+    "source": "quality",
+    "source_file": "corporate_website_design_mockup_with_mobile_previe.png",
+    "crop_box": [
+      289,
+      556,
+      432,
+      626
+    ],
+    "size": [
+      429,
+      210
+    ],
+    "notes": "Quality process concept image."
+  },
+  {
+    "file": "images/quality/dimensional-checks.jpg",
+    "label": "Dimensional Checks",
+    "source": "quality",
+    "source_file": "corporate_website_design_mockup_with_mobile_previe.png",
+    "crop_box": [
+      462,
+      556,
+      605,
+      626
+    ],
+    "size": [
+      429,
+      210
+    ],
+    "notes": "Quality process concept image."
+  },
+  {
+    "file": "images/quality/testing.jpg",
+    "label": "Testing",
+    "source": "quality",
+    "source_file": "corporate_website_design_mockup_with_mobile_previe.png",
+    "crop_box": [
+      636,
+      556,
+      780,
+      626
+    ],
+    "size": [
+      432,
+      210
+    ],
+    "notes": "Quality process concept image."
+  },
+  {
+    "file": "images/quality/final-inspection.jpg",
+    "label": "Final Inspection",
+    "source": "quality",
+    "source_file": "corporate_website_design_mockup_with_mobile_previe.png",
+    "crop_box": [
+      810,
+      556,
+      955,
+      626
+    ],
+    "size": [
+      435,
+      210
+    ],
+    "notes": "Quality process concept image."
+  },
+  {
+    "file": "images/quality/certificate-preview-concept.png",
+    "label": "Certificate preview concept",
+    "source": "quality",
+    "source_file": "corporate_website_design_mockup_with_mobile_previe.png",
+    "crop_box": [
+      766,
+      742,
+      1008,
+      834
+    ],
+    "size": [
+      484,
+      184
+    ],
+    "notes": "Visual placeholder only. Do not publish as a real certificate."
+  },
+  {
+    "file": "images/contact/contact-hero-illustration.png",
+    "label": "Contact hero illustration",
+    "source": "contact",
+    "source_file": "contact_us_page_design_mockup.png",
+    "crop_box": [
+      896,
+      111,
+      1018,
+      244
+    ],
+    "size": [
+      366,
+      399
+    ],
+    "notes": "Raster illustration crop."
+  },
+  {
+    "file": "images/contact/patna-map-concept.jpg",
+    "label": "Patna map concept",
+    "source": "contact",
+    "source_file": "contact_us_page_design_mockup.png",
+    "crop_box": [
+      312,
+      720,
+      720,
+      842
+    ],
+    "size": [
+      816,
+      244
+    ],
+    "notes": "Static concept map. Use a live verified map embed or licensed map in production."
+  },
+  {
+    "file": "images/hero/quote-page-industrial-background.jpg",
+    "label": "Quote page industrial hero background",
+    "source": "quote",
+    "source_file": "modern_website_request_a_quote_design.png",
+    "crop_box": [
+      40,
+      90,
+      1038,
+      225
+    ],
+    "size": [
+      998,
+      135
+    ],
+    "notes": "Dark industrial banner crop."
+  }
+]
