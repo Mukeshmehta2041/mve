@@ -64,24 +64,21 @@ export const Projects: React.FC = () => {
       <Section className="bg-navy-950 text-white pt-6 pb-12 md:pb-16 text-left relative overflow-hidden border-b border-slate-900">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
         <Container className="relative z-10">
-          <Breadcrumb 
-            items={[{ label: 'Our Work' }]} 
-            className="text-slate-400 mb-6"
+          <Breadcrumb onDark 
+            items={[{ label: 'Projects' }]}
+            className="mb-6"
           />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-6">
               <div>
-                <span className="text-[12px] leading-[18px] tracking-[0.1em] uppercase font-bold text-primary block mb-3">
-                  Our Track Record
-                </span>
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight font-heading">
-                  Projects That Show What We Can <span className="text-primary">Build</span>
+                  Selected projects
                 </h1>
               </div>
 
-              <p className="text-base md:text-lg text-slate-350 leading-relaxed max-w-xl font-sans">
+              <p className="text-base md:text-lg text-slate-400 leading-relaxed max-w-xl font-sans">
                 A selection of industrial fabrication and equipment work completed across different product and application requirements. We build structural reliability designed to client specifications.
               </p>
 
@@ -96,8 +93,8 @@ export const Projects: React.FC = () => {
                 </Button>
                 <Button
                   href="/custom-fabrication"
-                  variant="secondary"
-                  className="font-bold text-sm tracking-wider uppercase h-12 bg-transparent text-white border-white hover:border-primary hover:text-primary flex-grow sm:flex-grow-0"
+                  variant="outline-light"
+                  className="font-bold text-sm tracking-wider uppercase h-12 flex-grow sm:flex-grow-0"
                   onClick={() => trackEvent('projects_custom_fabrication_click', { position: 'hero' })}
                 >
                   Explore Custom Fabrication
@@ -125,7 +122,6 @@ export const Projects: React.FC = () => {
         <Section className="bg-white border-b border-border text-left">
           <Container>
             <SectionHeader
-              eyebrow="Spotlight"
               title="Featured Project Showcase"
               description="A detailed look at a high-capacity custom storage containment system fabricated for process industry clients."
               align="center"
@@ -213,7 +209,6 @@ export const Projects: React.FC = () => {
         <Container>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 md:mb-12 border-b border-border pb-6">
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-primary block mb-1">Catalog Index</span>
               <h2 className="text-2xl md:text-3xl font-extrabold text-navy-950">Explore Completed Works</h2>
             </div>
 
@@ -266,7 +261,6 @@ export const Projects: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center font-sans">
             {/* Left Content Column */}
             <div className="lg:col-span-7 space-y-6">
-              <span className="text-[11px] font-bold tracking-wider uppercase text-primary block">Bespoke Fabrication</span>
               <h2 className="text-2xl md:text-3xl font-extrabold text-navy-950 leading-tight">
                 Need Something Similar or Custom?
               </h2>
@@ -364,7 +358,7 @@ export const Projects: React.FC = () => {
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight text-white font-heading">
             Let’s Build the Right Solution for Your Project.
           </h2>
-          <p className="text-sm md:text-base leading-relaxed text-slate-350 max-w-2xl mx-auto font-sans">
+          <p className="text-sm md:text-base leading-relaxed text-slate-400 max-w-2xl mx-auto font-sans">
             Submit your specifications or explore our catalog of reaction vessels, custom tanks, safety barriers, and material bins.
           </p>
 
@@ -380,9 +374,9 @@ export const Projects: React.FC = () => {
             </Button>
             <Button
               href="/products"
-              variant="secondary"
+              variant="outline-light"
               size="md"
-              className="font-bold text-sm tracking-wider uppercase h-12 bg-transparent text-white border-white hover:border-primary hover:text-primary"
+              className="font-bold text-sm tracking-wider uppercase h-12"
             >
               View Products
             </Button>

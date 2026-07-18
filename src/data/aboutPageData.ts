@@ -1,11 +1,5 @@
 import { ASSETS } from '../lib/assets';
 
-export interface MilestoneItem {
-  year?: string;
-  title: string;
-  description: string;
-}
-
 export interface ValueItem {
   title: string;
   desc: string;
@@ -18,28 +12,6 @@ export interface CapabilityItem {
   icon: string;
   details: string[];
 }
-
-export const aboutTimelineData: MilestoneItem[] = [
-  {
-    year: '2008',
-    title: 'Company Foundation',
-    description: 'Maa Vindhawasini Enterprises established steel fabrication operations in Patna, Bihar, supplying general MS frames.',
-  },
-  {
-    year: '2013',
-    title: 'Industrial Equipment Expansion',
-    description: 'Expanded capabilities to custom vessel manufacturing, starting production of small storage tanks and concrete shuttering plates.',
-  },
-  {
-    year: '2019',
-    title: 'Custom Fabrication Scaling',
-    description: 'Began executing drawings-based process plant equipment including reaction vessels, resin kettles, and heavy hoppers.',
-  },
-  {
-    title: 'Present Direction',
-    description: 'Focused on high-capacity custom storage solutions, structural height gauges, and quality-controlled steel builds.',
-  },
-];
 
 export const aboutValuesData: ValueItem[] = [
   {

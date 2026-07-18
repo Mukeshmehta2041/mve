@@ -24,12 +24,11 @@ export const footerLinksData: FooterLinkGroup[] = [
     ],
   },
   {
-    title: 'Compliance & Legal',
+    title: 'Legal',
     links: [
-      { label: 'MSME Registered (Verified)', href: '/quality-certifications' },
-      { label: 'GST Compliant (Verified)', href: '/quality-certifications' },
       { label: 'Terms & Conditions', href: '/terms' },
       { label: 'Privacy Policy', href: '/privacy-policy' },
+      { label: 'Disclaimer', href: '/disclaimer' },
     ],
   },
 ];

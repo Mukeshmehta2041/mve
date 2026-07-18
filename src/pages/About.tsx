@@ -4,7 +4,6 @@ import { Container, Section, Button, Breadcrumb, SectionHeader } from '../compon
 import {
   companyData,
   contactData,
-  aboutTimelineData,
   aboutValuesData,
   aboutCapabilitiesData,
   aboutQualityHighlightsData,
@@ -28,7 +27,7 @@ export const About: React.FC = () => {
     <SiteLayout>
       <SEO
         title="About Us | Steel Fabrication Experts Patna"
-        description="Learn about Maa Vindhawasini Enterprises (MVE), our Patna workshop facilities, and our 15+ years track record in custom industrial fabrication."
+        description="Maa Vindhawasini Enterprises fabricates custom MS and stainless steel industrial equipment from its workshop in Patna, Bihar."
         canonicalPath="/about"
       />
 
@@ -36,25 +35,23 @@ export const About: React.FC = () => {
       <Section className="bg-navy-950 text-white pt-6 pb-12 md:pb-16 text-left relative overflow-hidden border-b border-slate-900">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
         <Container className="relative z-10 font-sans">
-          <Breadcrumb 
+          <Breadcrumb onDark 
             items={[{ label: 'About Us' }]} 
-            className="text-slate-400 mb-6"
+            className="mb-6"
           />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Content Column */}
             <div className="lg:col-span-7 space-y-6">
               <div>
-                <span className="text-[12px] leading-[18px] tracking-[0.1em] uppercase font-bold text-primary block mb-3">
-                  Our Identity
-                </span>
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight font-heading">
                   About Maa Vindhawasini Enterprises
                 </h1>
               </div>
 
-              <p className="text-base md:text-lg text-slate-350 leading-relaxed max-w-xl">
-                Built on practical fabrication experience, quality-focused workmanship, and solutions tailored to industrial requirements.
+              <p className="text-base md:text-lg text-slate-400 leading-relaxed max-w-xl">
+                A steel fabrication workshop in Patna building process vessels, tanks, hoppers, and
+                structural assemblies to customer drawings.
               </p>
 
               <div className="flex flex-wrap gap-4 pt-2">
@@ -68,8 +65,8 @@ export const About: React.FC = () => {
                 </Button>
                 <Button
                   href="/products"
-                  variant="secondary"
-                  className="font-bold text-sm tracking-wider uppercase h-12 bg-transparent text-white border-white hover:border-primary hover:text-primary flex-grow sm:flex-grow-0"
+                  variant="outline-light"
+                  className="font-bold text-sm tracking-wider uppercase h-12 flex-grow sm:flex-grow-0"
                   onClick={() => trackEvent('about_products_click', { position: 'hero' })}
                 >
                   View Our Products
@@ -81,8 +78,8 @@ export const About: React.FC = () => {
             <div className="lg:col-span-5 w-full">
               <div className="rounded-lg overflow-hidden border border-slate-800 shadow-card aspect-[16/10] bg-navy-900 relative">
                 <img
-                  src={ASSETS.hero.about}
-                  alt="Industrial manufacturing workshop overview showing steel plates and structural frames."
+                  src={ASSETS.projects.featuredBitumen}
+                  alt="Bitumen storage tanks fabricated by Maa Vindhawasini Enterprises."
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy-950/40 to-transparent pointer-events-none"></div>
@@ -100,8 +97,8 @@ export const About: React.FC = () => {
             <div className="lg:col-span-5 w-full">
               <div className="rounded-lg overflow-hidden border border-border shadow-card aspect-[4/3] bg-slate-50 relative">
                 <img
-                  src={ASSETS.facilities.companyBuilding}
-                  alt="Maa Vindhawasini Enterprises operational workshop exterior setup."
+                  src={ASSETS.products.resinGlueKettle}
+                  alt="A resin glue kettle fabricated by Maa Vindhawasini Enterprises."
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -110,15 +107,14 @@ export const About: React.FC = () => {
             {/* Right Details Column */}
             <div className="lg:col-span-7 space-y-6">
               <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-primary block mb-1">Company Overview</span>
-                <h2 className="text-2xl md:text-3xl font-extrabold text-navy-950 leading-tight">
-                  Building Strength. Delivering Reliable Solutions.
+                <h2 className="text-2xl md:text-3xl font-bold text-navy-950 leading-tight">
+                  What we do
                 </h2>
               </div>
 
-              <div className="space-y-4 text-sm text-slate-650 leading-relaxed">
+              <div className="space-y-4 text-base text-slate-600 leading-relaxed">
                 <p>
-                  Established in {companyData.establishmentYear} in Patna, Bihar, <strong>{companyData.legalName}</strong> is a dedicated manufacturer specializing in Mild Steel (MS) and Stainless Steel (SS) fabrication. Over our {companyData.yearsOfExperienceClaim}+ years of operations, we have focused on providing heavy-duty structural solutions and process equipment tailored to our customers specifications.
+                  <strong>{companyData.legalName}</strong> is a mild steel and stainless steel fabrication workshop in Patna, Bihar. We build heavy-duty structural assemblies and process equipment to our customers&rsquo; own specifications.
                 </p>
                 <p>
                   We fabricate a wide range of industrial equipment, including chemical reaction vessels, resin kettles, custom process bins, silos, storage tanks, and concrete shuttering plates. Our workshop handles cutting, metal rolling, continuous seam welding, and surface treatment (anti-rust primers and coatings).
@@ -142,41 +138,12 @@ export const About: React.FC = () => {
         </Container>
       </Section>
 
-      {/* Narrative Journey Section */}
-      <Section className="bg-surface border-b border-border text-left">
-        <Container className="max-w-4xl">
-          <div className="text-center max-w-2xl mx-auto mb-8 md:mb-12">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-primary block mb-1">Our Journey</span>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-navy-950 font-heading">Our Timeline & Milestones</h2>
-            <p className="text-xs text-slate-500 font-sans mt-2">
-              A historical look at the gradual growth in our production capacity and fabrication machinery limits in Bihar.
-            </p>
-          </div>
-
-          <div className="space-y-6 relative font-sans before:absolute before:inset-y-0 before:left-4 before:w-[2px] before:bg-slate-200 z-10 pl-8">
-            {aboutTimelineData.map((milestone, idx) => (
-              <div key={idx} className="relative flex flex-col items-start bg-white border border-border p-5 rounded-card shadow-sm">
-                <div className="absolute -left-6 top-6 w-4 h-4 rounded-full bg-primary border-4 border-white shadow-sm flex items-center justify-center"></div>
-                {milestone.year && (
-                  <span className="text-xs font-mono font-bold text-primary block mb-1">
-                    {milestone.year}
-                  </span>
-                )}
-                <h4 className="font-bold text-sm text-navy-950 mb-1 leading-snug">{milestone.title}</h4>
-                <p className="text-xs text-slate-550 leading-relaxed">{milestone.description}</p>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
       {/* Mission & Values Section */}
       <Section className="bg-white border-b border-border text-left">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start font-sans">
             {/* Left Column - Mission */}
             <div className="lg:col-span-5 bg-navy-950 text-white p-6 md:p-8 rounded-card shadow-card space-y-4">
-              <span className="text-[10px] tracking-widest uppercase font-bold text-primary block">Strategic Mission</span>
               <h3 className="text-xl md:text-2xl font-extrabold leading-snug">Our Mission</h3>
               <p className="text-xs text-slate-300 leading-relaxed">
                 Our mission is to fabricate high-integrity MS/SS industrial vessels, hoppers, stacks, and structural supports that precisely match customer capacity and layout parameters. We commit to using verified steel plate parameters and applying rigorous inspection standards to deliver structural safety for Patna and regional projects.
@@ -186,7 +153,6 @@ export const About: React.FC = () => {
             {/* Right Column - Values Grid */}
             <div className="lg:col-span-7 space-y-6">
               <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-primary block mb-1">Core Integrity</span>
                 <h2 className="text-2xl md:text-3xl font-extrabold text-navy-950 leading-tight">
                   Values That Guide Our Manufacturing
                 </h2>
@@ -216,7 +182,6 @@ export const About: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center font-sans">
             {/* Left Content Column */}
             <div className="lg:col-span-7 space-y-6">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-primary block">Infrastructure</span>
               <h2 className="text-2xl md:text-3xl font-extrabold text-navy-950 leading-tight">
                 Our Patna Workshop Environment
               </h2>
@@ -239,7 +204,7 @@ export const About: React.FC = () => {
             <div className="lg:col-span-5">
               <div className="rounded-lg overflow-hidden border border-border shadow-card aspect-[16/10] bg-slate-50 relative">
                 <img
-                  src={ASSETS.facilities.manufacturing}
+                  src={ASSETS.products.storageTank}
                   alt="Industrial manufacturing shop floor area with steel plates and equipment frames."
                   className="w-full h-full object-cover"
                 />
@@ -253,7 +218,6 @@ export const About: React.FC = () => {
       <Section className="bg-white border-b border-border text-left">
         <Container>
           <SectionHeader
-            eyebrow="Capabilities"
             title="Workshop Capability Metrics"
             description="We perform primary metal fabrication operations in-house to guarantee quality checks."
             align="center"
@@ -273,7 +237,7 @@ export const About: React.FC = () => {
                 <div className="pt-3 border-t border-slate-200 mt-auto">
                   <ul className="space-y-1">
                     {cap.details.map((detail, dIdx) => (
-                      <li key={dIdx} className="text-[10px] font-semibold text-slate-500 flex items-center">
+                      <li key={dIdx} className="text-xs font-medium text-slate-600 flex items-center">
                         <span className="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>
                         {detail}
                       </li>
@@ -290,7 +254,6 @@ export const About: React.FC = () => {
       <Section className="bg-surface border-b border-border text-left">
         <Container>
           <SectionHeader
-            eyebrow="Markets"
             title="Industrial Sectors We Support"
             description="We construct custom MS and SS equipment matching the regulatory codes of various processing units."
             align="center"
@@ -304,7 +267,7 @@ export const About: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-xs text-navy-950 leading-snug mb-1">{ind.name}</h4>
-                  <p className="text-[10px] text-slate-500 leading-normal">{ind.description}</p>
+                  <p className="text-sm text-slate-600 leading-relaxed">{ind.description}</p>
                 </div>
               </div>
             ))}
@@ -318,21 +281,21 @@ export const About: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center font-sans">
             {/* Left Content Column */}
             <div className="lg:col-span-7 space-y-6">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-primary block">Compliance Overview</span>
-              <h2 className="text-2xl md:text-3xl font-extrabold text-navy-950 leading-tight">
-                Practical Quality Compliance & Registrations
+              <h2 className="text-2xl md:text-3xl font-bold text-navy-950 leading-tight">
+                How we check the work
               </h2>
-              <p className="text-sm text-slate-655 leading-relaxed">
-                Maa Vindhawasini Enterprises maintains operational filings compliance. We are fully GST Registered, MSME / Udyam Registered, and hold standard Factory Licenses. Rather than showcasing unverified rating badges, we invite customers to verify our material inspections sheets and welding audits.
+              <p className="text-base text-slate-600 leading-relaxed">
+                We would rather show you inspection sheets than badges. These are the checks that
+                happen on every job.
               </p>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 {aboutQualityHighlightsData.map((item, idx) => (
-                  <div key={idx} className="flex gap-2">
-                    <span className="text-primary font-bold text-xs">✓</span>
+                  <div key={idx} className="flex gap-2.5">
+                    <span className="text-primary font-bold text-sm mt-0.5">✓</span>
                     <div>
-                      <h4 className="font-bold text-xs text-navy-950 mb-0.5 leading-snug">{item.title}</h4>
-                      <p className="text-[10px] text-slate-500 leading-normal">{item.desc}</p>
+                      <h3 className="font-semibold text-sm text-navy-950 mb-1 leading-snug">{item.title}</h3>
+                      <p className="text-sm text-slate-600 leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -345,7 +308,7 @@ export const About: React.FC = () => {
                   className="font-bold text-xs uppercase tracking-wide h-10 px-5"
                   onClick={() => trackEvent('about_quality_click')}
                 >
-                  View Quality & Certifications
+                  View our quality process
                 </Button>
               </div>
             </div>
@@ -354,7 +317,7 @@ export const About: React.FC = () => {
             <div className="lg:col-span-5">
               <div className="rounded-lg overflow-hidden border border-border shadow-card aspect-[4/3] bg-slate-50 relative">
                 <img
-                  src={ASSETS.facilities.factoryHome}
+                  src={ASSETS.hero.quality}
                   alt="Industrial supervisor inspecting raw steel plate curvatures."
                   className="w-full h-full object-cover"
                 />
@@ -386,9 +349,9 @@ export const About: React.FC = () => {
             </Button>
             <Button
               href="/products"
-              variant="secondary"
+              variant="outline-light"
               size="md"
-              className="font-bold text-sm tracking-wider uppercase h-12 bg-transparent text-white border-white hover:border-primary hover:text-primary"
+              className="font-bold text-sm tracking-wider uppercase h-12"
             >
               View Products
             </Button>

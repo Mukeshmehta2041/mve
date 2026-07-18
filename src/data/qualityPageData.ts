@@ -20,15 +20,6 @@ export interface InspectionMethod {
   icon: string;
 }
 
-export interface RegistrationCardInfo {
-  id: string;
-  name: string;
-  authority: string;
-  desc: string;
-  maskKey: string;
-  icon: string;
-}
-
 export const qualityCommitmentPointsData: QualityCommitmentPoint[] = [
   {
     title: 'Customer Requirement Review',
@@ -140,29 +131,3 @@ export const inspectionMethodsData: InspectionMethod[] = [
   },
 ];
 
-export const registrationsListData: RegistrationCardInfo[] = [
-  {
-    id: 'reg-gst',
-    name: 'GST Registration',
-    authority: 'Department of Revenue, Government of India',
-    desc: 'Tax compliant commercial supplier enabling standard business-to-business transactions.',
-    maskKey: 'gst',
-    icon: ASSETS.icons.fileText,
-  },
-  {
-    id: 'reg-udyam',
-    name: 'MSME / Udyam Certification',
-    authority: 'Ministry of Micro, Small & Medium Enterprises, Govt of India',
-    desc: 'Registered small enterprise enabling credit facilities and standard MSME compliance audits.',
-    maskKey: 'udyam',
-    icon: ASSETS.icons.certificate,
-  },
-  {
-    id: 'reg-license',
-    name: 'Factory Operations License',
-    authority: 'Inspectorate of Factories, Government of Bihar',
-    desc: 'Operational workshop safety and labor regulation license matching local factory codes.',
-    maskKey: 'factoryLicense',
-    icon: ASSETS.icons.factory,
-  },
-];

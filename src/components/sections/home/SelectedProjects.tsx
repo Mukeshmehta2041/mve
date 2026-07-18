@@ -13,7 +13,6 @@ export const SelectedProjects: React.FC = () => {
     <section className="py-16 md:py-24 bg-slate-50 border-b border-border">
       <Container>
         <SectionHeader
-          eyebrow="Track Record"
           title="Selected Fabrication Work"
           description="A selection of storage containment structures, hoppers, venting systems, and custom process assemblies completed to client parameters."
           align="center"

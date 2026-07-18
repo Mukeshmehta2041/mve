@@ -12,7 +12,6 @@ import { RequestAQuote } from '../pages/RequestAQuote';
 import { PrivacyPolicy } from '../pages/PrivacyPolicy';
 import { Terms } from '../pages/Terms';
 import { Disclaimer } from '../pages/Disclaimer';
-import { DesignSystemPreview } from '../pages/DesignSystemPreview';
 import { NotFound } from '../pages/NotFound';
 
 export const AppRoutes: React.FC = () => {
@@ -32,9 +31,6 @@ export const AppRoutes: React.FC = () => {
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       <Route path="/terms" element={<Terms />} />
       <Route path="/disclaimer" element={<Disclaimer />} />
-      
-      {/* Development-only Design System Preview page */}
-      <Route path="/design-system" element={<DesignSystemPreview />} />
       
       {/* 404 Route */}
       <Route path="*" element={<NotFound />} />

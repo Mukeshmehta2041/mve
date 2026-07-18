@@ -69,7 +69,7 @@ export const DesktopNavigation: React.FC = () => {
                 aria-expanded={dropdownOpen}
                 aria-haspopup="true"
                 className={cn(
-                  'flex items-center text-sm font-semibold py-2 transition-all cursor-pointer focus-ring rounded-sm text-slate-650 hover:text-navy-950',
+                  'flex items-center text-sm font-semibold py-2 transition-all cursor-pointer focus-ring rounded-sm text-slate-600 hover:text-navy-950',
                   dropdownOpen ? 'text-primary' : ''
                 )}
               >
@@ -77,7 +77,7 @@ export const DesktopNavigation: React.FC = () => {
                 <svg
                   className={cn(
                     'w-4 h-4 ml-1.5 transition-transform duration-200',
-                    dropdownOpen ? 'rotate-180 text-primary' : 'text-slate-455'
+                    dropdownOpen ? 'rotate-180 text-primary' : 'text-slate-400'
                   )}
                   fill="none"
                   stroke="currentColor"
@@ -134,6 +134,24 @@ export const DesktopNavigation: React.FC = () => {
                 ))}
               </div>
             </div>
+          );
+        }
+
+        // Anchor links (e.g. "/#industries") would otherwise match the "/" route and
+        // render as active alongside Home. Render them as plain links instead.
+        if (item.href.includes('#')) {
+          return (
+            <a
+              key={item.name}
+              href={item.href}
+              className="text-sm font-semibold py-2 transition-all relative group focus-ring rounded-sm text-slate-600 hover:text-navy-950"
+            >
+              <span>{item.name}</span>
+              <span
+                className="absolute bottom-0 left-0 w-full h-[2px] bg-primary transition-transform duration-200 origin-left scale-x-0 group-hover:scale-x-100"
+                aria-hidden="true"
+              />
+            </a>
           );
         }
 

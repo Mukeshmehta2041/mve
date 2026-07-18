@@ -29,7 +29,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           loading="lazy"
         />
         {project.isFeatured && (
-          <span className="absolute top-3 left-3 bg-primary text-white text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-sm">
+          <span className="absolute top-3 left-3 bg-primary text-white text-[11px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-sm">
             Featured
           </span>
         )}

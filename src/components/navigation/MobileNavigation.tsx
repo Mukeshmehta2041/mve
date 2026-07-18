@@ -159,7 +159,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
                     type="button"
                     onClick={handleProductsClick}
                     aria-expanded={productsExpanded}
-                    className="w-full flex items-center justify-between text-base font-bold text-navy-950 py-2 px-2 hover:bg-slate-55 rounded-sm transition-colors text-left cursor-pointer"
+                    className="w-full flex items-center justify-between text-base font-bold text-navy-950 py-2 px-2 rounded-sm transition-colors text-left cursor-pointer"
                   >
                     <span>{item.name}</span>
                     <svg
@@ -236,7 +236,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
         </nav>
 
         {/* Contact actions inside menu (Call and WhatsApp) */}
-        <div className="mt-auto border-t border-border pt-4 text-xs text-slate-550 space-y-3.5">
+        <div className="mt-auto border-t border-border pt-4 text-xs text-slate-500 space-y-3.5">
           <div className="flex flex-col gap-2.5">
             {verifiedPhones.map((phone) => (
               <a

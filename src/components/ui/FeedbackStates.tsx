@@ -52,12 +52,12 @@ export const EmptyGuard: React.FC<EmptyGuardProps> = ({
   return (
     <div
       className={cn(
-        'flex flex-col items-center justify-center p-8 md:p-12 border border-dashed border-slate-350 rounded-card bg-slate-50 text-center max-w-lg mx-auto my-6',
+        'flex flex-col items-center justify-center p-8 md:p-12 border border-dashed border-slate-400 rounded-card bg-slate-50 text-center max-w-lg mx-auto my-6',
         className
       )}
       {...props}
     >
-      <div className="w-12 h-12 bg-slate-200/60 rounded-full flex items-center justify-center text-slate-450 mb-4">
+      <div className="w-12 h-12 bg-slate-200/60 rounded-full flex items-center justify-center text-slate-400 mb-4">
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8">
           <path
             strokeLinecap="round"

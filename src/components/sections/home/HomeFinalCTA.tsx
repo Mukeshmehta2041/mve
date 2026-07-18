@@ -27,7 +27,7 @@ export const HomeFinalCTA: React.FC = () => {
           Have an Industrial Requirement?
         </h2>
         
-        <p className="text-base md:text-lg text-slate-650 leading-relaxed max-w-2xl mx-auto font-sans">
+        <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-sans">
           Send us your required dimensions, capacity specifications, structural drawings, or overall project details. Our technical team will review your files and draft a formal commercial proposal.
         </p>
 

@@ -23,17 +23,10 @@ export const Footer: React.FC = () => {
               />
             </Link>
             <p className="text-sm text-slate-400 leading-relaxed mt-4">
-              Premium MS fabrication and custom industrial equipment manufacturing solutions. Delivering high-quality pressure vessels, storage tanks, and structural solutions nationwide since 2008.
+              Custom MS and stainless steel fabrication from our workshop in Patna, Bihar — storage
+              tanks, reaction vessels, hoppers, chimneys, and structural assemblies built to your
+              drawings.
             </p>
-            {/* Minimalist Trust Seals strip */}
-            <div className="flex flex-wrap gap-2 pt-2">
-              <span className="bg-slate-800 text-white text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-sm font-sans">
-                MSME Registered
-              </span>
-              <span className="bg-slate-800 text-white text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-sm font-sans">
-                GST Compliant
-              </span>
-            </div>
           </div>
 
           {/* Links Column mapping */}
@@ -106,7 +99,7 @@ export const Footer: React.FC = () => {
             <Link to="/privacy-policy" className="hover:text-primary">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-primary">Terms of Use</Link>
             <Link to="/disclaimer" className="hover:text-primary">Disclaimer</Link>
-            <Link to="/quality-certifications" className="hover:text-primary">Certifications</Link>
+            <Link to="/quality-certifications" className="hover:text-primary">Quality</Link>
           </div>
         </div>
       </Container>

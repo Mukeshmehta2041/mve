@@ -165,7 +165,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
           />
           <label
             htmlFor={checkboxId}
-            className="ml-2.5 text-sm text-slate-650 cursor-pointer select-none font-medium text-navy-950"
+            className="ml-2.5 text-sm text-slate-600 cursor-pointer select-none font-medium text-navy-950"
           >
             {label}
             {required && <span className="text-red-500 ml-1">*</span>}

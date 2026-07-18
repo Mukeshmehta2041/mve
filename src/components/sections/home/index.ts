@@ -4,8 +4,5 @@ export * from './HomeAbout';
 export * from './FeaturedProducts';
 export * from './CustomFabricationHighlight';
 export * from './IndustriesServed';
-export * from './WhyChooseUs';
-export * from './ManufacturingProcess';
 export * from './SelectedProjects';
-export * from './QualityPreview';
 export * from './HomeFinalCTA';

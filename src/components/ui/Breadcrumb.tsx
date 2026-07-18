@@ -8,17 +8,24 @@ export interface BreadcrumbItem {
 
 interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
   items: BreadcrumbItem[];
+  /** Set on the dark navy page heroes, where the default navy current-page label is invisible */
+  onDark?: boolean;
 }
 
 export const Breadcrumb: React.FC<BreadcrumbProps> = ({
   items,
+  onDark = false,
   className,
   ...props
 }) => {
   return (
     <nav
       aria-label="Breadcrumb"
-      className={cn('text-xs md:text-sm text-slate-400 py-3 block', className)}
+      className={cn(
+        'text-xs md:text-sm py-3 block',
+        onDark ? 'text-slate-400' : 'text-slate-500',
+        className
+      )}
       {...props}
     >
       <ol className="flex flex-wrap items-center space-x-2">
@@ -32,11 +39,14 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
           return (
             <li key={idx} className="flex items-center space-x-2">
               {/* Separator symbol */}
-              <span className="text-slate-350 select-none text-[10px] md:text-xs">/</span>
+              <span className={cn('select-none text-xs', onDark ? 'text-slate-500' : 'text-slate-400')}>/</span>
               {isLast || !item.href ? (
                 <span
                   aria-current="page"
-                  className="font-medium text-navy-950 font-sans truncate max-w-[150px] md:max-w-xs"
+                  className={cn(
+                    'font-medium font-sans truncate max-w-[150px] md:max-w-xs',
+                    onDark ? 'text-white' : 'text-navy-950'
+                  )}
                 >
                   {item.label}
                 </span>

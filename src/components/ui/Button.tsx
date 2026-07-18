@@ -2,7 +2,7 @@ import React from 'react';
 import { cn } from '../../lib/utils';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'whatsapp';
+  variant?: 'primary' | 'secondary' | 'outline-light' | 'ghost' | 'whatsapp';
   size?: 'sm' | 'md' | 'lg';
   fullWidth?: boolean;
   icon?: React.ReactNode;
@@ -31,6 +31,9 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
   const variantClasses = {
     primary: 'bg-primary text-white hover:bg-primary-hover shadow-sm',
     secondary: 'bg-white border-2 border-navy-950 text-navy-950 hover:border-primary hover:text-primary',
+    // For use on the dark navy page heroes, where `secondary` would be white-on-white
+    'outline-light': 'bg-transparent border-2 border-white/70 text-white hover:border-primary hover:text-primary',
+    ghost: 'bg-transparent text-navy-950 hover:bg-slate-100 hover:text-primary',
     whatsapp: 'bg-success text-white hover:bg-green-600 shadow-sm',
   };
 

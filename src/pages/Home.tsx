@@ -7,10 +7,7 @@ import {
   FeaturedProducts,
   CustomFabricationHighlight,
   IndustriesServed,
-  WhyChooseUs,
-  ManufacturingProcess,
   SelectedProjects,
-  QualityPreview,
   HomeFinalCTA,
 } from '../components/sections/home';
 
@@ -47,10 +44,7 @@ export const Home: React.FC = () => {
       <FeaturedProducts />
       <CustomFabricationHighlight />
       <IndustriesServed />
-      <WhyChooseUs />
-      <ManufacturingProcess />
       <SelectedProjects />
-      <QualityPreview />
       <HomeFinalCTA />
     </SiteLayout>
   );

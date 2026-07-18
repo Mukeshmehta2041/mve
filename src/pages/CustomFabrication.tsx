@@ -42,24 +42,21 @@ export const CustomFabrication: React.FC = () => {
       <Section className="bg-navy-950 text-white pt-6 pb-14 md:pb-20 xl:pb-24 text-left relative overflow-hidden border-b border-slate-900">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
         <Container className="relative z-10">
-          <Breadcrumb 
+          <Breadcrumb onDark 
             items={[{ label: 'Custom Fabrication' }]} 
-            className="text-slate-400 mb-6"
+            className="mb-6"
           />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Content Column */}
             <div className="lg:col-span-7 space-y-6">
               <div>
-                <span className="text-[12px] leading-[18px] tracking-[0.1em] uppercase font-bold text-primary block mb-3">
-                  Tailored Engineering
-                </span>
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight font-heading">
-                  Custom Fabrication Built Around Your <span className="text-primary">Requirement</span>
+                  Fabrication built around your requirement
                 </h1>
               </div>
 
-              <p className="text-base md:text-lg text-slate-350 leading-relaxed max-w-2xl font-sans">
+              <p className="text-base md:text-lg text-slate-400 leading-relaxed max-w-2xl font-sans">
                 From customer drawings and dimensions to fabrication and delivery, we build industrial solutions tailored to specific project needs. We work directly with your templates, sketches, or structural designs.
               </p>
 
@@ -75,35 +72,14 @@ export const CustomFabrication: React.FC = () => {
                 </Button>
                 <Button
                   href={getQuoteUrl({ service: 'custom-fabrication', type: 'drawing-upload' })}
-                  variant="secondary"
-                  className="font-bold text-sm tracking-wider uppercase h-12 bg-transparent text-white border-white hover:border-primary hover:text-primary flex-grow sm:flex-grow-0"
+                  variant="outline-light"
+                  className="font-bold text-sm tracking-wider uppercase h-12 flex-grow sm:flex-grow-0"
                   onClick={() => trackEvent('custom_drawing_click', { position: 'hero' })}
                 >
                   Share Your Drawing
                 </Button>
               </div>
 
-              {/* Trust badges */}
-              <div className="flex flex-wrap gap-x-6 gap-y-3 pt-6 border-t border-slate-800 text-xs text-slate-400 font-sans">
-                <div className="flex items-center gap-2">
-                  <svg className="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                  </svg>
-                  <span>GST Registered Supplier</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <svg className="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                  </svg>
-                  <span>MSME/Udyam Certified</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <svg className="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                  </svg>
-                  <span>Factory Licensed Setup</span>
-                </div>
-              </div>
             </div>
 
             {/* Right Image Column */}
@@ -125,7 +101,6 @@ export const CustomFabrication: React.FC = () => {
       <Section className="bg-white border-b border-border text-left">
         <Container>
           <SectionHeader
-            eyebrow="Capabilities Scope"
             title="Custom Equipment & Assemblies We Fabricate"
             description="We manufacture custom steel units and process containment parts matching client-provided drawings and dimensions."
             align="left"
@@ -166,7 +141,6 @@ export const CustomFabrication: React.FC = () => {
       <Section className="bg-surface border-b border-border text-left">
         <Container>
           <SectionHeader
-            eyebrow="Custom Criteria"
             title="Built Around Your Drawings, Dimensions and Application"
             description="All fabrications are subject to technical drawings review and load feasibility alignment."
             align="center"
@@ -192,7 +166,6 @@ export const CustomFabrication: React.FC = () => {
       <Section className="bg-white border-b border-border text-left">
         <Container>
           <SectionHeader
-            eyebrow="Workflow Path"
             title="Our Custom Engineering & Delivery Process"
             description="We coordinate each phase—from drawing checks to site logistics—to deliver structural alignment."
             align="center"
@@ -213,7 +186,7 @@ export const CustomFabrication: React.FC = () => {
                     <div className="w-12 h-12 rounded-full bg-white border-2 border-slate-200 flex items-center justify-center text-slate-500">
                       <img src={step.icon} alt="" aria-hidden="true" className="w-5 h-5 object-contain" />
                     </div>
-                    <span className="absolute -top-1.5 -right-1.5 bg-navy-950 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                    <span className="absolute -top-1.5 -right-1.5 bg-navy-950 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
                       {step.stepNumber}
                     </span>
                   </div>
@@ -232,11 +205,10 @@ export const CustomFabrication: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Content Column */}
             <div className="lg:col-span-6 space-y-6">
-              <span className="text-[11px] font-bold tracking-wider uppercase text-primary">Manufacturing Materials</span>
               <h2 className="text-2xl md:text-3xl font-extrabold text-navy-950 leading-tight">
                 Steel Material Grades & Workshop Capacities
               </h2>
-              <p className="text-sm text-slate-655 leading-relaxed font-sans">
+              <p className="text-sm text-slate-600 leading-relaxed font-sans">
                 We maintain inventories of certified steel plates and structural profiles. All fabrication jobs undergo visual weld audits, surface priming, and dimensional verification before dispatch.
               </p>
 
@@ -318,7 +290,6 @@ export const CustomFabrication: React.FC = () => {
         <Container>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 md:mb-12">
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-primary block mb-1">Quality Controls</span>
               <h2 className="text-2xl md:text-3xl font-extrabold text-navy-950">Quality Checks at Every Relevant Stage</h2>
             </div>
             <Link
@@ -355,7 +326,6 @@ export const CustomFabrication: React.FC = () => {
           <Container>
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 md:mb-12">
               <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-primary block mb-1">Recent Works</span>
                 <h2 className="text-2xl md:text-3xl font-extrabold text-navy-950">Example Custom Fabrication Projects</h2>
               </div>
               <Link
@@ -422,9 +392,9 @@ export const CustomFabrication: React.FC = () => {
             {verifiedPhone && (
               <Button
                 href={`tel:${verifiedPhone}`}
-                variant="secondary"
+                variant="outline-light"
                 size="md"
-                className="font-bold text-sm tracking-wider uppercase h-12 bg-transparent text-white border-white hover:border-primary hover:text-primary"
+                className="font-bold text-sm tracking-wider uppercase h-12"
               >
                 <img src={ASSETS.icons.phone} alt="" aria-hidden="true" className="w-4 h-4 mr-2 filter invert" />
                 Call: {verifiedPhone}

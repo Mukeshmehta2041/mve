@@ -1,8 +1,12 @@
+import { contactData } from './contact';
+import { companyData } from './company';
+
 export const legalLastUpdated = 'July 2026';
 
+/** Derived from contact.ts so the legal pages can never drift from the rest of the site. */
 export const legalContactData = {
-  companyName: 'Maa Vindhawasini Enterprises',
-  email: 'mvepatna@gmail.com', // Neutral company email or check contactData email
-  phone: '+91-9576226156', // Central phone reference
-  address: 'Patna, Bihar, India',
+  companyName: companyData.legalName,
+  email: contactData.emails[0],
+  phone: contactData.phones[0],
+  address: contactData.officeAddress,
 };

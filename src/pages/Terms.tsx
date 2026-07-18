@@ -10,7 +10,7 @@ export const Terms: React.FC = () => {
   return (
     <LegalPageLayout
       title="Terms of Use"
-      description="Review the rules and operational boundaries governing the exploration of our steel fabrication catalog."
+      description="The terms that apply when you browse this site or send us a quotation request."
       canonicalPath="/terms"
     >
       <p>

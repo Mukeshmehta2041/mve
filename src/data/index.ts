@@ -5,7 +5,6 @@ export * from './products';
 export * from './industries';
 export * from './trust';
 export * from './footer';
-export * from './whyChooseUs';
 export * from './process';
 export * from './projects';
 export * from './quality';

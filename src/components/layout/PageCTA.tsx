@@ -37,7 +37,7 @@ export const PageCTA: React.FC<PageCTAProps> = ({
         <p
           className={cn(
             'text-base md:text-lg leading-relaxed max-w-2xl mx-auto font-sans',
-            dark ? 'text-slate-350' : 'text-slate-600'
+            dark ? 'text-slate-400' : 'text-slate-600'
           )}
         >
           Send us your engineering drawings or dimensional requirements. Our technicians will review and draft a complete itemized pricing proposal.

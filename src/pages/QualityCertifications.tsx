@@ -3,12 +3,10 @@ import { Link } from 'react-router-dom';
 import { SiteLayout, SEO } from '../components/layout';
 import { Container, Section, SectionHeader, Button, Breadcrumb } from '../components/ui';
 import {
-  companyData,
   contactData,
   qualityCommitmentPointsData,
   qualityPageProcessStepsData,
   inspectionMethodsData,
-  registrationsListData,
 } from '../data';
 import { trackEvent } from '../lib/analytics';
 import { ASSETS } from '../lib/assets';
@@ -25,31 +23,6 @@ export const QualityCertifications: React.FC = () => {
   const whatsappMsg = 'Hello Maa Vindhawasini Enterprises, I am looking at your quality certifications and would like to discuss my project specifications.';
   const whatsappUrl = `https://wa.me/${contactData.whatsapp}?text=${encodeURIComponent(whatsappMsg)}`;
 
-  // Masking function for sensitive registration keys (GST/Udyam/Factory License)
-  const renderRegistrationNumber = (maskKey: string) => {
-    const rawVal = companyData.registrations[maskKey as keyof typeof companyData.registrations];
-    
-    if (!rawVal || rawVal === 'pending verification') {
-      return (
-        <span className="text-[11px] font-bold text-slate-400 bg-slate-100 border border-slate-200/80 px-2 py-0.5 rounded-sm uppercase tracking-wide">
-          Verification Pending
-        </span>
-      );
-    }
-
-    // Mask value for public view (leaving only first 3 and last 2 characters visible)
-    const valStr = String(rawVal);
-    if (valStr.length > 5) {
-      return (
-        <code className="text-xs font-mono text-slate-650 bg-slate-50 border border-border px-2 py-0.5 rounded-sm">
-          {valStr.slice(0, 3)}XXXXXXXXX{valStr.slice(-2)}
-        </code>
-      );
-    }
-    
-    return <code className="text-xs font-mono text-slate-650 bg-slate-50 border border-border px-2 py-0.5 rounded-sm">{valStr}</code>;
-  };
-
   return (
     <SiteLayout>
       <SEO
@@ -62,24 +35,22 @@ export const QualityCertifications: React.FC = () => {
       <Section className="bg-navy-950 text-white pt-6 pb-12 md:pb-16 text-left relative overflow-hidden border-b border-slate-900">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
         <Container className="relative z-10">
-          <Breadcrumb 
+          <Breadcrumb onDark 
             items={[{ label: 'Quality & Certifications' }]} 
-            className="text-slate-400 mb-6"
+            className="mb-6"
           />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Content Column */}
             <div className="lg:col-span-7 space-y-6">
               <div>
-                <span className="text-[12px] leading-[18px] tracking-[0.1em] uppercase font-bold text-primary block mb-3">
-                  Operational Standards
-                </span>
+                
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight font-heading">
                   Quality & Certifications
                 </h1>
               </div>
 
-              <p className="text-base md:text-lg text-slate-350 leading-relaxed max-w-xl font-sans">
+              <p className="text-base md:text-lg text-slate-400 leading-relaxed max-w-xl font-sans">
                 A practical quality-focused approach across material review, fabrication, inspection, and final delivery. We maintain structural safety standards for every industrial build.
               </p>
 
@@ -94,8 +65,8 @@ export const QualityCertifications: React.FC = () => {
                 </Button>
                 <Button
                   href="/products"
-                  variant="secondary"
-                  className="font-bold text-sm tracking-wider uppercase h-12 bg-transparent text-white border-white hover:border-primary hover:text-primary flex-grow sm:flex-grow-0"
+                  variant="outline-light"
+                  className="font-bold text-sm tracking-wider uppercase h-12 flex-grow sm:flex-grow-0"
                 >
                   View Our Products
                 </Button>
@@ -123,11 +94,10 @@ export const QualityCertifications: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start font-sans">
             {/* Left Description Column */}
             <div className="lg:col-span-5 space-y-4 lg:sticky lg:top-24">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-primary block">Integrity Commitment</span>
               <h2 className="text-2xl md:text-3xl font-extrabold text-navy-950 leading-tight">
                 Quality Built Into Every Relevant Stage
               </h2>
-              <p className="text-sm text-slate-605 leading-relaxed">
+              <p className="text-sm text-slate-600 leading-relaxed">
                 Rather than relying on certificate badges alone, we follow operational workmanship checks to verify structural load limits, prevent fluid leakages, and guarantee dimensional accuracy.
               </p>
             </div>
@@ -154,33 +124,27 @@ export const QualityCertifications: React.FC = () => {
       <Section className="bg-surface border-b border-border text-left">
         <Container>
           <SectionHeader
-            eyebrow="Audit Path"
             title="Our Quality-Control Process Checklist"
             description="We apply standard checks at each fabrication milestone to ensure alignment with customer requirements."
             align="center"
           />
 
-          {/* Connected timeline workflow */}
-          <div className="relative pt-6 font-sans">
-            {/* Timeline connector line for desktop screens */}
-            <div className="hidden lg:block absolute top-[52px] left-[8%] right-[8%] h-[2px] bg-slate-200 z-0"></div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-8 gap-4 relative z-10">
+          {/* Process steps — 4 across on desktop so the text stays readable */}
+          <div className="pt-2 font-sans">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
               {qualityPageProcessStepsData.map((step) => (
-                <div
-                  key={step.stepNumber}
-                  className="bg-white lg:bg-transparent border border-border lg:border-none p-4 lg:p-0 rounded-card flex flex-col items-start shadow-sm lg:shadow-none"
-                >
-                  <div className="relative flex items-center justify-center mb-3">
-                    <div className="w-11 h-11 rounded-full bg-white border-2 border-slate-250 flex items-center justify-center text-slate-500">
-                      <img src={step.icon} alt="" aria-hidden="true" className="w-4.5 h-4.5 object-contain" />
+                <div key={step.stepNumber} className="flex flex-col items-start">
+                  <div className="relative flex items-center justify-center mb-4">
+                    <div className="w-11 h-11 rounded-full bg-white border-2 border-slate-200 flex items-center justify-center text-slate-500">
+                      <img src={step.icon} alt="" aria-hidden="true" className="w-5 h-5 object-contain" />
                     </div>
-                    <span className="absolute -top-1.5 -right-1.5 bg-navy-950 text-white text-[8px] font-bold w-4.5 h-4.5 rounded-full flex items-center justify-center border border-white">
+                    <span className="absolute -top-1.5 -right-1.5 bg-navy-950 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">
                       {step.stepNumber}
-                    </span>
+</span>
+                    
                   </div>
-                  <h4 className="font-bold text-xs text-navy-950 mb-1 leading-snug">{step.title}</h4>
-                  <p className="text-[10px] text-slate-550 leading-relaxed">{step.description}</p>
+                  <h3 className="font-bold text-sm text-navy-950 mb-1.5 leading-snug">{step.title}</h3>
+                  <p className="text-sm text-slate-600 leading-relaxed">{step.description}</p>
                 </div>
               ))}
             </div>
@@ -192,7 +156,6 @@ export const QualityCertifications: React.FC = () => {
       <Section className="bg-white border-b border-border text-left">
         <Container>
           <SectionHeader
-            eyebrow="Verification Methods"
             title="Applied Inspections & Mechanical Checks"
             description="All tests and verification audits are applied selectively based on product type and agreed scope parameters."
             align="center"
@@ -212,49 +175,10 @@ export const QualityCertifications: React.FC = () => {
                   <p className="text-xs text-slate-600 leading-relaxed mb-4">{method.desc}</p>
                 </div>
 
-                <span className="text-[10px] font-bold text-primary block pt-2 border-t border-slate-200 mt-auto">
+                <span className="text-xs font-bold text-primary block pt-2 border-t border-slate-200 mt-auto">
                   {method.scopeLabel}
-                </span>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* Registrations & Licences Grid */}
-      <Section className="bg-surface border-b border-border text-left">
-        <Container>
-          <SectionHeader
-            eyebrow="Corporate Compliance"
-            title="Verified Registrations & Operational Licences"
-            description="We display our status for standard corporate filings. Personal identification details are masked to preserve data privacy."
-            align="center"
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-3 font-sans">
-            {registrationsListData.map((reg) => (
-              <div
-                key={reg.id}
-                className="bg-white border border-border p-6 rounded-card shadow-card space-y-4 flex flex-col justify-between"
-                onClick={() => trackEvent('quality_registration_view', { registrationName: reg.name })}
-              >
-                <div className="space-y-3">
-                  <div className="w-10 h-10 rounded-sm bg-primary-soft text-primary flex items-center justify-center">
-                    <img src={reg.icon} alt="" aria-hidden="true" className="w-5 h-5 object-contain" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-base text-navy-950 mb-1 leading-snug">{reg.name}</h3>
-                    <span className="text-[10px] text-slate-400 block font-semibold uppercase tracking-wider mb-2">
-                      {reg.authority}
-                    </span>
-                    <p className="text-xs text-slate-600 leading-relaxed">{reg.desc}</p>
-                  </div>
-                </div>
-
-                <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-sans">
-                  <span className="text-slate-500 font-medium">Record Code:</span>
-                  {renderRegistrationNumber(reg.maskKey)}
-                </div>
+</span>
+                
               </div>
             ))}
           </div>
@@ -264,15 +188,14 @@ export const QualityCertifications: React.FC = () => {
       {/* Quality Across Products and Custom Fabrication */}
       <Section className="bg-white border-b border-border text-left py-12 md:py-16">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center font-sans">
-            {/* Left Content Column */}
-            <div className="lg:col-span-7 space-y-6">
-              <span className="text-[11px] font-bold tracking-wider uppercase text-primary block">Operational Integrity</span>
-              <h2 className="text-2xl md:text-3xl font-extrabold text-navy-950 leading-tight">
-                A Consistent Quality Approach Across All Offerings
+          <div className="max-w-3xl font-sans">
+            <div className="space-y-6">
+              <h2 className="text-2xl md:text-3xl font-bold text-navy-950 leading-tight">
+                The same checks, whatever we&rsquo;re building
               </h2>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Whether fabricating standard concrete shuttering plates, cylindrical storage tanks, exhaust stacks, or custom frameworks from drawing specifications, our shop-floor managers apply uniform testing and material check guidelines.
+              <p className="text-base text-slate-600 leading-relaxed">
+                Shuttering plates, storage tanks, exhaust stacks, or a one-off frame from your
+                drawing — the same material and testing checks apply to all of it.
               </p>
 
               <div className="flex flex-wrap gap-4 pt-2">
@@ -285,8 +208,7 @@ export const QualityCertifications: React.FC = () => {
                   <svg className="w-4 h-4 transform transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                   </svg>
-                </Link>
-                <span className="text-slate-300">|</span>
+                </Link>|
                 <Link
                   to="/custom-fabrication"
                   className="text-primary hover:text-primary-hover font-bold text-sm flex items-center gap-1 group"
@@ -296,8 +218,7 @@ export const QualityCertifications: React.FC = () => {
                   <svg className="w-4 h-4 transform transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                   </svg>
-                </Link>
-                <span className="text-slate-300">|</span>
+                </Link>|
                 <Link
                   to="/projects"
                   className="text-primary hover:text-primary-hover font-bold text-sm flex items-center gap-1 group"
@@ -311,17 +232,6 @@ export const QualityCertifications: React.FC = () => {
               </div>
             </div>
 
-            {/* Right Image Column */}
-            <div className="lg:col-span-5">
-              <div className="rounded-lg overflow-hidden border border-border shadow-card aspect-[16/10] bg-slate-50 relative">
-                <img
-                  src={ASSETS.fabrication.inspection}
-                  alt="Quality checking inspector verifying raw materials parameters."
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-950/40 to-transparent pointer-events-none"></div>
-              </div>
-            </div>
           </div>
         </Container>
       </Section>
@@ -365,9 +275,9 @@ export const QualityCertifications: React.FC = () => {
             {verifiedPhone && (
               <Button
                 href={`tel:${verifiedPhone}`}
-                variant="secondary"
+                variant="outline-light"
                 size="md"
-                className="font-bold text-sm tracking-wider uppercase h-12 bg-transparent text-white border-white hover:border-primary hover:text-primary"
+                className="font-bold text-sm tracking-wider uppercase h-12"
               >
                 <img src={ASSETS.icons.phone} alt="" aria-hidden="true" className="w-4 h-4 mr-2 filter invert" />
                 Call: {verifiedPhone}

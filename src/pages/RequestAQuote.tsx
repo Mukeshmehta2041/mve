@@ -347,7 +347,7 @@ export const RequestAQuote: React.FC = () => {
               <Button href="/products" variant="primary" className="font-bold text-xs uppercase tracking-wide">
                 Return to Products
               </Button>
-              <Button href="/" variant="secondary" className="font-bold text-xs uppercase tracking-wide bg-transparent border-navy-950 text-navy-950">
+              <Button href="/" variant="secondary" className="font-bold text-xs uppercase tracking-wide">
                 Go to Homepage
               </Button>
             </div>
@@ -369,7 +369,7 @@ export const RequestAQuote: React.FC = () => {
       <Section className="bg-navy-950 text-white pt-6 pb-10 text-left border-b border-slate-900 overflow-hidden relative">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
         <Container className="relative z-10">
-          <Breadcrumb items={[{ label: 'Request a Quote' }]} className="text-slate-400 mb-4" />
+          <Breadcrumb onDark items={[{ label: 'Request a Quote' }]} className="mb-4" />
           
           <div className="max-w-3xl space-y-2.5">
             <h1 className="text-3xl md:text-4xl font-extrabold text-white leading-tight font-heading">
@@ -377,7 +377,7 @@ export const RequestAQuote: React.FC = () => {
                 ? `Request a Quote for ${productsData.find((p) => p.slug === productSlug)?.name}`
                 : 'Request a Commercial Quote'}
             </h1>
-            <p className="text-sm md:text-base text-slate-350 leading-relaxed max-w-2xl font-sans">
+            <p className="text-sm md:text-base text-slate-400 leading-relaxed max-w-2xl font-sans">
               Share your product details, dimensions, quantity, drawing, or custom project requirement and our estimating team will review the parameters to draft a price proposal.
             </p>
           </div>
@@ -391,19 +391,19 @@ export const RequestAQuote: React.FC = () => {
             <svg className="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
-            <span className="font-semibold text-navy-950">GST Compliance Invoice Support</span>
+            <span className="font-semibold text-navy-950">Itemised written quotation</span>
           </div>
           <div className="flex items-center gap-2">
             <svg className="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
-            <span className="font-semibold text-navy-950">Engineering Drawings Review</span>
+            <span className="font-semibold text-navy-950">Drawings reviewed by our team</span>
           </div>
           <div className="flex items-center gap-2">
             <svg className="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
-            <span className="font-semibold text-navy-950">Direct Factory Operations</span>
+            <span className="font-semibold text-navy-950">You deal with the workshop directly</span>
           </div>
         </Container>
       </div>
@@ -444,7 +444,7 @@ export const RequestAQuote: React.FC = () => {
                             "p-4 rounded-card border-2 text-left cursor-pointer transition-all focus:outline-none focus-ring",
                             isSelected
                               ? "bg-white border-primary border-2 text-navy-950 shadow-sm"
-                              : "bg-white border-border text-slate-600 hover:border-slate-350"
+                              : "bg-white border-border text-slate-600 hover:border-slate-400"
                           )}
                           id={`input-reqType-${type.value}`}
                         >
@@ -648,7 +648,7 @@ export const RequestAQuote: React.FC = () => {
                     id="input-file"
                   />
                   {highlightUpload && (
-                    <span className="text-[10px] font-bold text-primary uppercase block mt-1 font-sans">
+                    <span className="text-xs font-bold text-primary uppercase block mt-1 font-sans">
                       Highlight: Recommended upload area for blueprint files.
                     </span>
                   )}

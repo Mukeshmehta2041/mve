@@ -26,7 +26,7 @@ export const NotFound: React.FC = () => {
               Page Not Found
             </h1>
             <p className="text-sm md:text-base text-slate-500 leading-relaxed max-w-md mx-auto">
-              The page you are looking for may have moved, been renamed, or no longer exists. Use our links below to return to the catalog pages.
+              This page may have moved or no longer exists. Head back to the home page, or browse the product catalogue.
             </p>
           </div>
 
@@ -42,18 +42,10 @@ export const NotFound: React.FC = () => {
             <Button
               href="/products"
               variant="secondary"
-              className="font-bold text-xs uppercase tracking-wide h-11 px-6 bg-transparent border-navy-950 text-navy-950 hover:bg-slate-55"
+              className="font-bold text-xs uppercase tracking-wide h-11 px-6"
               onClick={() => trackEvent('not_found_navigation_click', { destination: 'products' })}
             >
               View Products
-            </Button>
-            <Button
-              href="/contact"
-              variant="secondary"
-              className="font-bold text-xs uppercase tracking-wide h-11 px-6 bg-transparent border-slate-300 text-slate-600 hover:border-slate-400"
-              onClick={() => trackEvent('not_found_navigation_click', { destination: 'contact' })}
-            >
-              Contact Us
             </Button>
           </div>
         </Container>

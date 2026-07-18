@@ -13,8 +13,8 @@ export const HomeHero: React.FC = () => {
       <Container className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         {/* Left column - Content */}
         <div className="lg:col-span-7 space-y-6 text-left">
-          <span className="text-[12px] leading-[18px] tracking-[0.15em] uppercase font-bold text-primary block">
-            MS Fabrication & Industrial Equipment Manufacturing
+          <span className="text-[11px] md:text-[12px] leading-[18px] tracking-[0.12em] uppercase font-semibold text-slate-500 block">
+            MS fabrication &amp; industrial equipment &middot; Patna, Bihar
           </span>
           
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-navy-950 leading-[1.15] tracking-tight font-heading">
@@ -53,7 +53,7 @@ export const HomeHero: React.FC = () => {
               loading="eager"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
-            {/* Soft gradient overlay for premium feel */}
+            {/* Soft gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-navy-950/15 to-transparent pointer-events-none"></div>
           </div>
         </div>

@@ -212,15 +212,17 @@ export const ProductDetail: React.FC = () => {
                   </>
                 )}
 
-                {/* Image Count/Indicator overlay */}
-                <span className="absolute bottom-3 right-3 bg-navy-950/80 text-white text-xs font-medium px-2.5 py-1 rounded-sm">
-                  {activeImgIndex + 1} / {galleryImages.length}
-                </span>
+                {/* Image count — only meaningful when there is more than one image */}
+                {galleryImages.length > 1 && (
+                  <span className="absolute bottom-3 right-3 bg-navy-950/80 text-white text-xs font-medium px-2.5 py-1 rounded-sm">
+                    {activeImgIndex + 1} / {galleryImages.length}
+                  </span>
+                )}
               </div>
 
               {/* Thumbnails strip */}
               {galleryImages.length > 1 && (
-                <div className="flex gap-2.5 overflow-x-auto pb-1 scrollbar-thin">
+                <div className="flex gap-2.5 overflow-x-auto overflow-y-hidden pb-2 -mb-1 snap-x scroll-px-1">
                   {galleryImages.map((img, idx) => (
                     <button
                       key={idx}
@@ -229,7 +231,7 @@ export const ProductDetail: React.FC = () => {
                         trackEvent('product_gallery_change', { productSlug: product.slug, index: idx, trigger: 'thumbnail_click' });
                       }}
                       className={cn(
-                        "w-20 h-16 rounded-sm overflow-hidden border-2 bg-slate-50 transition-all flex-shrink-0 cursor-pointer focus-ring",
+                        "w-20 h-16 snap-start rounded-sm overflow-hidden border-2 bg-slate-50 transition-all flex-shrink-0 cursor-pointer focus-ring",
                         activeImgIndex === idx ? "border-primary opacity-100" : "border-border opacity-70 hover:opacity-100"
                       )}
                       aria-label={`View Image ${idx + 1}`}
@@ -243,7 +245,7 @@ export const ProductDetail: React.FC = () => {
             </div>
 
             {/* Product Overview & Action Panel */}
-            <div className="lg:col-span-5 flex flex-col justify-between">
+            <div className="lg:col-span-5 flex flex-col gap-8">
               <div>
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-[11px] font-bold uppercase tracking-wider bg-primary-soft text-primary mb-3">
                   <img src={product.categoryIcon} alt="" className="w-3.5 h-3.5 object-contain" />
@@ -254,7 +256,7 @@ export const ProductDetail: React.FC = () => {
                   {product.name}
                 </h1>
 
-                <p className="text-base text-slate-660 leading-relaxed font-sans mb-6">
+                <p className="text-base text-slate-600 leading-relaxed font-sans mb-6">
                   {product.description}
                 </p>
 
@@ -469,7 +471,7 @@ export const ProductDetail: React.FC = () => {
           <div className="max-w-3xl mb-8 md:mb-12">
             <span className="text-[11px] leading-[18px] tracking-[0.1em] uppercase font-bold text-primary block mb-2">Workflow Standards</span>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-navy-950">Manufacturing & Quality Controls</h2>
-            <p className="mt-3 text-base text-slate-650 font-sans">
+            <p className="mt-3 text-base text-slate-600 font-sans">
               We apply standardized engineering reviews, dimensional alignment checklists, and material validation steps to safeguard every fabrication batch.
             </p>
           </div>
@@ -484,7 +486,7 @@ export const ProductDetail: React.FC = () => {
                   <div className="w-12 h-12 rounded-full bg-white border-2 border-slate-200 flex items-center justify-center text-slate-500">
                     <img src={step.icon} alt="" aria-hidden="true" className="w-5 h-5 object-contain" />
                   </div>
-                  <span className="absolute -top-1.5 -right-1.5 bg-navy-950 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                  <span className="absolute -top-1.5 -right-1.5 bg-navy-950 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
                     {step.stepNumber}
                   </span>
                 </div>
@@ -656,9 +658,9 @@ export const ProductDetail: React.FC = () => {
             {verifiedPhone && (
               <Button
                 href={`tel:${verifiedPhone}`}
-                variant="secondary"
+                variant="outline-light"
                 size="md"
-                className="font-bold text-sm tracking-wider uppercase bg-transparent text-white border-white hover:border-primary hover:text-primary"
+                className="font-bold text-sm tracking-wider uppercase"
                 onClick={() => trackEvent('product_call_click', { productSlug: product.slug, position: 'footer_cta' })}
               >
                 <img src={ASSETS.icons.phone} alt="" className="w-4 h-4 mr-2 filter invert" />

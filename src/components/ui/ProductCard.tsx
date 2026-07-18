@@ -41,29 +41,27 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           {product.description}
         </p>
 
-        {/* Small Technical Specs Overview */}
+        {/* Key specs — one per row so values stay readable at narrow card widths */}
         {product.specifications && Object.keys(product.specifications).length > 0 && (
-          <div className="mt-auto pt-3 border-t border-border mb-4">
-            <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1.5">
-              Key Specifications
-            </span>
-            <div className="grid grid-cols-2 gap-x-2 gap-y-1 text-xs text-slate-600">
-              {Object.entries(product.specifications).slice(0, 2).map(([key, val]) => (
-                <div key={key} className="truncate">
-                  <span className="font-medium text-navy-950">{key}:</span> {val}
-                </div>
-              ))}
-            </div>
+          <div className="mt-auto pt-3 border-t border-border mb-4 space-y-1.5">
+            {Object.entries(product.specifications).slice(0, 2).map(([key, val]) => (
+              <div key={key} className="text-xs leading-snug">
+                <span className="block text-[11px] font-semibold text-slate-500 uppercase tracking-wide">
+                  {key}
+                </span>
+                <span className="text-navy-950">{val}</span>
+              </div>
+            ))}
           </div>
         )}
 
         {/* Action buttons */}
-        <div className="grid grid-cols-2 gap-2 mt-auto">
+        <div className="flex flex-col sm:flex-row gap-2 mt-auto">
           <Button
             variant="secondary"
             size="sm"
             href={`/products/${product.slug}`}
-            className="text-xs"
+            className="flex-1 text-xs whitespace-nowrap"
           >
             View Details
           </Button>
@@ -71,7 +69,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             variant="primary"
             size="sm"
             href={getQuoteUrl({ product: product.slug })}
-            className="text-xs"
+            className="flex-1 text-xs whitespace-nowrap"
           >
             Get Quote
           </Button>

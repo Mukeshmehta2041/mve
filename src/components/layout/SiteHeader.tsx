@@ -55,7 +55,7 @@ export const SiteHeader: React.FC = () => {
             </a>
           )}
           
-          <div className="flex items-center text-slate-650">
+          <div className="flex items-center text-slate-600">
             <img src={ASSETS.icons.mapPin} alt="" aria-hidden="true" className="w-3.5 h-3.5 mr-2 opacity-70" />
             <span>{displayAddress}</span>
           </div>

@@ -17,9 +17,6 @@ export interface CompanyInfo {
   legalName: string;
   publicBrandName: string;
   tagline: string;
-  establishmentYear: number;
-  yearsOfExperienceClaim: number;
-  registrations: RegistrationDetails;
 }
 
 export interface ContactInfo {

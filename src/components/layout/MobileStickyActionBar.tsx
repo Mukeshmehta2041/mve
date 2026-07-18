@@ -27,20 +27,18 @@ export const MobileStickyActionBar: React.FC = () => {
       {verifiedPhone ? (
         <a
           href={`tel:${verifiedPhone}`}
-          className="flex flex-col items-center justify-center bg-slate-100 hover:bg-slate-200 text-navy-950 w-12 h-12 rounded-card focus-ring"
-          aria-label="Call corporate offices"
+          className="flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-navy-950 w-12 h-12 shrink-0 rounded-card focus-ring"
+          aria-label="Call us"
         >
-          <img src={ASSETS.icons.phone} alt="" className="w-5 h-5 object-contain animate-none" />
-          <span className="text-[10px] font-bold mt-0.5">Call</span>
+          <img src={ASSETS.icons.phone} alt="" className="w-5 h-5 object-contain" />
         </a>
       ) : (
         <a
           href="/contact"
-          className="flex flex-col items-center justify-center bg-slate-100 hover:bg-slate-200 text-navy-950 w-12 h-12 rounded-card focus-ring"
+          className="flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-navy-950 w-12 h-12 shrink-0 rounded-card focus-ring"
           aria-label="View office location"
         >
           <img src={ASSETS.icons.mapPin} alt="" className="w-5 h-5 object-contain" />
-          <span className="text-[10px] font-bold mt-0.5">Contact</span>
         </a>
       )}
 
@@ -50,19 +48,17 @@ export const MobileStickyActionBar: React.FC = () => {
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-col items-center justify-center bg-success hover:bg-green-600 text-white w-12 h-12 rounded-card focus-ring"
-          aria-label="Message engineering teams on WhatsApp"
+          className="flex items-center justify-center bg-success hover:bg-green-600 text-white w-12 h-12 shrink-0 rounded-card focus-ring"
+          aria-label="Message us on WhatsApp"
         >
           <img src={ASSETS.icons.whatsapp} alt="" className="w-5 h-5 object-contain brightness-0 invert" />
-          <span className="text-[10px] font-bold mt-0.5">WhatsApp</span>
         </a>
       ) : (
         <div
-          className="flex flex-col items-center justify-center bg-slate-100 text-slate-400 w-12 h-12 rounded-card opacity-50 cursor-not-allowed"
+          className="flex items-center justify-center bg-slate-100 text-slate-400 w-12 h-12 shrink-0 rounded-card opacity-50 cursor-not-allowed"
           aria-hidden="true"
         >
           <img src={ASSETS.icons.whatsapp} alt="" className="w-5 h-5 object-contain opacity-50" />
-          <span className="text-[10px] font-bold mt-0.5">WhatsApp</span>
         </div>
       )}
 

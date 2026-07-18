@@ -131,24 +131,20 @@ export const Contact: React.FC = () => {
       <Section className="bg-navy-950 text-white pt-6 pb-12 md:pb-16 text-left relative overflow-hidden border-b border-slate-900">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
         <Container className="relative z-10">
-          <Breadcrumb 
+          <Breadcrumb onDark 
             items={[{ label: 'Contact Us' }]} 
-            className="text-slate-400 mb-6"
+            className="mb-6"
           />
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Left Content */}
-            <div className="lg:col-span-7 space-y-6">
+          <div className="max-w-3xl">
+            <div className="space-y-6">
               <div>
-                <span className="text-[12px] leading-[18px] tracking-[0.1em] uppercase font-bold text-primary block mb-3">
-                  Get In Touch
-                </span>
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight font-heading">
                   Contact Us
                 </h1>
               </div>
 
-              <p className="text-base md:text-lg text-slate-350 leading-relaxed max-w-xl font-sans">
+              <p className="text-base md:text-lg text-slate-400 leading-relaxed max-w-xl font-sans">
                 Speak with our team about industrial products, custom fabrication, drawings, dimensions, or project requirements.
               </p>
 
@@ -168,8 +164,8 @@ export const Contact: React.FC = () => {
                     href={whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    variant="secondary"
-                    className="font-bold text-sm tracking-wider uppercase h-12 bg-transparent text-white border-white hover:border-primary hover:text-primary flex-grow sm:flex-grow-0"
+                    variant="outline-light"
+                    className="font-bold text-sm tracking-wider uppercase h-12 flex-grow sm:flex-grow-0"
                     onClick={() => trackEvent('contact_whatsapp_click', { position: 'hero' })}
                   >
                     Chat on WhatsApp
@@ -178,17 +174,6 @@ export const Contact: React.FC = () => {
               </div>
             </div>
 
-            {/* Right Graphic */}
-            <div className="lg:col-span-5 w-full">
-              <div className="rounded-lg overflow-hidden border border-slate-800 shadow-card aspect-[16/10] bg-navy-900 relative">
-                <img
-                  src={ASSETS.contact.heroIllustration}
-                  alt="Industrial manufacturing site location illustration."
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-950/40 to-transparent pointer-events-none"></div>
-              </div>
-            </div>
           </div>
         </Container>
       </Section>
@@ -323,7 +308,7 @@ export const Contact: React.FC = () => {
               <h2 className="text-xl md:text-2xl font-extrabold text-navy-950 mb-1 leading-tight font-heading">
                 Submit an Enquiry
               </h2>
-              <p className="text-xs text-slate-450 mb-6 font-sans">
+              <p className="text-xs text-slate-400 mb-6 font-sans">
                 Have a general question regarding our fabrication services or order terms? Drop us a line.
               </p>
 
@@ -342,7 +327,7 @@ export const Contact: React.FC = () => {
                     type="button"
                     variant="secondary"
                     size="sm"
-                    className="font-bold text-xs uppercase tracking-wide bg-transparent border-navy-950 text-navy-950"
+                    className="font-bold text-xs uppercase tracking-wide"
                     onClick={() => {
                       setIsSuccess(false);
                       setFullName('');
@@ -419,12 +404,12 @@ export const Contact: React.FC = () => {
                   {(enquiryType === 'product' || enquiryType === 'custom') && (
                     <div className="bg-primary-soft text-primary border border-primary/20 p-4 rounded-card text-xs font-sans space-y-2">
                       <span className="font-bold block">Looking for a Detailed Sizing Quote?</span>
-                      <span className="leading-relaxed block text-slate-750">
+                      <span className="leading-relaxed block text-slate-700">
                         If you have CAD drawings, raw capacity limits, or custom material requirements, using our Request a Quote form will ensure faster technical engineering reviews.
                       </span>
                       <Link
                         to="/request-a-quote"
-                        className="inline-block bg-primary text-white font-bold px-3 py-1.5 rounded-sm hover:bg-primary-hover shadow-sm uppercase tracking-wide text-[10px]"
+                        className="inline-block bg-primary text-white font-bold px-3 py-1.5 rounded-sm hover:bg-primary-hover shadow-sm uppercase tracking-wide text-xs"
                         onClick={() => trackEvent('contact_quote_click', { position: 'form_redirect' })}
                       >
                         Request Detailed Proposal
@@ -496,14 +481,14 @@ export const Contact: React.FC = () => {
 
                   <div className="space-y-3 font-sans pt-2">
                     <div>
-                      <span className="text-[10px] text-slate-450 uppercase tracking-wider block font-bold">Physical Address</span>
+                      <span className="text-xs text-slate-400 uppercase tracking-wider block font-bold">Physical Address</span>
                       <p className="text-xs text-slate-600 leading-relaxed font-medium">
                         {displayAddress}
                       </p>
                     </div>
                     
                     <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
-                      <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Junction Guide:</span>
+                      <span className="text-xs text-slate-400 font-bold uppercase tracking-wider">Junction Guide:</span>
                       <a
                         href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(displayAddress)}`}
                         target="_blank"
@@ -530,7 +515,7 @@ export const Contact: React.FC = () => {
                   <div>
                     <h3 className="font-bold text-navy-950 text-sm mb-1 uppercase tracking-wide">Business Hours</h3>
                     <p className="text-xs text-slate-600 leading-normal mb-1">{contactData.businessHours}</p>
-                    <span className="text-[10px] text-slate-400 leading-normal block">
+                    <span className="text-xs text-slate-500 leading-relaxed block">
                       Visiting client meetings must be scheduled in advance with shop foremen.
                     </span>
                   </div>
@@ -549,7 +534,7 @@ export const Contact: React.FC = () => {
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight text-white font-heading">
             Have a Product or Custom Fabrication Requirement?
           </h2>
-          <p className="text-sm md:text-base leading-relaxed text-slate-335 max-w-2xl mx-auto">
+          <p className="text-sm md:text-base leading-relaxed text-slate-300 max-w-2xl mx-auto">
             If you have dimensions, quantity ranges, material preferences, or CAD drawings, please request a quote directly to get an itemized commercial proposal.
           </p>
 
@@ -565,9 +550,9 @@ export const Contact: React.FC = () => {
             </Button>
             <Button
               href="/products"
-              variant="secondary"
+              variant="outline-light"
               size="md"
-              className="font-bold text-sm tracking-wider uppercase h-12 bg-transparent text-white border-white hover:border-primary hover:text-primary"
+              className="font-bold text-sm tracking-wider uppercase h-12"
             >
               Explore Products
             </Button>
