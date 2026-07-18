@@ -9,7 +9,7 @@ export const Footer: React.FC = () => {
   const verifiedEmails = contactData.emails.filter((e) => e !== 'pending verification');
 
   return (
-    <footer className="bg-navy-950 text-slate-400 pt-16 pb-8 border-t border-slate-800 text-left">
+    <footer className="bg-navy-950 text-slate-400 pt-16 pb-24 lg:pb-8 border-t border-slate-800 text-left">
       <Container>
         {/* Footer Top Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 pb-12 border-b border-slate-800">

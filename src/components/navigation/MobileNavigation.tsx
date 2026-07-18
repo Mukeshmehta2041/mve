@@ -118,7 +118,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
       <div
         ref={drawerRef}
         className={cn(
-          'absolute top-0 right-0 w-full max-w-sm h-full bg-white shadow-floating flex flex-col p-6 transition-transform duration-300 ease-out transform safe-bottom',
+          'absolute top-0 right-0 w-full max-w-sm h-full bg-white shadow-floating flex flex-col p-4 sm:p-6 transition-transform duration-300 ease-out transform safe-bottom',
           isOpen ? 'translate-x-0' : 'translate-x-full'
         )}
       >

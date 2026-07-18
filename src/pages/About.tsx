@@ -153,10 +153,10 @@ export const About: React.FC = () => {
             </p>
           </div>
 
-          <div className="space-y-6 relative font-sans before:absolute before:inset-0 before:left-4 before:w-[2px] before:bg-slate-200 z-10 pl-10 md:pl-12">
+          <div className="space-y-6 relative font-sans before:absolute before:inset-y-0 before:left-4 before:w-[2px] before:bg-slate-200 z-10 pl-8">
             {aboutTimelineData.map((milestone, idx) => (
               <div key={idx} className="relative flex flex-col items-start bg-white border border-border p-5 rounded-card shadow-sm">
-                <div className="absolute -left-[49px] top-6 w-4.5 h-4.5 rounded-full bg-primary border-4 border-white shadow-sm flex items-center justify-center"></div>
+                <div className="absolute -left-6 top-6 w-4 h-4 rounded-full bg-primary border-4 border-white shadow-sm flex items-center justify-center"></div>
                 {milestone.year && (
                   <span className="text-xs font-mono font-bold text-primary block mb-1">
                     {milestone.year}
