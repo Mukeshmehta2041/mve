@@ -2,7 +2,7 @@ import React from 'react';
 import type { Product } from '../../types';
 import { Card } from './Card';
 import { Button } from './Button';
-import { cn } from '../../lib/utils';
+import { cn, getQuoteUrl } from '../../lib/utils';
 
 interface ProductCardProps {
   product: Product;
@@ -70,7 +70,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <Button
             variant="primary"
             size="sm"
-            href={`/quote?product=${product.slug}`}
+            href={getQuoteUrl({ product: product.slug })}
             className="text-xs"
           >
             Get Quote

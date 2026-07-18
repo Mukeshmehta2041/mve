@@ -8,9 +8,11 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   icon?: React.ReactNode;
   iconPosition?: 'left' | 'right';
   href?: string; // If provided, behaves like an anchor tag
+  target?: string;
+  rel?: string;
 }
 
-export const Button: React.FC<ButtonProps> = ({
+export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(({
   children,
   className,
   variant = 'primary',
@@ -20,8 +22,10 @@ export const Button: React.FC<ButtonProps> = ({
   iconPosition = 'right',
   href,
   type = 'button',
+  target,
+  rel,
   ...props
-}) => {
+}, ref) => {
   const baseClasses = 'inline-flex items-center justify-center font-semibold rounded-card transition-all duration-200 focus-ring disabled:opacity-50 disabled:pointer-events-none cursor-pointer';
   
   const variantClasses = {
@@ -48,12 +52,14 @@ export const Button: React.FC<ButtonProps> = ({
   );
 
   if (href) {
-    // Cast to any to bypass ButtonHTMLAttributes conflict on anchor
-    const anchorProps = props as React.AnchorHTMLAttributes<HTMLAnchorElement>;
+    const anchorProps = props as unknown as React.AnchorHTMLAttributes<HTMLAnchorElement>;
     return (
       <a
         href={href}
+        target={target}
+        rel={rel}
         className={cn(baseClasses, variantClasses[variant], sizeClasses[size], widthClass, className)}
+        ref={ref as React.Ref<HTMLAnchorElement>}
         {...anchorProps}
       >
         {renderContent()}
@@ -65,35 +71,45 @@ export const Button: React.FC<ButtonProps> = ({
     <button
       type={type}
       className={cn(baseClasses, variantClasses[variant], sizeClasses[size], widthClass, className)}
+      ref={ref as React.Ref<HTMLButtonElement>}
       {...props}
     >
       {renderContent()}
     </button>
   );
-};
+});
+
+Button.displayName = 'Button';
 
 interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   ariaLabel: string;
   href?: string;
+  target?: string;
+  rel?: string;
 }
 
-export const IconButton: React.FC<IconButtonProps> = ({
+export const IconButton = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, IconButtonProps>(({
   children,
   className,
   ariaLabel,
   href,
   type = 'button',
+  target,
+  rel,
   ...props
-}) => {
+}, ref) => {
   const baseClasses = 'inline-flex items-center justify-center min-w-[44px] min-h-[44px] rounded-card hover:bg-slate-100 transition-all duration-150 focus-ring cursor-pointer text-navy-950';
 
   if (href) {
-    const anchorProps = props as React.AnchorHTMLAttributes<HTMLAnchorElement>;
+    const anchorProps = props as unknown as React.AnchorHTMLAttributes<HTMLAnchorElement>;
     return (
       <a
         href={href}
+        target={target}
+        rel={rel}
         aria-label={ariaLabel}
         className={cn(baseClasses, className)}
+        ref={ref as React.Ref<HTMLAnchorElement>}
         {...anchorProps}
       >
         {children}
@@ -106,10 +122,14 @@ export const IconButton: React.FC<IconButtonProps> = ({
       type={type}
       aria-label={ariaLabel}
       className={cn(baseClasses, className)}
+      ref={ref as React.Ref<HTMLButtonElement>}
       {...props}
     >
       {children}
     </button>
   );
-};
+});
+
+IconButton.displayName = 'IconButton';
+
 export default Button;

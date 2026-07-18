@@ -6,10 +6,14 @@ import { Products } from '../pages/Products';
 import { ProductDetail } from '../pages/ProductDetail';
 import { CustomFabrication } from '../pages/CustomFabrication';
 import { Projects } from '../pages/Projects';
-import { Quality } from '../pages/Quality';
+import { QualityCertifications } from '../pages/QualityCertifications';
 import { Contact } from '../pages/Contact';
-import { Quote } from '../pages/Quote';
+import { RequestAQuote } from '../pages/RequestAQuote';
+import { PrivacyPolicy } from '../pages/PrivacyPolicy';
+import { Terms } from '../pages/Terms';
+import { Disclaimer } from '../pages/Disclaimer';
 import { DesignSystemPreview } from '../pages/DesignSystemPreview';
+import { NotFound } from '../pages/NotFound';
 
 export const AppRoutes: React.FC = () => {
   return (
@@ -20,18 +24,20 @@ export const AppRoutes: React.FC = () => {
       <Route path="/products/:slug" element={<ProductDetail />} />
       <Route path="/custom-fabrication" element={<CustomFabrication />} />
       <Route path="/projects" element={<Projects />} />
-      <Route path="/quality" element={<Quality />} />
+      <Route path="/quality-certifications" element={<QualityCertifications />} />
       <Route path="/contact" element={<Contact />} />
-      <Route path="/quote" element={<Quote />} />
+      <Route path="/request-a-quote" element={<RequestAQuote />} />
       
-      {/* 
-        Development-only Design System Preview page. 
-        It is excluded from public navigation lists.
-      */}
+      {/* Legal Pages */}
+      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="/terms" element={<Terms />} />
+      <Route path="/disclaimer" element={<Disclaimer />} />
+      
+      {/* Development-only Design System Preview page */}
       <Route path="/design-system" element={<DesignSystemPreview />} />
       
       {/* 404 Route */}
-      <Route path="*" element={<Home />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };

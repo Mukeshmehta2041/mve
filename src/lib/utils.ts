@@ -16,3 +16,21 @@ export function cn(...inputs: (string | undefined | null | boolean | Record<stri
   }
   return classes.filter(Boolean).join(' ');
 }
+
+/**
+ * Generates a quote link with optional product or service query parameters.
+ */
+export function getQuoteUrl(params: { product?: string; service?: string; type?: string } = {}) {
+  const queryParts: string[] = [];
+  if (params.product) {
+    queryParts.push(`product=${encodeURIComponent(params.product)}`);
+  }
+  if (params.service) {
+    queryParts.push(`service=${encodeURIComponent(params.service)}`);
+  }
+  if (params.type) {
+    queryParts.push(`type=${encodeURIComponent(params.type)}`);
+  }
+  return `/request-a-quote${queryParts.length > 0 ? `?${queryParts.join('&')}` : ''}`;
+}
+

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MainLayout, SEO } from '../components/layout';
+import { SiteLayout, SEO } from '../components/layout';
 import {
   Container,
   Section,
@@ -64,7 +64,7 @@ export const DesignSystemPreview: React.FC = () => {
   };
 
   return (
-    <MainLayout>
+    <SiteLayout>
       <SEO
         title="Design System Preview"
         description="Internal development preview page demonstrating Maa Vindhawasini Enterprises color variables, typography, buttons, cards, forms, and layouts."
@@ -168,7 +168,7 @@ export const DesignSystemPreview: React.FC = () => {
               <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2 font-mono">
                 Body Large (18px Desktop / 17px Mobile)
               </span>
-              <p className="text-lg text-slate-600 leading-relaxed font-sans">
+              <p className="text-lg text-slate-650 leading-relaxed font-sans">
                 Providing high-integrity process utility engineering for aggregate plants, chemical processing facilities, and railway crossings.
               </p>
             </div>
@@ -177,7 +177,7 @@ export const DesignSystemPreview: React.FC = () => {
               <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2 font-mono">
                 Body Standard (16px Desktop & Mobile)
               </span>
-              <p className="text-base text-slate-600 leading-relaxed font-sans">
+              <p className="text-base text-slate-650 leading-relaxed font-sans">
                 Our workshop utilizes specialized heavy machinery and certified welding inspectors. All steel fabrications undergo rigorous dimensional validation, pressure leak testing, and quality control audits before dispatch.
               </p>
             </div>
@@ -476,7 +476,7 @@ export const DesignSystemPreview: React.FC = () => {
           </div>
         </Container>
       </Section>
-    </MainLayout>
+    </SiteLayout>
   );
 };
 export default DesignSystemPreview;

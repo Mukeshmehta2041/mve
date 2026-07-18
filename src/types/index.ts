@@ -47,6 +47,19 @@ export interface Product {
   applications: string[];
   gallery: string[];
   relatedProducts: string[]; // references other product slugs
+  overview?: string;
+  imageAlt?: string;
+  industriesServed?: string[];
+  materialInfo?: string;
+  customizationOptions?: string[];
+  qualityProcess?: string[];
+  deliveryNotes?: string;
+  faqs?: { question: string; answer: string }[];
+  seoTitle?: string;
+  seoDescription?: string;
+  ogImage?: string;
+  publishState?: 'draft' | 'published';
+  verificationState?: 'pending' | 'verified';
 }
 
 export interface Project {
@@ -59,6 +72,14 @@ export interface Project {
   location: string;
   scope: string[];
   isFeatured?: boolean;
+  slug?: string;
+  productType?: string;
+  gallery?: string[];
+  imageAlt?: string;
+  publishState?: 'draft' | 'published';
+  verificationState?: 'pending' | 'verified';
+  seoTitle?: string;
+  seoDescription?: string;
 }
 
 export interface Industry {

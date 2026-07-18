@@ -1,16 +1,20 @@
 import React from 'react';
 import type { Project } from '../../types';
 import { Card } from './Card';
+import { Button } from './Button';
 import { cn } from '../../lib/utils';
+import { trackEvent } from '../../lib/analytics';
 
 interface ProjectCardProps {
   project: Project;
   className?: string;
+  showActions?: boolean;
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   className,
+  showActions = false,
 }) => {
   return (
     <Card className={cn('flex flex-col h-full', className)}>
@@ -62,6 +66,34 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 </span>
               ))}
             </div>
+          </div>
+        )}
+
+        {/* Dynamic Actions block for Projects list Page */}
+        {showActions && (
+          <div className="grid grid-cols-2 gap-2 mt-4 pt-4 border-t border-border">
+            {project.productSlug ? (
+              <Button
+                variant="secondary"
+                size="sm"
+                href={`/products/${project.productSlug}`}
+                className="text-xs font-bold leading-none h-[38px] px-1 truncate"
+                onClick={() => trackEvent('project_product_click', { projectKey: project.id, productSlug: project.productSlug })}
+              >
+                View Product
+              </Button>
+            ) : (
+              <div />
+            )}
+            <Button
+              variant="primary"
+              size="sm"
+              href={`/request-a-quote?source=project&project=${project.id}`}
+              className="text-xs font-bold leading-none h-[38px] px-1 truncate"
+              onClick={() => trackEvent('project_similar_quote_click', { projectKey: project.id })}
+            >
+              Discuss Project
+            </Button>
           </div>
         )}
       </div>

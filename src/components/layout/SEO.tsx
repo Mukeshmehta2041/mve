@@ -7,6 +7,7 @@ interface SEOProps {
   description: string;
   canonicalPath?: string;
   schemaJson?: Record<string, unknown>;
+  noindex?: boolean;
 }
 
 export const SEO: React.FC<SEOProps> = ({
@@ -14,6 +15,7 @@ export const SEO: React.FC<SEOProps> = ({
   description,
   canonicalPath,
   schemaJson,
+  noindex = false,
 }) => {
   const siteUrl = 'https://www.maavindhawasini.com'; // Placeholder pending verification
   const fullTitle = `${title} | ${companyData.legalName}`;
@@ -24,6 +26,7 @@ export const SEO: React.FC<SEOProps> = ({
       {/* Search Engine tags */}
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
+      {noindex && <meta name="robots" content="noindex, nofollow" />}
       {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 
       {/* Open Graph / Social tags */}

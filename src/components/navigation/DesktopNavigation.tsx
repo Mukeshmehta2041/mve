@@ -1,10 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { NavLink } from 'react-router-dom';
 import { navigationData } from '../../data/navigation';
 import { Button } from '../ui/Button';
 import { cn } from '../../lib/utils';
 
 export const DesktopNavigation: React.FC = () => {
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  // Click outside detection
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target as Node)
+      ) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Keyboard navigation inside dropdown
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      setDropdownOpen(false);
+      buttonRef.current?.focus();
+    }
+  };
+
+  const toggleDropdown = () => {
+    setDropdownOpen((prev) => !prev);
+  };
 
   return (
     <nav aria-label="Main Navigation" className="hidden lg:flex items-center space-x-7">
@@ -18,34 +49,35 @@ export const DesktopNavigation: React.FC = () => {
               href={item.href}
               variant="primary"
               size="sm"
-              className="font-bold uppercase tracking-wider text-xs"
+              className="font-bold uppercase tracking-wider text-xs flex items-center gap-1.5"
             >
-              {item.name}
+              <span>{item.name}</span>
+              <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+              </svg>
             </Button>
           );
         }
 
         if (hasChildren) {
           return (
-            <div
-              key={item.name}
-              className="relative"
-              onMouseEnter={() => setActiveDropdown(item.name)}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
+            <div key={item.name} className="relative">
               <button
-                aria-expanded={activeDropdown === item.name}
+                ref={buttonRef}
+                type="button"
+                onClick={toggleDropdown}
+                aria-expanded={dropdownOpen}
                 aria-haspopup="true"
                 className={cn(
-                  'flex items-center text-sm font-semibold py-2 transition-all cursor-pointer focus-ring rounded-sm',
-                  activeDropdown === item.name ? 'text-primary' : 'text-slate-600 hover:text-navy-950'
+                  'flex items-center text-sm font-semibold py-2 transition-all cursor-pointer focus-ring rounded-sm text-slate-650 hover:text-navy-950',
+                  dropdownOpen ? 'text-primary' : ''
                 )}
               >
                 <span>{item.name}</span>
                 <svg
                   className={cn(
-                    'w-4 h-4 ml-1 transition-transform duration-200',
-                    activeDropdown === item.name ? 'rotate-180 text-primary' : 'text-slate-400'
+                    'w-4 h-4 ml-1.5 transition-transform duration-200',
+                    dropdownOpen ? 'rotate-180 text-primary' : 'text-slate-455'
                   )}
                   fill="none"
                   stroke="currentColor"
@@ -56,55 +88,81 @@ export const DesktopNavigation: React.FC = () => {
                 </svg>
               </button>
 
-              {/* Dropdown Menu (design.md Section 11) */}
+              {/* Accessible Dropdown Menu */}
               <div
+                ref={dropdownRef}
+                onKeyDown={handleKeyDown}
                 className={cn(
-                  'absolute top-full left-0 w-64 bg-white border border-border shadow-floating rounded-card py-2 mt-1 z-50 transition-all duration-150 origin-top-left',
-                  activeDropdown === item.name
+                  'absolute top-full left-0 w-64 bg-white border border-border shadow-floating rounded-card py-2 mt-1.5 z-50 transition-all duration-150 origin-top-left',
+                  dropdownOpen
                     ? 'opacity-100 scale-100 translate-y-0 visible'
                     : 'opacity-0 scale-95 -translate-y-2 invisible pointer-events-none'
                 )}
                 role="menu"
+                aria-label="Products Submenu"
               >
+                <NavLink
+                  to="/products"
+                  end
+                  onClick={() => setDropdownOpen(false)}
+                  className={({ isActive }) =>
+                    cn(
+                      'block px-4 py-2 text-sm font-bold border-b border-border/55 text-slate-600 hover:text-primary hover:bg-slate-50 transition-colors',
+                      isActive ? 'text-primary bg-primary-soft/10' : ''
+                    )
+                  }
+                  role="menuitem"
+                >
+                  View All Products
+                </NavLink>
+                
                 {item.children?.map((subItem) => (
-                  <a
+                  <NavLink
                     key={subItem.name}
-                    href={subItem.href}
-                    className="block px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-primary hover:bg-slate-50 transition-colors"
+                    to={subItem.href}
+                    onClick={() => setDropdownOpen(false)}
+                    className={({ isActive }) =>
+                      cn(
+                        'block px-4 py-2 text-sm font-medium text-slate-600 hover:text-primary hover:bg-slate-50 transition-colors',
+                        isActive ? 'text-primary font-semibold bg-primary-soft/10' : ''
+                      )
+                    }
                     role="menuitem"
                   >
                     {subItem.name}
-                  </a>
+                  </NavLink>
                 ))}
               </div>
             </div>
           );
         }
 
-        // Standard link with active state underline animation (design.md Section 7)
-        const isHome = item.href === '/';
-        const isPathActive = isHome 
-          ? window.location.pathname === '/' 
-          : window.location.pathname.startsWith(item.href);
-
         return (
-          <a
+          <NavLink
             key={item.name}
-            href={item.href}
-            className={cn(
-              'text-sm font-semibold py-2 transition-all relative group focus-ring rounded-sm',
-              isPathActive ? 'text-primary' : 'text-slate-600 hover:text-navy-950'
-            )}
+            to={item.href}
+            end={item.href === '/'}
+            className={({ isActive }) =>
+              cn(
+                'text-sm font-semibold py-2 transition-all relative group focus-ring rounded-sm',
+                isActive ? 'text-slate-800 font-bold' : 'text-slate-600 hover:text-navy-950'
+              )
+            }
           >
-            <span>{item.name}</span>
-            {/* Active state underline indicator */}
-            <span
-              className={cn(
-                'absolute bottom-0 left-0 w-full h-[2px] bg-primary transition-transform duration-200 origin-left scale-x-0 group-hover:scale-x-100',
-                isPathActive ? 'scale-x-100' : ''
-              )}
-            ></span>
-          </a>
+            {({ isActive }) => (
+              <>
+                <span>{item.name}</span>
+                {/* Active Underline Indicator */}
+                <span
+                  className={cn(
+                    'absolute bottom-0 left-0 w-full h-[2px] bg-primary transition-transform duration-200 origin-left scale-x-0 group-hover:scale-x-100',
+                    isActive ? 'scale-x-100' : ''
+                  )}
+                  aria-hidden="true"
+                ></span>
+              </>
+            )}
+          </NavLink>
         );
       })}
     </nav>

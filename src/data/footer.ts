@@ -19,17 +19,17 @@ export const footerLinksData: FooterLinkGroup[] = [
       { label: 'About Our Facility', href: '/about' },
       { label: 'Custom MS Fabrication', href: '/custom-fabrication' },
       { label: 'Completed Projects', href: '/projects' },
-      { label: 'Quality Assurance Process', href: '/quality' },
+      { label: 'Quality Assurance Process', href: '/quality-certifications' },
       { label: 'Contact Us', href: '/contact' },
     ],
   },
   {
     title: 'Compliance & Legal',
     links: [
-      { label: 'MSME Registered (Verified)', href: '/quality' },
-      { label: 'GST Compliant (Verified)', href: '/quality' },
-      { label: 'Terms & Conditions', href: '#' },
-      { label: 'Privacy Policy', href: '#' },
+      { label: 'MSME Registered (Verified)', href: '/quality-certifications' },
+      { label: 'GST Compliant (Verified)', href: '/quality-certifications' },
+      { label: 'Terms & Conditions', href: '/terms' },
+      { label: 'Privacy Policy', href: '/privacy-policy' },
     ],
   },
 ];

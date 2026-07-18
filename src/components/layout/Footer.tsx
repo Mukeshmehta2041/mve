@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { footerLinksData, contactData } from '../../data';
 import { ASSETS } from '../../lib/assets';
 import { Container } from '../ui/Container';
@@ -14,22 +15,22 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 pb-12 border-b border-slate-800">
           {/* Brand and Description */}
           <div className="space-y-4">
-            <a href="/" className="inline-block focus-ring rounded-sm">
+            <Link to="/" className="inline-block focus-ring rounded-sm">
               <img
                 src={ASSETS.branding.logoDarkHeader}
                 alt="Maa Vindhawasini Enterprises Logo"
                 className="h-10 w-auto object-contain"
               />
-            </a>
+            </Link>
             <p className="text-sm text-slate-400 leading-relaxed mt-4">
               Premium MS fabrication and custom industrial equipment manufacturing solutions. Delivering high-quality pressure vessels, storage tanks, and structural solutions nationwide since 2008.
             </p>
             {/* Minimalist Trust Seals strip */}
             <div className="flex flex-wrap gap-2 pt-2">
-              <span className="bg-slate-800 text-white text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-sm">
+              <span className="bg-slate-800 text-white text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-sm font-sans">
                 MSME Registered
               </span>
-              <span className="bg-slate-800 text-white text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-sm">
+              <span className="bg-slate-800 text-white text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-sm font-sans">
                 GST Compliant
               </span>
             </div>
@@ -38,30 +39,30 @@ export const Footer: React.FC = () => {
           {/* Links Column mapping */}
           {footerLinksData.slice(0, 2).map((group) => (
             <div key={group.title} className="space-y-4">
-              <h3 className="text-white text-sm font-bold uppercase tracking-wider">
+              <h3 className="text-white text-sm font-bold uppercase tracking-wider font-heading">
                 {group.title}
               </h3>
-              <ul className="space-y-2.5 text-sm">
+              <ul className="space-y-2.5 text-sm font-sans">
                 {group.links.map((link) => (
                   <li key={link.label}>
-                    <a
-                      href={link.href}
+                    <Link
+                      to={link.href}
                       className="hover:text-primary transition-colors hover:underline"
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
             </div>
           ))}
 
-          {/* Contact Details Column (hides unverified parameters) */}
+          {/* Corporate Details Column */}
           <div className="space-y-4">
-            <h3 className="text-white text-sm font-bold uppercase tracking-wider">
+            <h3 className="text-white text-sm font-bold uppercase tracking-wider font-heading">
               Corporate Office
             </h3>
-            <div className="space-y-3.5 text-sm">
+            <div className="space-y-3.5 text-sm font-sans">
               {/* Only show address if it is verified (doesn't contain pending) */}
               {!contactData.officeAddress.includes('pending verification') && (
                 <div className="flex items-start">
@@ -97,18 +98,20 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Footer Bottom Block */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 space-y-4 md:space-y-0">
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 space-y-4 md:space-y-0 font-sans">
           <div>
             © {new Date().getFullYear()} Maa Vindhawasini Enterprises. All rights reserved.
           </div>
-          <div className="flex space-x-6">
-            <a href="#" className="hover:text-primary">Privacy Policy</a>
-            <a href="#" className="hover:text-primary">Terms of Service</a>
-            <a href="/quality" className="hover:text-primary">Certifications</a>
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
+            <Link to="/privacy-policy" className="hover:text-primary">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-primary">Terms of Use</Link>
+            <Link to="/disclaimer" className="hover:text-primary">Disclaimer</Link>
+            <Link to="/quality-certifications" className="hover:text-primary">Certifications</Link>
           </div>
         </div>
       </Container>
     </footer>
   );
 };
+
 export default Footer;

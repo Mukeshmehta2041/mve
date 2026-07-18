@@ -1,11 +1,11 @@
 import React from 'react';
-import { MainLayout, SEO } from '../components/layout';
+import { SiteLayout, SEO } from '../components/layout';
 import { Container, Section, SectionHeader, ProductCard } from '../components/ui';
 import { productsData } from '../data';
 
 export const Products: React.FC = () => {
   return (
-    <MainLayout>
+    <SiteLayout>
       <SEO
         title="Industrial Products Catalogue"
         description="Browse our catalogue of custom-fabricated equipment, including resin glue kettles, storage tanks, and construction shuttering plates."
@@ -25,7 +25,7 @@ export const Products: React.FC = () => {
           </div>
         </Container>
       </Section>
-    </MainLayout>
+    </SiteLayout>
   );
 };
 export default Products;

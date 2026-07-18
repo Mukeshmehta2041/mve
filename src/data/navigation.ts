@@ -16,9 +16,10 @@ export const navigationData: NavigationItem[] = [
       { name: 'Railway Height Gauge', href: '/products/railway-height-gauge' },
     ],
   },
-  { name: 'Custom Fabrication', href: '/custom-fabrication' },
+  { name: 'Industries', href: '/#industries' },
+  { name: 'Capabilities', href: '/custom-fabrication' },
   { name: 'Projects', href: '/projects' },
-  { name: 'Quality', href: '/quality' },
+  { name: 'Quality', href: '/quality-certifications' },
   { name: 'Contact', href: '/contact' },
-  { name: 'Request a Quote', href: '/quote', isCta: true },
+  { name: 'Request a Quote', href: '/request-a-quote', isCta: true },
 ];

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Exclude development design-system pages
+Disallow: /design-system
+
+Sitemap: https://www.maavindhawasini.com/sitemap.xml

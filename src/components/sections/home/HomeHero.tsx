@@ -1,0 +1,65 @@
+import React from 'react';
+import { Container } from '../../ui/Container';
+import { Button } from '../../ui/Button';
+import { ResponsiveImage } from '../../ui/ResponsiveImage';
+import { ASSETS } from '../../../lib/assets';
+
+export const HomeHero: React.FC = () => {
+  return (
+    <section className="bg-white border-b border-border relative overflow-hidden py-12 md:py-20 lg:py-24">
+      {/* Visual background details */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(var(--color-primary) 1.5px, transparent 1.5px)', backgroundSize: '24px 24px' }}></div>
+      
+      <Container className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        {/* Left column - Content */}
+        <div className="lg:col-span-7 space-y-6 text-left">
+          <span className="text-[12px] leading-[18px] tracking-[0.15em] uppercase font-bold text-primary block">
+            MS Fabrication & Industrial Equipment Manufacturing
+          </span>
+          
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-navy-950 leading-[1.15] tracking-tight font-heading">
+            Modern Fabrication Solutions, <span className="text-primary">Engineered</span> for Industry.
+          </h1>
+          
+          <p className="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed font-sans max-w-2xl">
+            High-precision MS fabrication, reaction vessels, storage tanks, and construction infrastructure components. Custom manufactured in Patna, Bihar to client drawings and technical criteria.
+          </p>
+          
+          <div className="flex flex-wrap gap-4 pt-2">
+            <Button 
+              href="/request-a-quote" 
+              variant="primary"
+              className="w-full sm:w-auto shadow-sm"
+            >
+              Request a Quote
+            </Button>
+            <Button 
+              href="/products" 
+              variant="secondary"
+              className="w-full sm:w-auto"
+            >
+              Explore Products
+            </Button>
+          </div>
+        </div>
+
+        {/* Right column - Image crop */}
+        <div className="lg:col-span-5 w-full">
+          <div className="relative rounded-lg overflow-hidden shadow-card border border-border aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] bg-slate-100 group">
+            <ResponsiveImage
+              src={ASSETS.hero.home}
+              alt="Maa Vindhawasini Enterprises industrial fabrication facility, featuring raw steel pipe materials and welding equipment."
+              ratio="auto"
+              loading="eager"
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            {/* Soft gradient overlay for premium feel */}
+            <div className="absolute inset-0 bg-gradient-to-t from-navy-950/15 to-transparent pointer-events-none"></div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+};
+
+export default HomeHero;
