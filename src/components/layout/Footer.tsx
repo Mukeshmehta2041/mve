@@ -16,11 +16,9 @@ export const Footer: React.FC = () => {
           {/* Brand and Description */}
           <div className="space-y-4">
             <Link to="/" className="inline-block focus-ring rounded-sm">
-              <img
-                src={ASSETS.branding.logoDarkHeader}
-                alt="Maa Vindhawasini Enterprises Logo"
-                className="h-10 w-auto object-contain"
-              />
+              <span className="font-heading font-extrabold text-white text-base md:text-lg leading-tight uppercase tracking-wider text-left block">
+                Maa <span className="text-primary">Vindhawasini</span>
+              </span>
             </Link>
             <p className="text-sm text-slate-400 leading-relaxed mt-4">
               Custom MS and stainless steel fabrication from our workshop in Patna, Bihar — storage

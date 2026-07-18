@@ -31,7 +31,7 @@ export const HomeAbout: React.FC = () => {
           <div className="rounded-lg overflow-hidden border border-border shadow-card aspect-[4/3] bg-slate-100 relative group">
             <ResponsiveImage
               src={ASSETS.projects.featuredBitumen}
-              alt="Storage tanks fabricated by Maa Vindhawasini Enterprises."
+              alt="Black insulated bitumen storage tanks in a yard"
               ratio="auto"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />

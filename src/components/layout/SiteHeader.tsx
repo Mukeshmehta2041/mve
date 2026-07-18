@@ -72,18 +72,9 @@ export const SiteHeader: React.FC = () => {
         <Container className="flex items-center justify-between">
           {/* Brand Logo Link */}
           <Link to="/" className="flex items-center focus-ring rounded-sm py-1 max-w-[200px] md:max-w-[250px]">
-            {logoError ? (
-              <span className="font-heading font-extrabold text-navy-950 text-base md:text-lg leading-tight uppercase tracking-wider text-left block">
-                Maa <span className="text-primary">Vindhawasini</span>
-              </span>
-            ) : (
-              <img
-                src={ASSETS.branding.logoHome}
-                alt="Maa Vindhawasini Enterprises Home"
-                onError={() => setLogoError(true)}
-                className="h-10 md:h-12 w-auto object-contain"
-              />
-            )}
+            <span className="font-heading font-extrabold text-navy-950 text-base md:text-lg leading-tight uppercase tracking-wider text-left block">
+              Maa <span className="text-primary">Vindhawasini</span>
+            </span>
           </Link>
 
           {/* Desktop Navigation Shell */}

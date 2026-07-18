@@ -87,7 +87,7 @@ export const CustomFabrication: React.FC = () => {
               <div className="rounded-lg overflow-hidden border border-slate-800 shadow-card aspect-[4/3] bg-navy-900 relative">
                 <img
                   src={ASSETS.hero.fabrication}
-                  alt="Metal fabrication workshop with raw steel templates and manufacturing setups."
+                  alt="A welder joining a large-diameter flanged cylindrical vessel inside a workshop, with sparks flying"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy-950/40 to-transparent pointer-events-none"></div>

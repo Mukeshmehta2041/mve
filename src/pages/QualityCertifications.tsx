@@ -78,7 +78,7 @@ export const QualityCertifications: React.FC = () => {
               <div className="rounded-lg overflow-hidden border border-slate-800 shadow-card aspect-[16/10] bg-navy-900 relative">
                 <img
                   src={ASSETS.hero.quality}
-                  alt="Industrial welding supervisor auditing joint curvature."
+                  alt="A welder laying a weld seam on a curved steel shell, with helmet down and sparks visible"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy-950/40 to-transparent pointer-events-none"></div>

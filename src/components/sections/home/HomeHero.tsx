@@ -48,7 +48,7 @@ export const HomeHero: React.FC = () => {
           <div className="relative rounded-lg overflow-hidden shadow-card border border-border aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] bg-slate-100 group">
             <ResponsiveImage
               src={ASSETS.hero.home}
-              alt="Maa Vindhawasini Enterprises industrial fabrication facility, featuring raw steel pipe materials and welding equipment."
+              alt="Wide view of a fabrication yard with large steel storage tanks and structural steel"
               ratio="auto"
               loading="eager"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"

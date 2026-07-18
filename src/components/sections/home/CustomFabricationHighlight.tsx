@@ -36,7 +36,7 @@ export const CustomFabricationHighlight: React.FC = () => {
           <div className="rounded-lg overflow-hidden border border-slate-800 shadow-card aspect-[4/3] bg-navy-900 relative group">
             <ResponsiveImage
               src={ASSETS.hero.quality}
-              alt="Welding work in progress at our Patna workshop."
+              alt="Welding work in progress on a curved steel shell"
               ratio="auto"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />

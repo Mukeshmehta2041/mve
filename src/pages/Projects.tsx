@@ -107,7 +107,7 @@ export const Projects: React.FC = () => {
               <div className="rounded-lg overflow-hidden border border-slate-800 shadow-card aspect-[16/10] bg-navy-900 relative">
                 <img
                   src={ASSETS.hero.projects}
-                  alt="Industrial steel columns and framing setup at a fabrication yard."
+                  alt="Multi-level structural steel process plant structure against a dusk sky"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy-950/40 to-transparent pointer-events-none"></div>
@@ -292,7 +292,7 @@ export const Projects: React.FC = () => {
               <div className="rounded-lg overflow-hidden border border-border shadow-card aspect-[16/9] bg-slate-50 relative">
                 <img
                   src={ASSETS.fabrication.productsBanner}
-                  alt="Industrial fabricator performing manual shielded metal arc welding checks."
+                  alt="Welder performing arc welding at a workshop station"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy-950/40 to-transparent pointer-events-none"></div>

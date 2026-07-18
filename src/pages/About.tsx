@@ -79,7 +79,7 @@ export const About: React.FC = () => {
               <div className="rounded-lg overflow-hidden border border-slate-800 shadow-card aspect-[16/10] bg-navy-900 relative">
                 <img
                   src={ASSETS.projects.featuredBitumen}
-                  alt="Bitumen storage tanks fabricated by Maa Vindhawasini Enterprises."
+                  alt="Black insulated storage tanks staged outdoors"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy-950/40 to-transparent pointer-events-none"></div>
@@ -98,7 +98,7 @@ export const About: React.FC = () => {
               <div className="rounded-lg overflow-hidden border border-border shadow-card aspect-[4/3] bg-slate-50 relative">
                 <img
                   src={ASSETS.products.resinGlueKettle}
-                  alt="A resin glue kettle fabricated by Maa Vindhawasini Enterprises."
+                  alt="Stainless steel jacketed reaction vessel with top motor"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -205,7 +205,7 @@ export const About: React.FC = () => {
               <div className="rounded-lg overflow-hidden border border-border shadow-card aspect-[16/10] bg-slate-50 relative">
                 <img
                   src={ASSETS.products.storageTank}
-                  alt="Industrial manufacturing shop floor area with steel plates and equipment frames."
+                  alt="A large cylindrical steel storage tank with access ladder"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -318,7 +318,7 @@ export const About: React.FC = () => {
               <div className="rounded-lg overflow-hidden border border-border shadow-card aspect-[4/3] bg-slate-50 relative">
                 <img
                   src={ASSETS.hero.quality}
-                  alt="Industrial supervisor inspecting raw steel plate curvatures."
+                  alt="A welder laying a clean weld seam on a curved steel shell"
                   className="w-full h-full object-cover"
                 />
               </div>

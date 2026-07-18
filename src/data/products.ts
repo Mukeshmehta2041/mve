@@ -63,7 +63,7 @@ export const productsData: Product[] = [
     ],
     // Only the main shot is a usable photograph; the former thumb/gallery sets were
     // low-resolution screen captures with page text baked into them.
-    gallery: [ASSETS.productDetails.storageTank.main],
+    gallery: [ASSETS.products.storageTankMain],
     relatedProducts: ['resin-glue-kettle', 'hopper', 'industrial-chimney'],
   },
   {
