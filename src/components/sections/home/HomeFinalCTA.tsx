@@ -19,16 +19,13 @@ export const HomeFinalCTA: React.FC = () => {
       <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(var(--color-primary) 1.5px, transparent 1.5px)', backgroundSize: '32px 32px' }}></div>
 
       <Container className="relative z-10 max-w-4xl space-y-6">
-        <span className="text-[12px] leading-[18px] tracking-[0.15em] uppercase font-bold text-primary block">
-          Get an Itemized Estimate
-        </span>
-        
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy-950 leading-tight font-heading">
-          Have an Industrial Requirement?
+        <h2 className="text-3xl md:text-4xl font-bold text-navy-950 leading-tight font-heading">
+          Tell us what you need built
         </h2>
-        
+
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-sans">
-          Send us your required dimensions, capacity specifications, structural drawings, or overall project details. Our technical team will review your files and draft a formal commercial proposal.
+          Send dimensions, capacities, or a drawing — whatever you have. We&rsquo;ll review it and come
+          back with an itemised quotation.
         </p>
 
         <div className="flex flex-wrap gap-4 justify-center items-center pt-4">
