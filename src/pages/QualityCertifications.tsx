@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { SiteLayout, SEO } from '../components/layout';
 import { Container, Section, SectionHeader, Button, Breadcrumb } from '../components/ui';
+import { getBreadcrumbSchema } from '../lib/seo';
 import {
   contactData,
   qualityCommitmentPointsData,
@@ -23,12 +24,15 @@ export const QualityCertifications: React.FC = () => {
   const whatsappMsg = 'Hello Maa Vindhawasini Enterprises, I am looking at your quality certifications and would like to discuss my project specifications.';
   const whatsappUrl = `https://wa.me/${contactData.whatsapp}?text=${encodeURIComponent(whatsappMsg)}`;
 
+  const qualitySchemas = getBreadcrumbSchema([{ label: 'Quality & Certifications', href: '/quality-certifications' }]);
+
   return (
     <SiteLayout>
       <SEO
-        title="Quality Standards & Fabrication Certifications"
+        title="Quality Assurance & Industrial Fabrication Standards Patna"
         description="Learn about our manufacturing quality checks, raw material inspection guidelines, and testing methodologies in Patna, Bihar."
         canonicalPath="/quality-certifications"
+        schemaJson={qualitySchemas}
       />
 
       {/* Quality Hero Section */}
@@ -266,8 +270,11 @@ export const QualityCertifications: React.FC = () => {
                 size="md"
                 className="font-bold text-sm tracking-wider uppercase h-12"
                 onClick={() => trackEvent('quality_whatsapp_click', { position: 'footer_cta' })}
+                icon={
+                  <img src={ASSETS.icons.whatsapp} alt="" aria-hidden="true" className="w-5 h-5 brightness-0 invert" />
+                }
+                iconPosition="left"
               >
-                <img src={ASSETS.icons.whatsapp} alt="" aria-hidden="true" className="w-5 h-5 mr-2 brightness-0 invert" />
                 WhatsApp Us
               </Button>
             )}
@@ -278,8 +285,11 @@ export const QualityCertifications: React.FC = () => {
                 variant="outline-light"
                 size="md"
                 className="font-bold text-sm tracking-wider uppercase h-12"
+                icon={
+                  <img src={ASSETS.icons.phone} alt="" aria-hidden="true" className="w-4 h-4 filter invert" />
+                }
+                iconPosition="left"
               >
-                <img src={ASSETS.icons.phone} alt="" aria-hidden="true" className="w-4 h-4 mr-2 filter invert" />
                 Call: {verifiedPhone}
               </Button>
             )}

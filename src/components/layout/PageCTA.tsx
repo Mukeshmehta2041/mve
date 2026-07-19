@@ -49,8 +49,15 @@ export const PageCTA: React.FC<PageCTAProps> = ({
           </Button>
 
           {verifiedPhone && (
-            <Button href={`tel:${verifiedPhone}`} variant="secondary" size="md">
-              <img src={ASSETS.icons.phone} alt="" className="w-4 h-4 mr-2" />
+            <Button
+              href={`tel:${verifiedPhone}`}
+              variant="secondary"
+              size="md"
+              icon={
+                <img src={ASSETS.icons.phone} alt="" className="w-4 h-4" />
+              }
+              iconPosition="left"
+            >
               Call: {verifiedPhone}
             </Button>
           )}
@@ -62,8 +69,11 @@ export const PageCTA: React.FC<PageCTAProps> = ({
               rel="noopener noreferrer"
               variant="whatsapp"
               size="md"
+              icon={
+                <img src={ASSETS.icons.whatsapp} alt="" className="w-4 h-4 brightness-0 invert" />
+              }
+              iconPosition="left"
             >
-              <img src={ASSETS.icons.whatsapp} alt="" className="w-4 h-4 mr-2 brightness-0 invert" />
               Chat on WhatsApp
             </Button>
           )}

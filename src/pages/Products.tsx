@@ -2,14 +2,21 @@ import React from 'react';
 import { SiteLayout, SEO, PageHeroShell } from '../components/layout';
 import { Container, Section, ProductCard } from '../components/ui';
 import { productsData } from '../data';
+import { getBreadcrumbSchema, getItemListSchema } from '../lib/seo';
 
 export const Products: React.FC = () => {
+  const productsSchemas = [
+    getBreadcrumbSchema([{ label: 'Products', href: '/products' }]),
+    getItemListSchema(productsData),
+  ];
+
   return (
     <SiteLayout>
       <SEO
-        title="Industrial Products Catalogue"
-        description="Browse our catalogue of custom-fabricated equipment, including resin glue kettles, storage tanks, and construction shuttering plates."
+        title="Industrial Equipment & Steel Fabrication Products"
+        description="Browse our catalogue of custom MS & SS industrial equipment: resin glue kettles, storage tanks, shuttering plates, hoppers, chimneys, and hot water generators."
         canonicalPath="/products"
+        schemaJson={productsSchemas}
       />
 
       <PageHeroShell

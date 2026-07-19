@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { SiteLayout, SEO } from '../components/layout';
 import { Container, Section, SectionHeader, Button, Breadcrumb, ProjectCard } from '../components/ui';
 import { projectsData, contactData } from '../data';
+import { getBreadcrumbSchema } from '../lib/seo';
 import { trackEvent } from '../lib/analytics';
 import { getQuoteUrl, cn } from '../lib/utils';
 import { ASSETS } from '../lib/assets';
@@ -52,12 +53,15 @@ export const Projects: React.FC = () => {
   const whatsappMsg = 'Hello Maa Vindhawasini Enterprises, I was looking at your completed fabrication projects and would like to discuss my requirements.';
   const whatsappUrl = `https://wa.me/${contactData.whatsapp}?text=${encodeURIComponent(whatsappMsg)}`;
 
+  const projectsSchemas = getBreadcrumbSchema([{ label: 'Projects', href: '/projects' }]);
+
   return (
     <SiteLayout>
       <SEO
-        title="Completed Industrial Fabrication & Steel Projects"
+        title="Industrial Fabrication Projects Portfolio Patna"
         description="Explore our portfolio of completed storage vessels, chimneys, hoppers, and custom structural steel projects in Patna, Bihar."
         canonicalPath="/projects"
+        schemaJson={projectsSchemas}
       />
 
       {/* Projects Hero Section */}

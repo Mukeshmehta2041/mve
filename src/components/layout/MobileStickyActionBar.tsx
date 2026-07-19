@@ -65,7 +65,7 @@ export const MobileStickyActionBar: React.FC = () => {
       {/* Request Quote Button (has largest weight) */}
       <a
         href="/request-a-quote"
-        className="flex-grow h-12 bg-primary hover:bg-primary-hover text-white text-sm font-bold uppercase tracking-wider rounded-card flex items-center justify-center gap-2 focus-ring shadow-sm"
+        className="flex-grow h-12 bg-primary hover:bg-primary-hover text-white text-sm font-bold uppercase tracking-wider rounded-card flex items-center justify-center gap-2 focus-ring shadow-sm whitespace-nowrap"
       >
         <span>Request a Quote</span>
         <svg

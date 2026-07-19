@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { SiteLayout, SEO } from '../components/layout';
 import { Container, Section, Button, Breadcrumb, EmptyGuard } from '../components/ui';
 import { productsData, contactData, processStepsData } from '../data';
-import { getProductSchema } from '../lib/seo';
+import { getProductSchema, getBreadcrumbSchema, getFAQSchema } from '../lib/seo';
 import { getQuoteUrl, cn } from '../lib/utils';
 import { trackEvent } from '../lib/analytics';
 import { ASSETS } from '../lib/assets';
@@ -156,13 +156,23 @@ export const ProductDetail: React.FC = () => {
 
   const productFaqs = product.faqs && product.faqs.length > 0 ? product.faqs : defaultFaqs;
 
+  const productSchemas = [
+    getProductSchema(product),
+    getBreadcrumbSchema([
+      { label: 'Products', href: '/products' },
+      { label: product.name, href: `/products/${product.slug}` },
+    ]),
+    getFAQSchema(productFaqs),
+  ];
+
   return (
     <SiteLayout>
       <SEO
-        title={product.seoTitle || `${product.name} | Industrial Fabrication`}
+        title={product.seoTitle || `${product.name} Manufacturer Patna | Custom Steel Fabrication`}
         description={product.seoDescription || product.description}
         canonicalPath={`/products/${product.slug}`}
-        schemaJson={getProductSchema(product)}
+        ogImage={product.image}
+        schemaJson={productSchemas}
       />
 
       <Section className="bg-white pt-6 pb-12 md:pb-16 border-b border-border">
@@ -237,7 +247,7 @@ export const ProductDetail: React.FC = () => {
                       aria-label={`View Image ${idx + 1}`}
                       aria-current={activeImgIndex === idx ? "true" : "false"}
                     >
-                      <img src={img} alt="" className="w-full h-full object-cover" loading="lazy" />
+                      <img src={img} alt={`${product.name} thumbnail ${idx + 1}`} className="w-full h-full object-cover" loading="lazy" />
                     </button>
                   ))}
                 </div>
@@ -309,8 +319,11 @@ export const ProductDetail: React.FC = () => {
                       variant="whatsapp"
                       className="flex-1 font-bold text-sm tracking-wider uppercase h-12"
                       onClick={() => trackEvent('product_whatsapp_click', { productSlug: product.slug, position: 'hero' })}
+                      icon={
+                        <img src={ASSETS.icons.whatsapp} alt="" className="w-5 h-5 brightness-0 invert" />
+                      }
+                      iconPosition="left"
                     >
-                      <img src={ASSETS.icons.whatsapp} alt="" className="w-5 h-5 mr-2 brightness-0 invert" />
                       WhatsApp Inquiry
                     </Button>
                   )}
@@ -322,8 +335,11 @@ export const ProductDetail: React.FC = () => {
                     variant="secondary"
                     className="w-full font-bold text-sm tracking-wider uppercase h-12"
                     onClick={() => trackEvent('product_call_click', { productSlug: product.slug, position: 'hero' })}
+                    icon={
+                      <img src={ASSETS.icons.phone} alt="" className="w-4 h-4" />
+                    }
+                    iconPosition="left"
                   >
-                    <img src={ASSETS.icons.phone} alt="" className="w-4 h-4 mr-2" />
                     Call: {verifiedPhone}
                   </Button>
                 )}
@@ -649,8 +665,11 @@ export const ProductDetail: React.FC = () => {
                 size="md"
                 className="font-bold text-sm tracking-wider uppercase"
                 onClick={() => trackEvent('product_whatsapp_click', { productSlug: product.slug, position: 'footer_cta' })}
+                icon={
+                  <img src={ASSETS.icons.whatsapp} alt="" className="w-5 h-5 brightness-0 invert" />
+                }
+                iconPosition="left"
               >
-                <img src={ASSETS.icons.whatsapp} alt="" className="w-5 h-5 mr-2 brightness-0 invert" />
                 WhatsApp Inquiry
               </Button>
             )}
@@ -662,8 +681,11 @@ export const ProductDetail: React.FC = () => {
                 size="md"
                 className="font-bold text-sm tracking-wider uppercase"
                 onClick={() => trackEvent('product_call_click', { productSlug: product.slug, position: 'footer_cta' })}
+                icon={
+                  <img src={ASSETS.icons.phone} alt="" className="w-4 h-4 filter invert" />
+                }
+                iconPosition="left"
               >
-                <img src={ASSETS.icons.phone} alt="" className="w-4 h-4 mr-2 filter invert" />
                 Call: {verifiedPhone}
               </Button>
             )}

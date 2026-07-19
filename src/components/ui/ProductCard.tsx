@@ -21,7 +21,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       <div className="aspect-[4/3] w-full rounded-sm overflow-hidden bg-slate-100 mb-4 relative">
         <img
           src={product.image}
-          alt={product.name}
+          alt={`${product.name} - ${product.category || 'Industrial Steel Fabrication'}`}
           className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
           loading="lazy"
         />

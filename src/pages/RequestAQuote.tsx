@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { SiteLayout, SEO } from '../components/layout';
+import { getBreadcrumbSchema } from '../lib/seo';
 import { Container, Section, Button, Breadcrumb } from '../components/ui';
 import {
   Input,
@@ -290,7 +291,7 @@ export const RequestAQuote: React.FC = () => {
   if (isSuccess) {
     return (
       <SiteLayout>
-        <SEO title="Quote Request Submitted Successful" description="Thank you for submitting your quote request details." />
+        <SEO title="Quote Request Submitted | Maa Vindhawasini Enterprises" description="Thank you for submitting your quote request details." noindex={true} />
         <Section className="bg-white py-16 md:py-24 text-center">
           <Container className="max-w-2xl font-sans">
             <div className="w-16 h-16 bg-green-50 border border-green-200 rounded-full flex items-center justify-center text-success mx-auto mb-6 shadow-sm">
@@ -357,12 +358,15 @@ export const RequestAQuote: React.FC = () => {
     );
   }
 
+  const quoteSchemas = getBreadcrumbSchema([{ label: 'Request a Quote', href: '/request-a-quote' }]);
+
   return (
     <SiteLayout>
       <SEO
-        title="Request a Quote | Custom Industrial Fabrication"
+        title="Request a Custom Fabrication Quote Patna"
         description="Submit your technical drawings and fabrication requirements for an itemized commercial proposal from Maa Vindhawasini Enterprises."
         canonicalPath="/request-a-quote"
+        schemaJson={quoteSchemas}
       />
 
       {/* Quote Hero Banner */}

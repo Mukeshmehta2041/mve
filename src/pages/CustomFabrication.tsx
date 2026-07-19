@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { SiteLayout, SEO } from '../components/layout';
 import { Container, Section, SectionHeader, Button, Breadcrumb, ProjectCard } from '../components/ui';
+import { getBreadcrumbSchema, getServiceSchema } from '../lib/seo';
 import {
   contactData,
   projectsData,
@@ -30,12 +31,21 @@ export const CustomFabrication: React.FC = () => {
   // Filter projects relating to custom work
   const customProjects = projectsData.slice(0, 3);
 
+  const customSchemas = [
+    getBreadcrumbSchema([{ label: 'Custom Fabrication', href: '/custom-fabrication' }]),
+    getServiceSchema(
+      'Custom Mild Steel (MS) Fabrication & Industrial Equipment Manufacturing',
+      'Tailored steel fabrication, reaction vessels, storage tanks, hoppers, chimneys, and heavy industrial assemblies built to customer drawings and specifications in Patna, Bihar.'
+    ),
+  ];
+
   return (
     <SiteLayout>
       <SEO
-        title="Custom Mild Steel (MS) Fabrication & Equipment"
+        title="Custom Mild Steel (MS) Fabrication & Equipment Patna"
         description="We manufacture custom steel frameworks, storage vessels, hoppers, and chimneys matching client drawings and dimensions in Patna, Bihar."
         canonicalPath="/custom-fabrication"
+        schemaJson={customSchemas}
       />
 
       {/* Hero Section */}
@@ -383,8 +393,11 @@ export const CustomFabrication: React.FC = () => {
                 size="md"
                 className="font-bold text-sm tracking-wider uppercase h-12 animate-none"
                 onClick={() => trackEvent('custom_whatsapp_click', { position: 'footer_cta' })}
+                icon={
+                  <img src={ASSETS.icons.whatsapp} alt="" aria-hidden="true" className="w-5 h-5 brightness-0 invert" />
+                }
+                iconPosition="left"
               >
-                <img src={ASSETS.icons.whatsapp} alt="" aria-hidden="true" className="w-5 h-5 mr-2 brightness-0 invert" />
                 WhatsApp Your Requirement
               </Button>
             )}
@@ -395,8 +408,11 @@ export const CustomFabrication: React.FC = () => {
                 variant="outline-light"
                 size="md"
                 className="font-bold text-sm tracking-wider uppercase h-12"
+                icon={
+                  <img src={ASSETS.icons.phone} alt="" aria-hidden="true" className="w-4 h-4 filter invert" />
+                }
+                iconPosition="left"
               >
-                <img src={ASSETS.icons.phone} alt="" aria-hidden="true" className="w-4 h-4 mr-2 filter invert" />
                 Call: {verifiedPhone}
               </Button>
             )}

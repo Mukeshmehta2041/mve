@@ -41,25 +41,36 @@ export const HomeFinalCTA: React.FC = () => {
               variant="whatsapp"
               size="md"
               className="w-full sm:w-auto"
+              icon={
+                <img 
+                  src={ASSETS.icons.whatsapp} 
+                  alt="" 
+                  aria-hidden="true"
+                  className="w-5 h-5 brightness-0 invert" 
+                />
+              }
+              iconPosition="left"
             >
-              <img 
-                src={ASSETS.icons.whatsapp} 
-                alt="" 
-                aria-hidden="true"
-                className="w-5 h-5 mr-2 brightness-0 invert" 
-              />
               WhatsApp Us
             </Button>
           )}
 
           {verifiedPhone && (
-            <Button href={`tel:${verifiedPhone}`} variant="secondary" size="md" className="w-full sm:w-auto">
-              <img 
-                src={ASSETS.icons.phone} 
-                alt="" 
-                aria-hidden="true"
-                className="w-4 h-4 mr-2" 
-              />
+            <Button
+              href={`tel:${verifiedPhone}`}
+              variant="secondary"
+              size="md"
+              className="w-full sm:w-auto"
+              icon={
+                <img 
+                  src={ASSETS.icons.phone} 
+                  alt="" 
+                  aria-hidden="true"
+                  className="w-4 h-4" 
+                />
+              }
+              iconPosition="left"
+            >
               Call: {verifiedPhone}
             </Button>
           )}

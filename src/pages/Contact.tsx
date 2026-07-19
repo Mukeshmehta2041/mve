@@ -4,6 +4,7 @@ import { SiteLayout, SEO } from '../components/layout';
 import { Container, Section, Button, Breadcrumb } from '../components/ui';
 import { Input, Select, Textarea, Checkbox, FormErrorMessage } from '../components/ui/FormControls';
 import { contactData } from '../data';
+import { getBreadcrumbSchema, getLocalBusinessSchema } from '../lib/seo';
 import { trackEvent } from '../lib/analytics';
 import { ASSETS } from '../lib/assets';
 
@@ -119,12 +120,18 @@ export const Contact: React.FC = () => {
     }
   };
 
+  const contactSchemas = [
+    getBreadcrumbSchema([{ label: 'Contact Us', href: '/contact' }]),
+    getLocalBusinessSchema(),
+  ];
+
   return (
     <SiteLayout>
       <SEO
-        title="Contact Us | Maa Vindhawasini Enterprises"
-        description="Contact our workshop in Patna, Bihar for custom fabrication queries, steel storage tanks quotes, or factory visits."
+        title="Contact Industrial Equipment Fabricators Patna"
+        description="Contact our workshop in Patna, Bihar for custom fabrication queries, steel storage tank quotes, factory visits, or engineering consultations."
         canonicalPath="/contact"
+        schemaJson={contactSchemas}
       />
 
       {/* Hero Section */}

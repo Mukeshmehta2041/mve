@@ -49,12 +49,15 @@ export const DesktopNavigation: React.FC = () => {
               href={item.href}
               variant="primary"
               size="sm"
-              className="font-bold uppercase tracking-wider text-xs flex items-center gap-1.5"
+              className="font-bold uppercase tracking-wider text-xs whitespace-nowrap"
+              icon={
+                <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                </svg>
+              }
+              iconPosition="right"
             >
-              <span>{item.name}</span>
-              <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-              </svg>
+              {item.name}
             </Button>
           );
         }

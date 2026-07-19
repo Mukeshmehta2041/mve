@@ -48,9 +48,9 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
 
   const renderContent = () => (
     <>
-      {icon && iconPosition === 'left' && <span className="mr-2 inline-flex">{icon}</span>}
-      <span>{children}</span>
-      {icon && iconPosition === 'right' && <span className="ml-2 inline-flex">{icon}</span>}
+      {icon && iconPosition === 'left' && <span className="mr-2 inline-flex shrink-0">{icon}</span>}
+      <span className="inline-flex items-center justify-center gap-1.5 whitespace-nowrap">{children}</span>
+      {icon && iconPosition === 'right' && <span className="ml-2 inline-flex shrink-0">{icon}</span>}
     </>
   );
 

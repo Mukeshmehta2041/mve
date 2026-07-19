@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { SiteLayout, SEO } from '../components/layout';
+import { getBreadcrumbSchema, getOrganizationSchema } from '../lib/seo';
 import { Container, Section, Button, Breadcrumb, SectionHeader } from '../components/ui';
 import {
   companyData,
@@ -23,12 +24,18 @@ export const About: React.FC = () => {
   const whatsappMsg = 'Hello Maa Vindhawasini Enterprises, I am looking at your company details and would like to discuss my fabrication requirement.';
   const whatsappUrl = `https://wa.me/${contactData.whatsapp}?text=${encodeURIComponent(whatsappMsg)}`;
 
+  const aboutSchemas = [
+    getBreadcrumbSchema([{ label: 'About Us', href: '/about' }]),
+    getOrganizationSchema(),
+  ];
+
   return (
     <SiteLayout>
       <SEO
-        title="About Us | Steel Fabrication Experts Patna"
-        description="Maa Vindhawasini Enterprises fabricates custom MS and stainless steel industrial equipment from its workshop in Patna, Bihar."
+        title="About Us | Industrial Steel Fabrication Experts Patna"
+        description="Learn about Maa Vindhawasini Enterprises, leading manufacturers of custom MS & stainless steel industrial equipment, reaction vessels, and heavy structures in Patna, Bihar."
         canonicalPath="/about"
+        schemaJson={aboutSchemas}
       />
 
       {/* About Page Hero */}
@@ -365,8 +372,11 @@ export const About: React.FC = () => {
                 size="md"
                 className="font-bold text-sm tracking-wider uppercase h-12"
                 onClick={() => trackEvent('about_whatsapp_click')}
+                icon={
+                  <img src={ASSETS.icons.whatsapp} alt="" aria-hidden="true" className="w-5 h-5 brightness-0 invert" />
+                }
+                iconPosition="left"
               >
-                <img src={ASSETS.icons.whatsapp} alt="" aria-hidden="true" className="w-5 h-5 mr-2 brightness-0 invert" />
                 WhatsApp Us
               </Button>
             )}
