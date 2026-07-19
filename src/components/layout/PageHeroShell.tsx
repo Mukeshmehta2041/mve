@@ -9,6 +9,8 @@ interface PageHeroShellProps {
   description?: string;
   backgroundImage?: string;
   breadcrumb?: BreadcrumbItem[];
+  /** Optional button row below the description, for heroes that need a CTA but not the two-column image layout. */
+  actions?: React.ReactNode;
   className?: string;
 }
 
@@ -21,6 +23,7 @@ export const PageHeroShell: React.FC<PageHeroShellProps> = ({
   description,
   backgroundImage,
   breadcrumb,
+  actions,
   className,
 }) => {
   return (
@@ -33,10 +36,14 @@ export const PageHeroShell: React.FC<PageHeroShellProps> = ({
       {/* Background Image with high-contrast dark overlay */}
       {backgroundImage && (
         <div className="absolute inset-0 z-0">
+          {/* No width/height: this is position:absolute inset-0, so intrinsic
+              dimensions don't reserve layout space the way they would in flow -
+              there's no CLS to prevent here. */}
           <img
             src={backgroundImage}
             alt=""
             aria-hidden="true"
+            decoding="async"
             className="w-full h-full object-cover object-center opacity-30 select-none pointer-events-none"
           />
           <div className="absolute inset-0 bg-navy-950/70" />
@@ -55,6 +62,7 @@ export const PageHeroShell: React.FC<PageHeroShellProps> = ({
             </p>
           )}
         </div>
+        {actions && <div className="flex flex-wrap gap-4 pt-6">{actions}</div>}
       </Container>
     </div>
   );

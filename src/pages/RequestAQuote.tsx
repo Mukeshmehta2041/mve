@@ -335,8 +335,8 @@ export const RequestAQuote: React.FC = () => {
 
               {/* Secure Attachment upload pending notification (Option 3) */}
               {selectedFile && (
-                <div className="bg-amber-50/50 border border-amber-200/80 p-3.5 rounded-card text-amber-900 text-xs flex gap-2.5 mt-2.5">
-                  <svg className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <div className="bg-warning-soft border border-warning/30 p-3.5 rounded-card text-navy-950 text-xs flex gap-2.5 mt-2.5">
+                  <svg className="w-5 h-5 text-warning flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0zm-7-4a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 9a1 1 0 0 0 0 2v3a1 1 0 0 0 2 0v-3a1 1 0 0 0-1-1z" clipRule="evenodd" />
                   </svg>
                   <div>
@@ -381,7 +381,6 @@ export const RequestAQuote: React.FC = () => {
 
       {/* Quote Hero Banner */}
       <Section className="bg-navy-950 text-white pt-6 pb-10 text-left border-b border-slate-900 overflow-hidden relative">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
         <Container className="relative z-10">
           <Breadcrumb onDark items={[{ label: 'Request a Quote' }]} className="mb-4" />
           
@@ -425,10 +424,10 @@ export const RequestAQuote: React.FC = () => {
       {/* Form and Alternates Panel Split Grid */}
       <Section className="bg-white pt-10 pb-16 text-left">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             
             {/* Form Column */}
-            <div className="lg:col-span-8 bg-slate-50 border border-border p-6 md:p-8 rounded-card shadow-sm">
+            <div className="lg:col-span-8 bg-slate-50 border border-border p-6 md:p-8 rounded-card shadow-card">
               <form onSubmit={handleSubmit} className="space-y-6">
                 
                 {/* Proposal Project Meta Pre-fill alerts */}
@@ -444,7 +443,7 @@ export const RequestAQuote: React.FC = () => {
                 {/* Section A: Requirement type */}
                 <div>
                   <label className="block text-sm font-semibold text-navy-950 mb-3">
-                    Select Requirement Type <span className="text-red-500">*</span>
+                    Select Requirement Type <span className="text-error" aria-hidden="true">*</span>
                   </label>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3 font-sans">
                     {quoteRequirementTypesData.map((type) => {
@@ -455,9 +454,9 @@ export const RequestAQuote: React.FC = () => {
                           type="button"
                           onClick={() => handleReqTypeChange(type.value as 'standard' | 'custom' | 'general')}
                           className={cn(
-                            "p-4 rounded-card border-2 text-left cursor-pointer transition-all focus:outline-none focus-ring",
+                            "p-4 rounded-card border-2 text-left cursor-pointer transition focus:outline-none focus-ring",
                             isSelected
-                              ? "bg-white border-primary border-2 text-navy-950 shadow-sm"
+                              ? "bg-white border-primary border-2 text-navy-950 shadow-card"
                               : "bg-white border-border text-slate-600 hover:border-slate-400"
                           )}
                           id={`input-reqType-${type.value}`}
@@ -787,7 +786,7 @@ export const RequestAQuote: React.FC = () => {
             <div className="lg:col-span-4 space-y-8 text-left font-sans">
               
               {/* Alternative contacts */}
-              <div className="bg-slate-50 border border-border p-6 rounded-card shadow-sm space-y-4">
+              <div className="bg-slate-50 border border-border p-6 rounded-card shadow-card space-y-4">
                 <h3 className="text-base font-bold text-navy-950 pb-2 border-b border-border">Discuss Directly</h3>
                 <p className="text-xs text-slate-500 leading-relaxed">
                   Prefer to consult on your custom dimensions or raw plate weights with a shop technician directly?
@@ -799,10 +798,10 @@ export const RequestAQuote: React.FC = () => {
                       href={whatsappUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center min-h-11 gap-2 text-xs font-bold text-white bg-success-ink hover:bg-success-ink-hover px-4 py-2.5 rounded-card w-full text-center shadow-sm"
+                      className="flex items-center justify-center min-h-11 gap-2 text-xs font-bold text-white bg-success-ink hover:bg-success-ink-hover px-4 py-2.5 rounded-card w-full text-center shadow-card"
                       onClick={() => trackEvent('quote_alternative_contact_click', { channel: 'whatsapp' })}
                     >
-                      <img src={ASSETS.icons.whatsapp} alt="" aria-hidden="true" className="w-4 h-4 brightness-0 invert" />
+                      <img src={ASSETS.icons.whatsapp} alt="" aria-hidden="true" className="w-4 h-4 brightness-0 invert" width={16} height={16} decoding="async" />
                       Chat on WhatsApp
                     </a>
                   )}
@@ -813,7 +812,7 @@ export const RequestAQuote: React.FC = () => {
                       className="flex items-center justify-center gap-2 text-xs font-bold text-navy-950 bg-white border border-navy-950 hover:bg-slate-50 px-4 py-2.5 rounded-card w-full text-center"
                       onClick={() => trackEvent('quote_alternative_contact_click', { channel: 'call' })}
                     >
-                      <img src={ASSETS.icons.phone} alt="" aria-hidden="true" className="w-4 h-4" />
+                      <img src={ASSETS.icons.phone} alt="" aria-hidden="true" className="w-4 h-4" width={16} height={16} decoding="async" />
                       Call: {verifiedPhone}
                     </a>
                   )}
@@ -824,7 +823,7 @@ export const RequestAQuote: React.FC = () => {
                       className="flex items-center justify-center gap-2 text-xs font-bold text-navy-950 bg-white border border-navy-950 hover:bg-slate-50 px-4 py-2.5 rounded-card w-full text-center"
                       onClick={() => trackEvent('quote_alternative_contact_click', { channel: 'email' })}
                     >
-                      <img src={ASSETS.icons.email} alt="" aria-hidden="true" className="w-4 h-4" />
+                      <img src={ASSETS.icons.email} alt="" aria-hidden="true" className="w-4 h-4" width={16} height={16} decoding="async" />
                       Email Requirements
                     </a>
                   )}
@@ -832,7 +831,7 @@ export const RequestAQuote: React.FC = () => {
               </div>
 
               {/* What happens next */}
-              <div className="bg-slate-50 border border-border p-6 rounded-card shadow-sm space-y-4">
+              <div className="bg-slate-50 border border-border p-6 rounded-card shadow-card space-y-4">
                 <h3 className="text-base font-bold text-navy-950 pb-2 border-b border-border">What Happens Next?</h3>
                 <div className="space-y-4">
                   {quoteNextStepsData.map((step) => (

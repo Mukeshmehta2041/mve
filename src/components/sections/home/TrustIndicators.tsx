@@ -11,7 +11,7 @@ export const TrustIndicators: React.FC = () => {
             return (
               <div 
                 key={indicator.id}
-                className="flex items-start md:items-center space-x-3.5 p-3 rounded-card hover:bg-white hover:shadow-card transition-all duration-200"
+                className="flex items-start md:items-center space-x-3.5 p-3 rounded-card hover:bg-white hover:shadow-card transition duration-200"
               >
                 {/* Icon wrapper */}
                 <div className="flex-shrink-0 w-10 h-10 rounded-sm bg-primary-soft flex items-center justify-center text-primary">
@@ -20,7 +20,7 @@ export const TrustIndicators: React.FC = () => {
                     alt="" 
                     aria-hidden="true"
                     className="w-5.5 h-5.5 object-contain" 
-                  />
+                   width={22} height={22} decoding="async"/>
                 </div>
                 
                 {/* Content */}

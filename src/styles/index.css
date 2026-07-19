@@ -30,6 +30,9 @@
   --brand-success-ink: #15803d;
   --brand-success-ink-hover: #166534;
   --brand-error: #dc2626;
+  /* 5.02:1 on white, 4.84:1 on --brand-warning-soft */
+  --brand-warning: #b45309;
+  --brand-warning-soft: #fffbeb;
 
   /* Semantic UI tokens (as requested by user) */
   --color-primary: var(--brand-primary);
@@ -52,6 +55,8 @@
   --color-success-ink: var(--brand-success-ink);
   --color-success-ink-hover: var(--brand-success-ink-hover);
   --color-error: var(--brand-error);
+  --color-warning: var(--brand-warning);
+  --color-warning-soft: var(--brand-warning-soft);
 }
 
 @theme {
@@ -73,6 +78,8 @@
   --color-success-ink: var(--color-success-ink);
   --color-success-ink-hover: var(--color-success-ink-hover);
   --color-error: var(--color-error);
+  --color-warning: var(--color-warning);
+  --color-warning-soft: var(--color-warning-soft);
 
   --color-navy-950: var(--brand-navy-950);
   --color-navy-900: var(--brand-navy-900);
@@ -80,9 +87,9 @@
   --color-slate-500: var(--brand-slate-500);
   --color-slate-400: var(--brand-slate-400);
 
-  /* Typography scale linkings (design.md Section 4) */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, Arial, sans-serif;
-  --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, Arial, sans-serif;
+  /* Typography scale linkings. See index.html for why this pairing (not Inter+Poppins). */
+  --font-sans: 'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, Arial, sans-serif;
+  --font-heading: 'Big Shoulders Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, Arial, sans-serif;
 
   /* Layout and grids (design.md Section 5 & 6) */
   --radius-sm: 8px;
@@ -97,9 +104,6 @@
      bar, the nav drawer, the dropdown panel. */
   --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.06), 0 2px 6px rgba(15, 23, 42, 0.05);
   --shadow-floating: 0 8px 24px rgba(15, 23, 42, 0.12);
-
-  --animate-accordion-down: accordion-down 0.2s ease-out;
-  --animate-accordion-up: accordion-up 0.2s ease-out;
 }
 
 /* Base resets & global styles */
@@ -123,9 +127,23 @@
   }
 
   /* Custom typography components corresponding to Type Scale in Section 4 */
-  h1, h2, h3, h4, h5, h6 {
+  /* Big Shoulders Display is a condensed display face: it earns its keep at
+     hero/section scale (h1, h2) where its character reads as intentional.
+     Below that, card titles and small UI headings (h3-h6) stay on Archivo -
+     a condensed face at 16-18px reads cramped, not distinctive. */
+  h1, h2 {
     font-family: var(--font-heading);
     @apply font-bold tracking-tight text-navy-950;
+    text-wrap: balance;
+  }
+  h3, h4, h5, h6 {
+    @apply font-bold tracking-tight text-navy-950;
+    text-wrap: balance;
+  }
+
+  /* Reduces orphan words on long-form copy; harmless on short UI microcopy. */
+  p {
+    text-wrap: pretty;
   }
 }
 

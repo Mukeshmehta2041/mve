@@ -16,8 +16,8 @@ export const Badge: React.FC<BadgeProps> = ({
   const variantClasses = {
     neutral: 'bg-slate-100 text-slate-600',
     primary: 'bg-primary-soft text-primary-ink',
-    success: 'bg-green-50 text-success border border-green-200',
-    warning: 'bg-yellow-50 text-yellow-800 border border-yellow-200',
+    success: 'bg-success-ink/10 text-success-ink border border-success-ink/20',
+    warning: 'bg-warning-soft text-warning border border-warning/20',
   };
 
   return (
@@ -48,14 +48,14 @@ export const TrustBadge: React.FC<TrustBadgeProps> = ({
   return (
     <div
       className={cn(
-        'flex items-start p-4 bg-white border border-border rounded-card hover:shadow-card transition-all duration-200',
+        'flex items-start p-4 bg-white border border-border rounded-card hover:shadow-card transition duration-200',
         className
       )}
       {...props}
     >
       {icon && (
         <div className="flex-shrink-0 w-10 h-10 mr-3.5 bg-primary-soft rounded-sm flex items-center justify-center text-primary">
-          <img src={icon} alt="" aria-hidden="true" className="w-5 h-5 object-contain" />
+          <img src={icon} alt="" aria-hidden="true" className="w-5 h-5 object-contain" width={20} height={20} decoding="async" />
         </div>
       )}
       <div>

@@ -35,7 +35,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
   return (
     <div
       className={cn(
-        'fixed inset-0 z-50 transition-all duration-300 lg:hidden',
+        'fixed inset-0 z-50 transition duration-300 lg:hidden',
         isOpen ? 'visible' : 'invisible pointer-events-none'
       )}
       role="dialog"
@@ -62,7 +62,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
         )}
       >
         <div className="flex items-center justify-between border-b border-border pb-4 mb-4">
-          <span className="font-bold text-navy-950 font-heading text-lg">Menu</span>
+          <span className="font-bold text-navy-950 text-lg">Menu</span>
           <IconButton ariaLabel="Close menu" onClick={onClose} className="hover:bg-slate-100">
             <svg className="w-6 h-6 text-navy-950" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
@@ -118,6 +118,10 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
                   {/* Collapsible Accordion Submenu */}
                   <div
                     className={cn(
+                      // transition-all (not `transition`) deliberately: this
+                      // accordion animates max-height and padding to expand/
+                      // collapse, both layout properties the default
+                      // `transition` utility excludes.
                       'pl-4 border-l border-slate-200 space-y-2.5 overflow-hidden transition-all duration-300',
                       productsExpanded ? 'max-h-[500px] py-1.5 opacity-100' : 'max-h-0 py-0 opacity-0 pointer-events-none'
                     )}
@@ -181,9 +185,9 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
               <a
                 key={phone}
                 href={`tel:${phone}`}
-                className="flex items-center min-h-11 text-sm font-bold text-navy-950 hover:text-primary-ink bg-slate-50 border border-border p-2.5 rounded-card transition-all"
+                className="flex items-center min-h-11 text-sm font-bold text-navy-950 hover:text-primary-ink bg-slate-50 border border-border p-2.5 rounded-card transition"
               >
-                <img src={ASSETS.icons.phone} alt="" className="w-4 h-4 mr-2.5 text-primary-ink" />
+                <img src={ASSETS.icons.phone} alt="" className="w-4 h-4 mr-2.5 text-primary-ink" width={16} height={16} decoding="async" />
                 <span>Call: {phone}</span>
               </a>
             ))}
@@ -193,9 +197,9 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
                 href={contactData.whatsappMessageUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center min-h-11 text-sm font-bold text-white bg-success-ink hover:bg-success-ink-hover p-2.5 rounded-card transition-all"
+                className="flex items-center min-h-11 text-sm font-bold text-white bg-success-ink hover:bg-success-ink-hover p-2.5 rounded-card transition"
               >
-                <img src={ASSETS.icons.whatsapp} alt="" className="w-4 h-4 mr-2.5 brightness-0 invert" />
+                <img src={ASSETS.icons.whatsapp} alt="" className="w-4 h-4 mr-2.5 brightness-0 invert" width={16} height={16} decoding="async" />
                 <span>WhatsApp Message</span>
               </a>
             )}

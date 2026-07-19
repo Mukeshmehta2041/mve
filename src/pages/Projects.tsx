@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { SiteLayout, SEO, PageCTA } from '../components/layout';
-import { Container, Section, SectionHeader, Button, Breadcrumb, ProjectCard } from '../components/ui';
+import { SiteLayout, SEO, PageCTA, PageHeroSplit } from '../components/layout';
+import { Container, Section, SectionHeader, Button, ProjectCard } from '../components/ui';
 import { projectsData, contactData } from '../data';
 import { getBreadcrumbSchema } from '../lib/seo';
 import { trackEvent } from '../lib/analytics';
@@ -64,62 +64,25 @@ export const Projects: React.FC = () => {
         schemaJson={projectsSchemas}
       />
 
-      {/* Projects Hero Section */}
-      <Section className="bg-navy-950 text-white pt-6 pb-12 md:pb-16 text-left relative overflow-hidden border-b border-slate-900">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
-        <Container className="relative z-10">
-          <Breadcrumb onDark 
-            items={[{ label: 'Projects' }]}
-            className="mb-6"
-          />
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Left Content */}
-            <div className="lg:col-span-7 space-y-6">
-              <div>
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight font-heading">
-                  Selected projects
-                </h1>
-              </div>
-
-              <p className="text-base md:text-lg text-slate-400 leading-relaxed max-w-xl font-sans">
-                A selection of industrial fabrication and equipment work completed across different product and application requirements. We build structural reliability designed to client specifications.
-              </p>
-
-              <div className="flex flex-wrap gap-4 pt-2">
-                <Button
-                  href="/request-a-quote?source=projects"
-                  variant="primary"
-                  className="font-bold text-sm tracking-wider uppercase h-12 flex-grow sm:flex-grow-0"
-                  onClick={() => trackEvent('projects_quote_click', { position: 'hero' })}
-                >
-                  Discuss Your Project
-                </Button>
-                <Button
-                  href="/custom-fabrication"
-                  variant="outline-light"
-                  className="font-bold text-sm tracking-wider uppercase h-12 flex-grow sm:flex-grow-0"
-                  onClick={() => trackEvent('projects_custom_fabrication_click', { position: 'hero' })}
-                >
-                  Explore Custom Fabrication
-                </Button>
-              </div>
-            </div>
-
-            {/* Right Image */}
-            <div className="lg:col-span-5 w-full">
-              <div className="rounded-lg overflow-hidden border border-slate-800 shadow-card aspect-[16/10] bg-navy-900 relative">
-                <img
-                  src={ASSETS.hero.projects}
-                  alt="Multi-level structural steel process plant structure against a dusk sky"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-950/40 to-transparent pointer-events-none"></div>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </Section>
+      <PageHeroSplit
+        breadcrumb={[{ label: 'Projects' }]}
+        title="Selected projects"
+        description="A selection of industrial fabrication and equipment work completed across different product and application requirements. We build structural reliability designed to client specifications."
+        primaryAction={{
+          label: 'Discuss Your Project',
+          href: '/request-a-quote?source=projects',
+          onClick: () => trackEvent('projects_quote_click', { position: 'hero' }),
+        }}
+        secondaryAction={{
+          label: 'Explore Custom Fabrication',
+          href: '/custom-fabrication',
+          onClick: () => trackEvent('projects_custom_fabrication_click', { position: 'hero' }),
+        }}
+        image={{
+          src: ASSETS.hero.projects,
+          alt: 'Multi-level structural steel process plant structure against a dusk sky',
+        }}
+      />
 
       {/* Featured Project Section */}
       {featuredProject && (
@@ -131,13 +94,13 @@ export const Projects: React.FC = () => {
               align="center"
             />
 
-            <div className="bg-slate-50 border border-border rounded-card overflow-hidden shadow-card grid grid-cols-1 lg:grid-cols-12 gap-0 font-sans">
+            <div className="bg-slate-50 border border-border rounded-card overflow-hidden shadow-card grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-0 font-sans">
               {/* Left Column Image */}
               <div className="lg:col-span-7 aspect-[16/10] lg:aspect-auto w-full relative min-h-[300px]">
                 <img
                   src={featuredProject.image}
                   alt={featuredProject.title}
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full object-cover" width={800} height={500} decoding="async"
                 />
               </div>
 
@@ -165,10 +128,10 @@ export const Projects: React.FC = () => {
                         Scope of Work
                       </span>
                       <div className="flex flex-wrap gap-1.5">
-                        {featuredProject.scope.map((tag, idx) => (
+                        {featuredProject.scope.map((tag) => (
                           <span
-                            key={idx}
-                            className="bg-white border border-border text-slate-700 text-xs px-2.5 py-1 rounded-sm font-medium shadow-sm"
+                            key={tag}
+                            className="bg-white border border-border text-slate-700 text-xs px-2.5 py-1 rounded-sm font-medium shadow-card"
                           >
                             {tag}
                           </span>
@@ -264,7 +227,7 @@ export const Projects: React.FC = () => {
       {/* Custom Fabrication Integration Connection */}
       <Section className="bg-white border-b border-border text-left py-12 md:py-16">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center font-sans">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 items-center font-sans">
             {/* Left Content Column */}
             <div className="lg:col-span-7 space-y-6">
               <h2 className="text-2xl md:text-3xl font-extrabold text-navy-950 leading-tight">
@@ -299,7 +262,7 @@ export const Projects: React.FC = () => {
                 <img
                   src={ASSETS.fabrication.productsBanner}
                   alt="Welder performing arc welding at a workshop station"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover" width={800} height={450} decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy-950/40 to-transparent pointer-events-none"></div>
               </div>
@@ -338,7 +301,7 @@ export const Projects: React.FC = () => {
                   className="font-bold text-xs uppercase tracking-wide h-11 w-full"
                   onClick={() => trackEvent('projects_whatsapp_click', { position: 'discuss_similar' })}
                 >
-                  <img src={ASSETS.icons.whatsapp} alt="" aria-hidden="true" className="w-4 h-4 mr-2 brightness-0 invert" />
+                  <img src={ASSETS.icons.whatsapp} alt="" aria-hidden="true" className="w-4 h-4 mr-2 brightness-0 invert" width={16} height={16} decoding="async" />
                   WhatsApp Us
                 </Button>
               )}
@@ -349,7 +312,7 @@ export const Projects: React.FC = () => {
                   variant="secondary"
                   className="font-bold text-xs uppercase tracking-wide h-11 w-full bg-white text-navy-950 border-navy-950"
                 >
-                  <img src={ASSETS.icons.phone} alt="" aria-hidden="true" className="w-4 h-4 mr-1" />
+                  <img src={ASSETS.icons.phone} alt="" aria-hidden="true" className="w-4 h-4 mr-1" width={16} height={16} decoding="async" />
                   Call: {verifiedPhone}
                 </Button>
               )}

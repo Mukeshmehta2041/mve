@@ -25,7 +25,7 @@ export const HomeAbout: React.FC = () => {
 
   return (
     <section className="py-16 md:py-24 bg-white border-b border-border text-left">
-      <Container className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+      <Container className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
         {/* Left column - Images/Visual */}
         <div className="lg:col-span-6">
           <div className="rounded-lg overflow-hidden border border-border shadow-card aspect-[4/3] bg-slate-100 relative group">
@@ -60,7 +60,7 @@ export const HomeAbout: React.FC = () => {
                     alt=""
                     aria-hidden="true"
                     className="w-3 h-3 object-contain"
-                  />
+                   width={12} height={12} decoding="async"/>
                 </span>
                 <div>
                   <h3 className="font-semibold text-navy-950 font-sans">{benefit.title}</h3>

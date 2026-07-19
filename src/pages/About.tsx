@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { SiteLayout, SEO, PageCTA } from '../components/layout';
+import { SiteLayout, SEO, PageCTA, PageHeroSplit } from '../components/layout';
 import { getBreadcrumbSchema, getOrganizationSchema } from '../lib/seo';
-import { Container, Section, Button, Breadcrumb, SectionHeader } from '../components/ui';
+import { Container, Section, Button, SectionHeader } from '../components/ui';
 import {
   companyData,
   contactData,
@@ -37,75 +37,37 @@ export const About: React.FC = () => {
         schemaJson={aboutSchemas}
       />
 
-      {/* About Page Hero */}
-      <Section className="bg-navy-950 text-white pt-6 pb-12 md:pb-16 text-left relative overflow-hidden border-b border-slate-900">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
-        <Container className="relative z-10 font-sans">
-          <Breadcrumb onDark 
-            items={[{ label: 'About Us' }]} 
-            className="mb-6"
-          />
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Left Content Column */}
-            <div className="lg:col-span-7 space-y-6">
-              <div>
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight font-heading">
-                  About Maa Vindhawasini Enterprises
-                </h1>
-              </div>
-
-              <p className="text-base md:text-lg text-slate-400 leading-relaxed max-w-xl">
-                A steel fabrication workshop in Patna building process vessels, tanks, hoppers, and
-                structural assemblies to customer drawings.
-              </p>
-
-              <div className="flex flex-wrap gap-4 pt-2">
-                <Button
-                  href="/request-a-quote"
-                  variant="primary"
-                  className="font-bold text-sm tracking-wider uppercase h-12 flex-grow sm:flex-grow-0"
-                  onClick={() => trackEvent('about_quote_click', { position: 'hero' })}
-                >
-                  Request a Quote
-                </Button>
-                <Button
-                  href="/products"
-                  variant="outline-light"
-                  className="font-bold text-sm tracking-wider uppercase h-12 flex-grow sm:flex-grow-0"
-                  onClick={() => trackEvent('about_products_click', { position: 'hero' })}
-                >
-                  View Our Products
-                </Button>
-              </div>
-            </div>
-
-            {/* Right Image Column */}
-            <div className="lg:col-span-5 w-full">
-              <div className="rounded-lg overflow-hidden border border-slate-800 shadow-card aspect-[16/10] bg-navy-900 relative">
-                <img
-                  src={ASSETS.projects.featuredBitumen}
-                  alt="Black insulated storage tanks staged outdoors"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-950/40 to-transparent pointer-events-none"></div>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </Section>
+      <PageHeroSplit
+        breadcrumb={[{ label: 'About Us' }]}
+        title="About Maa Vindhawasini Enterprises"
+        description="A steel fabrication workshop in Patna building process vessels, tanks, hoppers, and structural assemblies to customer drawings."
+        primaryAction={{
+          label: 'Request a Quote',
+          href: '/request-a-quote',
+          onClick: () => trackEvent('about_quote_click', { position: 'hero' }),
+        }}
+        secondaryAction={{
+          label: 'View Our Products',
+          href: '/products',
+          onClick: () => trackEvent('about_products_click', { position: 'hero' }),
+        }}
+        image={{
+          src: ASSETS.projects.featuredBitumen,
+          alt: 'Black insulated storage tanks staged outdoors',
+        }}
+      />
 
       {/* Company Overview Section */}
       <Section className="bg-white border-b border-border text-left">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center font-sans">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 items-center font-sans">
             {/* Left Image Column */}
             <div className="lg:col-span-5 w-full">
               <div className="rounded-lg overflow-hidden border border-border shadow-card aspect-[4/3] bg-slate-50 relative">
                 <img
                   src={ASSETS.products.resinGlueKettle}
                   alt="Stainless steel jacketed reaction vessel with top motor"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover" width={800} height={600} decoding="async"
                 />
               </div>
             </div>
@@ -147,7 +109,7 @@ export const About: React.FC = () => {
       {/* Mission & Values Section */}
       <Section className="bg-white border-b border-border text-left">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start font-sans">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 items-start font-sans">
             {/* Left Column - Mission */}
             <div className="lg:col-span-5 bg-navy-950 text-white p-6 md:p-8 rounded-card shadow-card space-y-4">
               <h3 className="text-xl md:text-2xl font-extrabold leading-snug">Our Mission</h3>
@@ -164,16 +126,15 @@ export const About: React.FC = () => {
                 </h2>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {aboutValuesData.map((val, idx) => (
-                  <div key={idx} className="flex gap-4">
-                    <div className="w-10 h-10 rounded-sm bg-primary-soft text-primary flex items-center justify-center flex-shrink-0">
-                      <img src={val.icon} alt="" aria-hidden="true" className="w-5 h-5 object-contain" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-sm text-navy-950 mb-1 leading-snug">{val.title}</h4>
-                      <p className="text-xs text-slate-500 leading-relaxed">{val.desc}</p>
-                    </div>
+              {/* Plain typography, not another icon tile: this is the third
+                  icon-square section on this page in a row, and values are
+                  stated principles rather than a physical tool or capability
+                  an icon can represent - confident type carries them better. */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-7">
+                {aboutValuesData.map((val) => (
+                  <div key={val.title}>
+                    <h4 className="font-bold text-base text-navy-950 mb-1.5 leading-snug">{val.title}</h4>
+                    <p className="text-sm text-slate-600 leading-relaxed">{val.desc}</p>
                   </div>
                 ))}
               </div>
@@ -185,7 +146,7 @@ export const About: React.FC = () => {
       {/* Manufacturing Facility Section */}
       <Section className="bg-surface border-b border-border text-left">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center font-sans">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 items-center font-sans">
             {/* Left Content Column */}
             <div className="lg:col-span-7 space-y-6">
               <h2 className="text-2xl md:text-3xl font-extrabold text-navy-950 leading-tight">
@@ -212,7 +173,7 @@ export const About: React.FC = () => {
                 <img
                   src={ASSETS.products.storageTank}
                   alt="A large cylindrical steel storage tank with access ladder"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover" width={800} height={500} decoding="async"
                 />
               </div>
             </div>
@@ -230,11 +191,11 @@ export const About: React.FC = () => {
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-3 font-sans">
-            {aboutCapabilitiesData.map((cap, idx) => (
-              <div key={idx} className="bg-slate-50 border border-border p-6 rounded-card shadow-sm flex flex-col justify-between">
+            {aboutCapabilitiesData.map((cap) => (
+              <div key={cap.name} className="bg-slate-50 border border-border p-6 rounded-card shadow-card flex flex-col justify-between">
                 <div>
                   <div className="w-10 h-10 rounded-sm bg-primary-soft text-primary flex items-center justify-center mb-4">
-                    <img src={cap.icon} alt="" aria-hidden="true" className="w-5 h-5 object-contain" />
+                    <img src={cap.icon} alt="" aria-hidden="true" className="w-5 h-5 object-contain" width={20} height={20} decoding="async" />
                   </div>
                   <h3 className="text-base font-bold text-navy-950 mb-2 leading-snug">{cap.name}</h3>
                   <p className="text-xs text-slate-600 leading-relaxed mb-4">{cap.desc}</p>
@@ -265,16 +226,14 @@ export const About: React.FC = () => {
             align="center"
           />
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 font-sans">
+          {/* A rule-separated list, not another icon-square grid: this is the
+              third icon-tile pattern on this page and the fourth site-wide
+              card treatment for "industries" content specifically. */}
+          <div className="max-w-3xl mx-auto divide-y divide-border border-t border-border font-sans">
             {industriesData.map((ind) => (
-              <div key={ind.id} className="bg-white border border-border p-5 rounded-card shadow-sm flex items-start gap-3">
-                <div className="w-8 h-8 rounded-sm bg-primary-soft text-primary flex items-center justify-center flex-shrink-0">
-                  <img src={ind.icon} alt="" aria-hidden="true" className="w-4 h-4 object-contain" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-xs text-navy-950 leading-snug mb-1">{ind.name}</h4>
-                  <p className="text-sm text-slate-600 leading-relaxed">{ind.description}</p>
-                </div>
+              <div key={ind.id} className="py-5 sm:flex sm:gap-8">
+                <h4 className="font-bold text-sm text-navy-950 leading-snug sm:w-1/3 sm:shrink-0">{ind.name}</h4>
+                <p className="text-sm text-slate-600 leading-relaxed mt-1 sm:mt-0">{ind.description}</p>
               </div>
             ))}
           </div>
@@ -284,7 +243,7 @@ export const About: React.FC = () => {
       {/* Quality Preview Panel */}
       <Section className="bg-white border-b border-border text-left">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center font-sans">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 items-center font-sans">
             {/* Left Content Column */}
             <div className="lg:col-span-7 space-y-6">
               <h2 className="text-2xl md:text-3xl font-bold text-navy-950 leading-tight">
@@ -296,8 +255,8 @@ export const About: React.FC = () => {
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                {aboutQualityHighlightsData.map((item, idx) => (
-                  <div key={idx} className="flex gap-2.5">
+                {aboutQualityHighlightsData.map((item) => (
+                  <div key={item.title} className="flex gap-2.5">
                     <span className="text-primary font-bold text-sm mt-0.5">✓</span>
                     <div>
                       <h3 className="font-semibold text-sm text-navy-950 mb-1 leading-snug">{item.title}</h3>
@@ -325,7 +284,7 @@ export const About: React.FC = () => {
                 <img
                   src={ASSETS.hero.quality}
                   alt="A welder laying a clean weld seam on a curved steel shell"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover" width={800} height={600} decoding="async"
                 />
               </div>
             </div>

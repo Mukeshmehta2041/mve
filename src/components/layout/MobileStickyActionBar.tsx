@@ -31,7 +31,7 @@ export const MobileStickyActionBar: React.FC = () => {
           className="flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-navy-950 w-12 h-12 shrink-0 rounded-card focus-ring"
           aria-label="Call us"
         >
-          <img src={ASSETS.icons.phone} alt="" className="w-5 h-5 object-contain" />
+          <img src={ASSETS.icons.phone} alt="" className="w-5 h-5 object-contain" width={20} height={20} decoding="async" />
         </a>
       ) : (
         <a
@@ -39,7 +39,7 @@ export const MobileStickyActionBar: React.FC = () => {
           className="flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-navy-950 w-12 h-12 shrink-0 rounded-card focus-ring"
           aria-label="View office location"
         >
-          <img src={ASSETS.icons.mapPin} alt="" className="w-5 h-5 object-contain" />
+          <img src={ASSETS.icons.mapPin} alt="" className="w-5 h-5 object-contain" width={20} height={20} decoding="async" />
         </a>
       )}
 
@@ -52,21 +52,21 @@ export const MobileStickyActionBar: React.FC = () => {
           className="flex items-center justify-center bg-success-ink hover:bg-success-ink-hover text-white w-12 h-12 shrink-0 rounded-card focus-ring"
           aria-label="Message us on WhatsApp"
         >
-          <img src={ASSETS.icons.whatsapp} alt="" className="w-5 h-5 object-contain brightness-0 invert" />
+          <img src={ASSETS.icons.whatsapp} alt="" className="w-5 h-5 object-contain brightness-0 invert" width={20} height={20} decoding="async" />
         </a>
       ) : (
         <div
           className="flex items-center justify-center bg-slate-100 text-slate-400 w-12 h-12 shrink-0 rounded-card opacity-50 cursor-not-allowed"
           aria-hidden="true"
         >
-          <img src={ASSETS.icons.whatsapp} alt="" className="w-5 h-5 object-contain opacity-50" />
+          <img src={ASSETS.icons.whatsapp} alt="" className="w-5 h-5 object-contain opacity-50" width={20} height={20} decoding="async" />
         </div>
       )}
 
       {/* Request Quote Button (has largest weight) */}
       <a
         href="/request-a-quote"
-        className="flex-grow h-12 bg-primary-ink hover:bg-primary-ink-hover text-white text-sm font-bold uppercase tracking-wider rounded-card flex items-center justify-center gap-2 focus-ring shadow-sm whitespace-nowrap"
+        className="flex-grow h-12 bg-primary-ink hover:bg-primary-ink-hover text-white text-sm font-bold uppercase tracking-wider rounded-card flex items-center justify-center gap-2 focus-ring shadow-card whitespace-nowrap"
       >
         <span>Request a Quote</span>
         <svg

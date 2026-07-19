@@ -6,11 +6,8 @@ import { ASSETS } from '../../../lib/assets';
 
 export const HomeHero: React.FC = () => {
   return (
-    <section className="bg-white border-b border-border relative overflow-hidden py-12 md:py-20 lg:py-24">
-      {/* Visual background details */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(var(--color-primary) 1.5px, transparent 1.5px)', backgroundSize: '24px 24px' }}></div>
-      
-      <Container className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+    <section className="bg-white border-b border-border py-12 md:py-20 lg:py-24">
+      <Container className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         {/* Left column - Content */}
         <div className="lg:col-span-7 space-y-6 text-left">
           <span className="text-[11px] md:text-[12px] leading-[18px] tracking-[0.12em] uppercase font-semibold text-slate-500 block">
@@ -29,7 +26,7 @@ export const HomeHero: React.FC = () => {
             <Button 
               href="/request-a-quote" 
               variant="primary"
-              className="w-full sm:w-auto shadow-sm"
+              className="w-full sm:w-auto shadow-card"
             >
               Request a Quote
             </Button>
@@ -46,11 +43,16 @@ export const HomeHero: React.FC = () => {
         {/* Right column - Image crop */}
         <div className="lg:col-span-5 w-full">
           <div className="relative rounded-lg overflow-hidden shadow-card border border-border aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] bg-slate-100 group">
+            {/* LCP image: eager + fetchPriority so it isn't queued behind
+                lower-priority requests; SEO component preloads the same URL */}
             <ResponsiveImage
               src={ASSETS.hero.home}
               alt="Wide view of a fabrication yard with large steel storage tanks and structural steel"
               ratio="auto"
               loading="eager"
+              fetchPriority="high"
+              width={800}
+              height={600}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
             {/* Soft gradient overlay */}

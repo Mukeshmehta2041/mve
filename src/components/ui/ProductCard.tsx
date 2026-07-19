@@ -23,7 +23,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           src={product.image}
           alt={`${product.name} - ${product.category || 'Industrial Steel Fabrication'}`}
           className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          width={640}
+          height={480}
           loading="lazy"
+          decoding="async"
         />
         {product.category && (
           <span className="absolute top-3 left-3 bg-navy-950/85 text-white text-[11px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-sm">

@@ -99,7 +99,7 @@ export const PageCTA: React.FC<PageCTAProps> = ({
                   alt=""
                   aria-hidden="true"
                   className="w-5 h-5 brightness-0 invert"
-                />
+                 width={20} height={20} decoding="async"/>
               }
               iconPosition="left"
             >
@@ -114,7 +114,7 @@ export const PageCTA: React.FC<PageCTAProps> = ({
               size="md"
               className={actionClasses}
               onClick={onCallClick}
-              icon={<img src={ASSETS.icons.phone} alt="" aria-hidden="true" className="w-4 h-4" />}
+              icon={<img src={ASSETS.icons.phone} alt="" aria-hidden="true" className="w-4 h-4" width={16} height={16} decoding="async" />}
               iconPosition="left"
             >
               Call: {verifiedPhone}

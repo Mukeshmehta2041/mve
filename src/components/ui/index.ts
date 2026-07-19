@@ -11,3 +11,4 @@ export * from './FormControls';
 export * from './Breadcrumb';
 export * from './ResponsiveImage';
 export * from './FeedbackStates';
+export * from './ProcessTimeline';

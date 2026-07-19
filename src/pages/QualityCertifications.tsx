@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { SiteLayout, SEO, PageCTA } from '../components/layout';
-import { Container, Section, SectionHeader, Button, Breadcrumb } from '../components/ui';
+import { SiteLayout, SEO, PageCTA, PageHeroSplit } from '../components/layout';
+import { Container, Section, SectionHeader, ProcessTimeline } from '../components/ui';
 import { getBreadcrumbSchema } from '../lib/seo';
 import {
   contactData,
@@ -33,67 +33,26 @@ export const QualityCertifications: React.FC = () => {
         schemaJson={qualitySchemas}
       />
 
-      {/* Quality Hero Section */}
-      <Section className="bg-navy-950 text-white pt-6 pb-12 md:pb-16 text-left relative overflow-hidden border-b border-slate-900">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
-        <Container className="relative z-10">
-          <Breadcrumb onDark 
-            items={[{ label: 'Quality & Certifications' }]} 
-            className="mb-6"
-          />
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Left Content Column */}
-            <div className="lg:col-span-7 space-y-6">
-              <div>
-                
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight font-heading">
-                  Quality & Certifications
-                </h1>
-              </div>
-
-              <p className="text-base md:text-lg text-slate-400 leading-relaxed max-w-xl font-sans">
-                A practical quality-focused approach across material review, fabrication, inspection, and final delivery. We maintain structural safety standards for every industrial build.
-              </p>
-
-              <div className="flex flex-wrap gap-4 pt-2">
-                <Button
-                  href="/request-a-quote?source=quality"
-                  variant="primary"
-                  className="font-bold text-sm tracking-wider uppercase h-12 flex-grow sm:flex-grow-0"
-                  onClick={() => trackEvent('quality_quote_click', { position: 'hero' })}
-                >
-                  Request a Quote
-                </Button>
-                <Button
-                  href="/products"
-                  variant="outline-light"
-                  className="font-bold text-sm tracking-wider uppercase h-12 flex-grow sm:flex-grow-0"
-                >
-                  View Our Products
-                </Button>
-              </div>
-            </div>
-
-            {/* Right Image Column */}
-            <div className="lg:col-span-5 w-full">
-              <div className="rounded-lg overflow-hidden border border-slate-800 shadow-card aspect-[16/10] bg-navy-900 relative">
-                <img
-                  src={ASSETS.hero.quality}
-                  alt="A welder laying a weld seam on a curved steel shell, with helmet down and sparks visible"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-950/40 to-transparent pointer-events-none"></div>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </Section>
+      <PageHeroSplit
+        breadcrumb={[{ label: 'Quality & Certifications' }]}
+        title="Quality & Certifications"
+        description="A practical quality-focused approach across material review, fabrication, inspection, and final delivery. We maintain structural safety standards for every industrial build."
+        primaryAction={{
+          label: 'Request a Quote',
+          href: '/request-a-quote?source=quality',
+          onClick: () => trackEvent('quality_quote_click', { position: 'hero' }),
+        }}
+        secondaryAction={{ label: 'View Our Products', href: '/products' }}
+        image={{
+          src: ASSETS.hero.quality,
+          alt: 'A welder laying a weld seam on a curved steel shell, with helmet down and sparks visible',
+        }}
+      />
 
       {/* Quality Commitment Section */}
       <Section className="bg-white border-b border-border text-left">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start font-sans">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 items-start font-sans">
             {/* Left Description Column */}
             <div className="lg:col-span-5 space-y-4 lg:sticky lg:top-24">
               <h2 className="text-2xl md:text-3xl font-extrabold text-navy-950 leading-tight">
@@ -104,16 +63,26 @@ export const QualityCertifications: React.FC = () => {
               </p>
             </div>
 
-            {/* Right Commitment Points Grid */}
-            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {qualityCommitmentPointsData.map((pt, idx) => (
-                <div key={idx} className="bg-slate-50 border border-border p-5 rounded-card shadow-sm space-y-3">
-                  <div className="w-9 h-9 rounded-sm bg-primary-soft text-primary flex items-center justify-center">
-                    <img src={pt.icon} alt="" aria-hidden="true" className="w-5 h-5 object-contain" />
-                  </div>
+            {/* Inline check marks, not another icon-tile card grid: the
+                page's own process checklist two sections down already uses
+                numbered circles, and these points are a summary of that, not
+                a second sequence needing its own icon system. */}
+            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
+              {qualityCommitmentPointsData.map((pt) => (
+                <div key={pt.title} className="flex gap-3">
+                  <svg
+                    className="w-5 h-5 text-success-ink flex-shrink-0 mt-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2.5"
+                    aria-hidden="true"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                  </svg>
                   <div>
                     <h3 className="font-bold text-sm text-navy-950 mb-1 leading-snug">{pt.title}</h3>
-                    <p className="text-xs text-slate-500 leading-relaxed">{pt.desc}</p>
+                    <p className="text-sm text-slate-600 leading-relaxed">{pt.desc}</p>
                   </div>
                 </div>
               ))}
@@ -131,25 +100,8 @@ export const QualityCertifications: React.FC = () => {
             align="center"
           />
 
-          {/* Process steps — 4 across on desktop so the text stays readable */}
           <div className="pt-2 font-sans">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
-              {qualityPageProcessStepsData.map((step) => (
-                <div key={step.stepNumber} className="flex flex-col items-start">
-                  <div className="relative flex items-center justify-center mb-4">
-                    <div className="w-11 h-11 rounded-full bg-white border-2 border-slate-200 flex items-center justify-center text-slate-500">
-                      <img src={step.icon} alt="" aria-hidden="true" className="w-5 h-5 object-contain" />
-                    </div>
-                    <span className="absolute -top-1.5 -right-1.5 bg-navy-950 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">
-                      {step.stepNumber}
-</span>
-                    
-                  </div>
-                  <h3 className="font-bold text-sm text-navy-950 mb-1.5 leading-snug">{step.title}</h3>
-                  <p className="text-sm text-slate-600 leading-relaxed">{step.description}</p>
-                </div>
-              ))}
-            </div>
+            <ProcessTimeline steps={qualityPageProcessStepsData} columns={4} showConnector={false} />
           </div>
         </Container>
       </Section>
@@ -164,14 +116,14 @@ export const QualityCertifications: React.FC = () => {
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-3 font-sans">
-            {inspectionMethodsData.map((method, idx) => (
+            {inspectionMethodsData.map((method) => (
               <div
-                key={idx}
-                className="bg-slate-50 border border-border rounded-card p-6 flex flex-col justify-between hover:translate-y-[-3px] transition-all duration-300 shadow-sm"
+                key={method.title}
+                className="bg-slate-50 border border-border rounded-card p-6 flex flex-col justify-between hover:translate-y-[-3px] transition duration-300 shadow-card"
               >
                 <div>
                   <div className="w-10 h-10 rounded-sm bg-primary-soft text-primary flex items-center justify-center mb-4">
-                    <img src={method.icon} alt="" aria-hidden="true" className="w-5 h-5 object-contain" />
+                    <img src={method.icon} alt="" aria-hidden="true" className="w-5 h-5 object-contain" width={20} height={20} decoding="async" />
                   </div>
                   <h3 className="text-base font-bold text-navy-950 mb-2 leading-snug">{method.title}</h3>
                   <p className="text-xs text-slate-600 leading-relaxed mb-4">{method.desc}</p>

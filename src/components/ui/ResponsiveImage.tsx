@@ -15,6 +15,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   className,
   wrapperClassName,
   loading = 'lazy',
+  decoding = 'async',
   ...props
 }) => {
   const [loaded, setLoaded] = useState(false);
@@ -70,6 +71,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
           role={alt === '' ? 'presentation' : undefined}
           aria-hidden={alt === '' ? true : undefined}
           loading={loading}
+          decoding={decoding}
           onLoad={handleLoad}
           onError={handleError}
           className={cn(

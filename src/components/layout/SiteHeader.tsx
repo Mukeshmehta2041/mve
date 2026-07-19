@@ -36,26 +36,26 @@ export const SiteHeader: React.FC = () => {
   const displayAddress = isAddressPending ? 'Patna, Bihar, India' : contactData.officeAddress;
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-white shadow-sm">
+    <header className="sticky top-0 z-40 w-full bg-white shadow-card">
       {/* Top Bar Strip */}
       <div className="hidden lg:block bg-slate-50 border-b border-slate-100 py-2 text-xs text-slate-600 font-sans">
         <Container className="flex justify-end items-center space-x-6">
           {verifiedEmail && (
             <a href={`mailto:${verifiedEmail}`} className="flex items-center hover:text-primary transition-colors">
-              <img src={ASSETS.icons.email} alt="" aria-hidden="true" className="w-3.5 h-3.5 mr-2 opacity-70" />
+              <img src={ASSETS.icons.email} alt="" aria-hidden="true" className="w-3.5 h-3.5 mr-2 opacity-70" width={14} height={14} decoding="async" />
               <span>{verifiedEmail}</span>
             </a>
           )}
           
           {verifiedPhone && (
             <a href={`tel:${verifiedPhone}`} className="flex items-center hover:text-primary transition-colors font-mono">
-              <img src={ASSETS.icons.phone} alt="" aria-hidden="true" className="w-3.5 h-3.5 mr-2 opacity-70" />
+              <img src={ASSETS.icons.phone} alt="" aria-hidden="true" className="w-3.5 h-3.5 mr-2 opacity-70" width={14} height={14} decoding="async" />
               <span>{verifiedPhone}</span>
             </a>
           )}
           
           <div className="flex items-center text-slate-600">
-            <img src={ASSETS.icons.mapPin} alt="" aria-hidden="true" className="w-3.5 h-3.5 mr-2 opacity-70" />
+            <img src={ASSETS.icons.mapPin} alt="" aria-hidden="true" className="w-3.5 h-3.5 mr-2 opacity-70" width={14} height={14} decoding="async" />
             <span>{displayAddress}</span>
           </div>
         </Container>
@@ -64,7 +64,7 @@ export const SiteHeader: React.FC = () => {
       {/* Main Navbar */}
       <div
         className={cn(
-          'w-full transition-all duration-200 h-16 md:h-[72px] lg:h-20 flex items-center border-b border-border/80',
+          'w-full transition duration-200 h-16 md:h-[72px] lg:h-20 flex items-center border-b border-border/80',
           scrolled ? 'bg-white/95 backdrop-blur-md shadow-card' : 'bg-white'
         )}
       >
@@ -91,7 +91,7 @@ export const SiteHeader: React.FC = () => {
               alt=""
               aria-hidden="true"
               className="w-6 h-6 object-contain"
-            />
+             width={24} height={24} decoding="async"/>
           </IconButton>
 
           {/* Mobile Navigation Shell */}

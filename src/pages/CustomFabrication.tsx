@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { SiteLayout, SEO, PageCTA } from '../components/layout';
-import { Container, Section, SectionHeader, Button, Breadcrumb, ProjectCard } from '../components/ui';
+import { Container, Section, SectionHeader, ProjectCard, ProcessTimeline } from '../components/ui';
 import { getBreadcrumbSchema, getServiceSchema } from '../lib/seo';
 import {
   contactData,
@@ -46,64 +46,27 @@ export const CustomFabrication: React.FC = () => {
         schemaJson={customSchemas}
       />
 
-      {/* Hero Section */}
-      <Section className="bg-navy-950 text-white pt-6 pb-14 md:pb-20 xl:pb-24 text-left relative overflow-hidden border-b border-slate-900">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
-        <Container className="relative z-10">
-          <Breadcrumb onDark 
-            items={[{ label: 'Custom Fabrication' }]} 
-            className="mb-6"
-          />
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Left Content Column */}
-            <div className="lg:col-span-7 space-y-6">
-              <div>
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight font-heading">
-                  Fabrication built around your requirement
-                </h1>
-              </div>
-
-              <p className="text-base md:text-lg text-slate-400 leading-relaxed max-w-2xl font-sans">
-                From customer drawings and dimensions to fabrication and delivery, we build industrial solutions tailored to specific project needs. We work directly with your templates, sketches, or structural designs.
-              </p>
-
-              {/* Action Buttons */}
-              <div className="flex flex-wrap gap-4 pt-2">
-                <Button
-                  href={getQuoteUrl({ service: 'custom-fabrication' })}
-                  variant="primary"
-                  className="font-bold text-sm tracking-wider uppercase h-12 flex-grow sm:flex-grow-0"
-                  onClick={() => trackEvent('custom_quote_click', { position: 'hero' })}
-                >
-                  Request Custom Quote
-                </Button>
-                <Button
-                  href={getQuoteUrl({ service: 'custom-fabrication', type: 'drawing-upload' })}
-                  variant="outline-light"
-                  className="font-bold text-sm tracking-wider uppercase h-12 flex-grow sm:flex-grow-0"
-                  onClick={() => trackEvent('custom_drawing_click', { position: 'hero' })}
-                >
-                  Share Your Drawing
-                </Button>
-              </div>
-
-            </div>
-
-            {/* Right Image Column */}
-            <div className="lg:col-span-5 w-full">
-              <div className="rounded-lg overflow-hidden border border-slate-800 shadow-card aspect-[4/3] bg-navy-900 relative">
-                <img
-                  src={ASSETS.hero.fabrication}
-                  alt="A welder joining a large-diameter flanged cylindrical vessel inside a workshop, with sparks flying"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-950/40 to-transparent pointer-events-none"></div>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </Section>
+      <PageHeroSplit
+        className="pb-14 md:pb-20 xl:pb-24"
+        breadcrumb={[{ label: 'Custom Fabrication' }]}
+        title="Fabrication built around your requirement"
+        description="From customer drawings and dimensions to fabrication and delivery, we build industrial solutions tailored to specific project needs. We work directly with your templates, sketches, or structural designs."
+        primaryAction={{
+          label: 'Request Custom Quote',
+          href: getQuoteUrl({ service: 'custom-fabrication' }),
+          onClick: () => trackEvent('custom_quote_click', { position: 'hero' }),
+        }}
+        secondaryAction={{
+          label: 'Share Your Drawing',
+          href: getQuoteUrl({ service: 'custom-fabrication', type: 'drawing-upload' }),
+          onClick: () => trackEvent('custom_drawing_click', { position: 'hero' }),
+        }}
+        image={{
+          src: ASSETS.hero.fabrication,
+          alt: 'A welder joining a large-diameter flanged cylindrical vessel inside a workshop, with sparks flying',
+          aspect: '4/3',
+        }}
+      />
 
       {/* What We Can Fabricate */}
       <Section className="bg-white border-b border-border text-left">
@@ -118,11 +81,11 @@ export const CustomFabrication: React.FC = () => {
             {customCategoriesData.map((cat) => (
               <div
                 key={cat.id}
-                className="bg-slate-50 border border-border rounded-card p-6 flex flex-col justify-between hover:translate-y-[-3px] transition-all duration-300 shadow-sm"
+                className="bg-slate-50 border border-border rounded-card p-6 flex flex-col justify-between hover:translate-y-[-3px] transition duration-300 shadow-card"
               >
                 <div>
                   <div className="w-10 h-10 rounded-sm bg-primary-soft text-primary flex items-center justify-center mb-4">
-                    <img src={cat.icon} alt="" aria-hidden="true" className="w-5 h-5 object-contain" />
+                    <img src={cat.icon} alt="" aria-hidden="true" className="w-5 h-5 object-contain" width={20} height={20} decoding="async" />
                   </div>
                   <h3 className="text-lg font-bold text-navy-950 mb-2 leading-snug">{cat.name}</h3>
                   <p className="text-sm text-slate-600 leading-relaxed mb-4">{cat.desc}</p>
@@ -155,10 +118,10 @@ export const CustomFabrication: React.FC = () => {
           />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-3 font-sans">
-            {customizationParametersData.map((param, idx) => (
-              <div key={idx} className="bg-white border border-border p-6 rounded-card shadow-card flex items-start gap-4">
+            {customizationParametersData.map((param) => (
+              <div key={param.label} className="bg-white border border-border p-6 rounded-card shadow-card flex items-start gap-4">
                 <div className="w-10 h-10 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center flex-shrink-0 text-primary">
-                  <img src={param.icon} alt="" aria-hidden="true" className="w-4 h-4 object-contain text-primary" />
+                  <img src={param.icon} alt="" aria-hidden="true" className="w-4 h-4 object-contain text-primary" width={16} height={16} decoding="async" />
                 </div>
                 <div className="space-y-1">
                   <h4 className="font-bold text-base text-navy-950">{param.label}</h4>
@@ -179,38 +142,14 @@ export const CustomFabrication: React.FC = () => {
             align="center"
           />
 
-          {/* Connected timeline */}
-          <div className="relative pt-6 font-sans">
-            {/* Desktop timeline connector line */}
-            <div className="hidden lg:block absolute top-[52px] left-[8%] right-[8%] h-[2px] bg-slate-100 z-0"></div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 relative z-10">
-              {customFabricationProcessSteps.map((step) => (
-                <div
-                  key={step.stepNumber}
-                  className="bg-slate-50 lg:bg-transparent border border-border lg:border-none p-5 lg:p-0 rounded-card flex flex-col items-start"
-                >
-                  <div className="relative flex items-center justify-center mb-4">
-                    <div className="w-12 h-12 rounded-full bg-white border-2 border-slate-200 flex items-center justify-center text-slate-500">
-                      <img src={step.icon} alt="" aria-hidden="true" className="w-5 h-5 object-contain" />
-                    </div>
-                    <span className="absolute -top-1.5 -right-1.5 bg-navy-950 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
-                      {step.stepNumber}
-                    </span>
-                  </div>
-                  <h4 className="font-bold text-sm text-navy-950 mb-1 leading-snug">{step.title}</h4>
-                  <p className="text-[11px] text-slate-500 leading-relaxed max-w-[200px]">{step.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+          <ProcessTimeline steps={customFabricationProcessSteps} columns={6} className="pt-6 font-sans" />
         </Container>
       </Section>
 
       {/* Materials & Fabrication Capabilities */}
       <Section className="bg-surface border-b border-border text-left">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Content Column */}
             <div className="lg:col-span-6 space-y-6">
               <h2 className="text-2xl md:text-3xl font-extrabold text-navy-950 leading-tight">
@@ -221,8 +160,8 @@ export const CustomFabrication: React.FC = () => {
               </p>
 
               <div className="space-y-4 font-sans">
-                {fabricationMaterialsData.map((mat, idx) => (
-                  <div key={idx} className="bg-white border border-border p-5 rounded-card shadow-sm space-y-1">
+                {fabricationMaterialsData.map((mat) => (
+                  <div key={mat.name} className="bg-white border border-border p-5 rounded-card shadow-card space-y-1">
                     <div className="flex items-center justify-between">
                       <span className="font-bold text-navy-950 text-base">{mat.name}</span>
                       <span className="text-[11px] font-bold text-primary bg-primary-soft px-2.5 py-0.5 rounded-sm uppercase tracking-wide">
@@ -238,7 +177,7 @@ export const CustomFabrication: React.FC = () => {
             {/* Right Column - Workshop capabilities list */}
             <div className="lg:col-span-6 space-y-6 bg-white p-6 md:p-8 rounded-card border border-border shadow-card text-left font-sans">
               <h3 className="text-lg md:text-xl font-bold text-navy-950 mb-4 pb-2 border-b border-border flex items-center gap-2">
-                <img src={ASSETS.icons.wrench} alt="" aria-hidden="true" className="w-5 h-5 object-contain" />
+                <img src={ASSETS.icons.wrench} alt="" aria-hidden="true" className="w-5 h-5 object-contain" width={20} height={20} decoding="async" />
                 Workshop Capabilities
               </h3>
               
@@ -313,10 +252,10 @@ export const CustomFabrication: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-sans">
-            {fabricationQualityChecksData.map((check, idx) => (
-              <div key={idx} className="bg-slate-50 border border-border p-5 rounded-card shadow-sm flex items-start gap-4">
+            {fabricationQualityChecksData.map((check) => (
+              <div key={check.title} className="bg-slate-50 border border-border p-5 rounded-card shadow-card flex items-start gap-4">
                 <div className="w-9 h-9 rounded-full bg-white border border-slate-200 flex items-center justify-center flex-shrink-0 text-primary">
-                  <img src={check.icon} alt="" aria-hidden="true" className="w-4 h-4 object-contain" />
+                  <img src={check.icon} alt="" aria-hidden="true" className="w-4 h-4 object-contain" width={16} height={16} decoding="async" />
                 </div>
                 <div className="space-y-1">
                   <h4 className="font-bold text-sm text-navy-950">{check.title}</h4>

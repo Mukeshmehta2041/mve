@@ -26,7 +26,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           src={project.image}
           alt={project.title}
           className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          width={640}
+          height={360}
           loading="lazy"
+          decoding="async"
         />
         {project.isFeatured && (
           <span className="absolute top-3 left-3 bg-primary-ink text-white text-[11px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-sm">
@@ -57,9 +60,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               Scope of Work
             </span>
             <div className="flex flex-wrap gap-1.5">
-              {project.scope.map((item, idx) => (
+              {project.scope.map((item) => (
                 <span
-                  key={idx}
+                  key={item}
                   className="bg-slate-100 text-slate-600 text-xs px-2 py-0.5 rounded-sm"
                 >
                   {item}

@@ -26,7 +26,7 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
   rel,
   ...props
 }, ref) => {
-  const baseClasses = 'inline-flex items-center justify-center font-semibold rounded-card transition-all duration-200 focus-ring disabled:opacity-50 disabled:pointer-events-none cursor-pointer';
+  const baseClasses = 'inline-flex items-center justify-center font-semibold rounded-card transition duration-200 focus-ring disabled:opacity-50 disabled:pointer-events-none cursor-pointer';
   
   // Variants that place white text on a colored fill, or colored text on a light
   // surface, use the `-ink` tier: --color-primary is 3.02:1 against white and
@@ -34,12 +34,12 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
   // semibold labels used here. On the navy heroes the base orange is 5.90:1 and
   // stays as-is (`outline-light`).
   const variantClasses = {
-    primary: 'bg-primary-ink text-white hover:bg-primary-ink-hover shadow-sm',
+    primary: 'bg-primary-ink text-white hover:bg-primary-ink-hover shadow-card',
     secondary: 'bg-white border-2 border-navy-950 text-navy-950 hover:border-primary-ink hover:text-primary-ink',
     // For use on the dark navy page heroes, where `secondary` would be white-on-white
     'outline-light': 'bg-transparent border-2 border-white/70 text-white hover:border-primary hover:text-primary',
     ghost: 'bg-transparent text-navy-950 hover:bg-slate-100 hover:text-primary-ink',
-    whatsapp: 'bg-success-ink text-white hover:bg-success-ink-hover shadow-sm',
+    whatsapp: 'bg-success-ink text-white hover:bg-success-ink-hover shadow-card',
   };
 
   const sizeClasses = {
@@ -108,7 +108,7 @@ export const IconButton = React.forwardRef<HTMLButtonElement | HTMLAnchorElement
   rel,
   ...props
 }, ref) => {
-  const baseClasses = 'inline-flex items-center justify-center min-w-[44px] min-h-[44px] rounded-card hover:bg-slate-100 transition-all duration-150 focus-ring cursor-pointer text-navy-950';
+  const baseClasses = 'inline-flex items-center justify-center min-w-[44px] min-h-[44px] rounded-card hover:bg-slate-100 transition duration-150 focus-ring cursor-pointer text-navy-950';
 
   if (href) {
     const anchorProps = props as unknown as React.AnchorHTMLAttributes<HTMLAnchorElement>;

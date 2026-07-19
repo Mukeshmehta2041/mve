@@ -9,6 +9,8 @@ export interface SEOProps {
   schemaJson?: Record<string, unknown> | Array<Record<string, unknown>>;
   ogImage?: string;
   noindex?: boolean;
+  /** LCP image for this route. Emits a preload link with the real (hashed) build URL. */
+  preloadImage?: string;
 }
 
 export const SEO: React.FC<SEOProps> = ({
@@ -18,6 +20,7 @@ export const SEO: React.FC<SEOProps> = ({
   schemaJson,
   ogImage,
   noindex = false,
+  preloadImage,
 }) => {
   const siteUrl = 'https://www.maavindhawasini.com';
   const fullTitle = title.includes(companyData.legalName) ? title : `${title} | ${companyData.legalName}`;
@@ -34,6 +37,7 @@ export const SEO: React.FC<SEOProps> = ({
       <meta name="description" content={description} />
       <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
       <link rel="canonical" href={canonicalUrl} />
+      {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
 
       {/* Open Graph / Facebook / LinkedIn */}
       <meta property="og:title" content={fullTitle} />

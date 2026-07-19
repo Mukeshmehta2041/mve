@@ -4,5 +4,6 @@ export * from './MobileStickyActionBar';
 export * from './SiteLayout';
 export * from './SEO';
 export * from './PageHeroShell';
+export * from './PageHeroSplit';
 export * from './PageCTA';
 export * from './PageLayoutElements';

@@ -29,7 +29,7 @@ export const LegalPageLayout: React.FC<LegalPageLayoutProps> = ({
       {/* Main Body */}
       <Section className="bg-white pt-10 pb-16 text-left">
         <Container className="max-w-4xl font-sans">
-          <div className="bg-slate-50 border border-border p-6 md:p-10 rounded-card shadow-sm space-y-6">
+          <div className="bg-slate-50 border border-border p-6 md:p-10 rounded-card shadow-card space-y-6">
             <p className="text-sm text-slate-500 font-medium block border-b border-slate-200 pb-3">
               Last Updated: {legalLastUpdated}
             </p>

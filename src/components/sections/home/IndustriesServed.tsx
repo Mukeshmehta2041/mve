@@ -9,7 +9,7 @@ export const IndustriesServed: React.FC = () => {
       className="scroll-mt-24 py-16 md:py-24 bg-white border-b border-border"
     >
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-16">
           <div className="lg:col-span-4">
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-navy-950 leading-tight">
               Industries we work with

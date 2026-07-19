@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { SiteLayout, SEO, PageCTA } from '../components/layout';
-import { Container, Section, Button, Breadcrumb, EmptyGuard } from '../components/ui';
+import { Container, Section, Button, Breadcrumb, EmptyGuard, ProcessTimeline } from '../components/ui';
 import { productsData, contactData, processStepsData } from '../data';
 import { getProductSchema, getBreadcrumbSchema, getFAQSchema } from '../lib/seo';
 import { getQuoteUrl, cn } from '../lib/utils';
@@ -185,7 +185,7 @@ export const ProductDetail: React.FC = () => {
           <Breadcrumb items={[{ label: 'Products', href: '/products' }, { label: product.name }]} className="mb-4" />
 
           {/* Hero Section Split Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 text-left">
             {/* Gallery Column */}
             <div className="lg:col-span-7 space-y-4">
               <div 
@@ -250,19 +250,19 @@ export const ProductDetail: React.FC = () => {
                 <div className="flex gap-2.5 overflow-x-auto overflow-y-hidden pb-2 -mb-1 snap-x scroll-px-1">
                   {galleryImages.map((img, idx) => (
                     <button
-                      key={idx}
+                      key={img}
                       onClick={() => {
                         setActiveImgIndex(idx);
                         trackEvent('product_gallery_change', { productSlug: product.slug, index: idx, trigger: 'thumbnail_click' });
                       }}
                       className={cn(
-                        "w-20 h-16 snap-start rounded-sm overflow-hidden border-2 bg-slate-50 transition-all flex-shrink-0 cursor-pointer focus-ring",
+                        "w-20 h-16 snap-start rounded-sm overflow-hidden border-2 bg-slate-50 transition flex-shrink-0 cursor-pointer focus-ring",
                         activeImgIndex === idx ? "border-primary opacity-100" : "border-border opacity-70 hover:opacity-100"
                       )}
                       aria-label={`View Image ${idx + 1}`}
                       aria-current={activeImgIndex === idx ? "true" : "false"}
                     >
-                      <img src={img} alt={`${product.name} thumbnail ${idx + 1}`} className="w-full h-full object-cover" loading="lazy" />
+                      <img src={img} alt={`${product.name} thumbnail ${idx + 1}`} className="w-full h-full object-cover" width={80} height={64} loading="lazy" decoding="async" />
                     </button>
                   ))}
                 </div>
@@ -273,7 +273,7 @@ export const ProductDetail: React.FC = () => {
             <div className="lg:col-span-5 flex flex-col gap-8">
               <div>
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-[11px] font-bold uppercase tracking-wider bg-primary-soft text-primary mb-3">
-                  <img src={product.categoryIcon} alt="" className="w-3.5 h-3.5 object-contain" />
+                  <img src={product.categoryIcon} alt="" className="w-3.5 h-3.5 object-contain" width={14} height={14} decoding="async" />
                   {product.category}
                 </span>
 
@@ -335,7 +335,7 @@ export const ProductDetail: React.FC = () => {
                       className="flex-1 font-bold text-sm tracking-wider uppercase h-12"
                       onClick={() => trackEvent('product_whatsapp_click', { productSlug: product.slug, position: 'hero' })}
                       icon={
-                        <img src={ASSETS.icons.whatsapp} alt="" className="w-5 h-5 brightness-0 invert" />
+                        <img src={ASSETS.icons.whatsapp} alt="" className="w-5 h-5 brightness-0 invert" width={20} height={20} decoding="async" />
                       }
                       iconPosition="left"
                     >
@@ -351,7 +351,7 @@ export const ProductDetail: React.FC = () => {
                     className="w-full font-bold text-sm tracking-wider uppercase h-12"
                     onClick={() => trackEvent('product_call_click', { productSlug: product.slug, position: 'hero' })}
                     icon={
-                      <img src={ASSETS.icons.phone} alt="" className="w-4 h-4" />
+                      <img src={ASSETS.icons.phone} alt="" className="w-4 h-4" width={16} height={16} decoding="async" />
                     }
                     iconPosition="left"
                   >
@@ -367,14 +367,14 @@ export const ProductDetail: React.FC = () => {
       {/* Main Details Section */}
       <Section className="bg-surface pt-12 pb-16 md:py-20 border-b border-border">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12">
             
             {/* Technical Specifications (Semantic and Responsive Table) */}
             <div className="lg:col-span-7 space-y-10 text-left">
               {validSpecs.length >= 2 && (
                 <div>
                   <h2 className="text-xl md:text-2xl font-extrabold text-navy-950 mb-5 pb-2 border-b border-border flex items-center gap-2">
-                    <img src={ASSETS.icons.fileText} alt="" className="w-5 h-5 object-contain" />
+                    <img src={ASSETS.icons.fileText} alt="" className="w-5 h-5 object-contain" width={20} height={20} decoding="async" />
                     Technical Specifications
                   </h2>
                   
@@ -399,7 +399,7 @@ export const ProductDetail: React.FC = () => {
                   {/* Mobile view: Stacked layout card-like representation */}
                   <div className="md:hidden space-y-3">
                     {validSpecs.map(([key, val]) => (
-                      <div key={key} className="bg-white border border-border p-4 rounded-card shadow-sm flex flex-col gap-1 font-sans">
+                      <div key={key} className="bg-white border border-border p-4 rounded-card shadow-card flex flex-col gap-1 font-sans">
                         <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">{key}</span>
                         <span className="text-sm font-semibold text-navy-950">{val}</span>
                       </div>
@@ -411,7 +411,7 @@ export const ProductDetail: React.FC = () => {
               {/* Manufacturing & Customization Capabilities */}
               <div className="bg-white border border-border p-6 md:p-8 rounded-card shadow-card">
                 <h3 className="text-lg md:text-xl font-bold text-navy-950 mb-3 flex items-center gap-2">
-                  <img src={ASSETS.icons.gear} alt="" className="w-5 h-5 object-contain" />
+                  <img src={ASSETS.icons.gear} alt="" className="w-5 h-5 object-contain" width={20} height={20} decoding="async" />
                   Engineering & Customization Options
                 </h3>
                 <p className="text-sm text-slate-600 leading-relaxed font-sans mb-6">
@@ -419,19 +419,19 @@ export const ProductDetail: React.FC = () => {
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm font-sans mb-6">
                   <div className="flex items-start gap-2.5">
-                    <img src={ASSETS.icons.check} alt="" className="w-4 h-4 mt-0.5 text-success flex-shrink-0" />
+                    <img src={ASSETS.icons.check} alt="" className="w-4 h-4 mt-0.5 text-success flex-shrink-0" width={16} height={16} decoding="async" />
                     <span className="text-slate-700">Dimensions built according to site coordinates</span>
                   </div>
                   <div className="flex items-start gap-2.5">
-                    <img src={ASSETS.icons.check} alt="" className="w-4 h-4 mt-0.5 text-success flex-shrink-0" />
+                    <img src={ASSETS.icons.check} alt="" className="w-4 h-4 mt-0.5 text-success flex-shrink-0" width={16} height={16} decoding="async" />
                     <span className="text-slate-700">High-grade raw materials (SS304, SS316, IS2062 MS)</span>
                   </div>
                   <div className="flex items-start gap-2.5">
-                    <img src={ASSETS.icons.check} alt="" className="w-4 h-4 mt-0.5 text-success flex-shrink-0" />
+                    <img src={ASSETS.icons.check} alt="" className="w-4 h-4 mt-0.5 text-success flex-shrink-0" width={16} height={16} decoding="async" />
                     <span className="text-slate-700">Custom connection nozzles and fitting mounts</span>
                   </div>
                   <div className="flex items-start gap-2.5">
-                    <img src={ASSETS.icons.check} alt="" className="w-4 h-4 mt-0.5 text-success flex-shrink-0" />
+                    <img src={ASSETS.icons.check} alt="" className="w-4 h-4 mt-0.5 text-success flex-shrink-0" width={16} height={16} decoding="async" />
                     <span className="text-slate-700">Optional internal structural linings or surface coats</span>
                   </div>
                 </div>
@@ -453,12 +453,12 @@ export const ProductDetail: React.FC = () => {
               {product.features && product.features.length > 0 && (
                 <div>
                   <h2 className="text-xl md:text-2xl font-extrabold text-navy-950 mb-5 pb-2 border-b border-border flex items-center gap-2">
-                    <img src={ASSETS.icons.shieldCheck} alt="" className="w-5 h-5 object-contain" />
+                    <img src={ASSETS.icons.shieldCheck} alt="" className="w-5 h-5 object-contain" width={20} height={20} decoding="async" />
                     Product Features
                   </h2>
                   <ul className="space-y-4 font-sans text-sm text-slate-600">
-                    {product.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start bg-white p-4 rounded-card border border-border shadow-sm">
+                    {product.features.map((feature) => (
+                      <li key={feature} className="flex items-start bg-white p-4 rounded-card border border-border shadow-card">
                         <div className="w-5 h-5 rounded-full bg-primary-soft text-primary flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
                           <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
                             <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
@@ -475,13 +475,13 @@ export const ProductDetail: React.FC = () => {
               {product.applications && product.applications.length > 0 && (
                 <div>
                   <h2 className="text-xl md:text-2xl font-extrabold text-navy-950 mb-5 pb-2 border-b border-border flex items-center gap-2">
-                    <img src={ASSETS.icons.factory} alt="" className="w-5 h-5 object-contain" />
+                    <img src={ASSETS.icons.factory} alt="" className="w-5 h-5 object-contain" width={20} height={20} decoding="async" />
                     Typical Applications
                   </h2>
-                  <div className="bg-white rounded-card border border-border p-4 md:p-6 shadow-sm">
+                  <div className="bg-white rounded-card border border-border p-4 md:p-6 shadow-card">
                     <ul className="space-y-3 font-sans text-sm text-slate-600">
-                      {product.applications.map((app, idx) => (
-                        <li key={idx} className="flex items-start">
+                      {product.applications.map((app) => (
+                        <li key={app} className="flex items-start">
                           <div className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0" />
                           <span>{app}</span>
                         </li>
@@ -507,25 +507,7 @@ export const ProductDetail: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 pt-3 relative">
-            {/* Horizontal timeline connector for large devices */}
-            <div className="hidden lg:block absolute top-[52px] left-[8%] right-[8%] h-[2px] bg-slate-100 z-0"></div>
-            
-            {processStepsData.map((step) => (
-              <div key={step.stepNumber} className="relative z-10 flex flex-col bg-slate-50 lg:bg-transparent border border-border lg:border-none p-5 lg:p-0 rounded-card items-start font-sans">
-                <div className="relative flex items-center justify-center mb-4">
-                  <div className="w-12 h-12 rounded-full bg-white border-2 border-slate-200 flex items-center justify-center text-slate-500">
-                    <img src={step.icon} alt="" aria-hidden="true" className="w-5 h-5 object-contain" />
-                  </div>
-                  <span className="absolute -top-1.5 -right-1.5 bg-navy-950 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
-                    {step.stepNumber}
-                  </span>
-                </div>
-                <h4 className="font-bold text-sm text-navy-950 mb-1">{step.title}</h4>
-                <p className="text-[11px] text-slate-500 leading-relaxed max-w-[200px]">{step.description}</p>
-              </div>
-            ))}
-          </div>
+          <ProcessTimeline steps={processStepsData} columns={6} className="pt-3 font-sans" />
         </Container>
       </Section>
 
@@ -541,7 +523,7 @@ export const ProductDetail: React.FC = () => {
             {productFaqs.map((faq, idx) => {
               const isExpanded = expandedFaqIndex === idx;
               return (
-                <div key={idx} className="bg-white border border-border rounded-card overflow-hidden shadow-sm transition-all duration-200">
+                <div key={faq.question} className="bg-white border border-border rounded-card overflow-hidden shadow-card transition duration-200">
                   <button
                     onClick={() => {
                       const nextState = isExpanded ? null : idx;
@@ -609,13 +591,13 @@ export const ProductDetail: React.FC = () => {
                   onClick={() => trackEvent('product_related_click', { productSlug: product.slug, clickedSlug: p.slug })}
                 >
                   <Link to={`/products/${p.slug}`} className="block h-full cursor-pointer">
-                    <div className="bg-white border border-border rounded-card overflow-hidden shadow-card flex flex-col h-full hover:translate-y-[-3px] transition-all duration-300">
+                    <div className="bg-white border border-border rounded-card overflow-hidden shadow-card flex flex-col h-full hover:translate-y-[-3px] transition duration-300">
                       {/* Product Card Image */}
                       <div className="aspect-[4/3] w-full rounded-sm overflow-hidden bg-slate-100 mb-4 relative">
                         <img
                           src={p.image}
                           alt={p.name}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover" width={640} height={480} decoding="async"
                           loading="lazy"
                         />
                         {p.category && (
@@ -705,9 +687,14 @@ export const ProductDetail: React.FC = () => {
               </button>
             )}
 
+            {/* No fixed width/height: gallery images can be any aspect ratio,
+                and this is object-contain in a centered flex layout rather than
+                flow content - a guessed ratio would fight the real one on load
+                instead of preventing a shift. */}
             <img
               src={galleryImages[activeImgIndex]}
               alt={`${product.name} - Fullscreen View ${activeImgIndex + 1}`}
+              decoding="async"
               className="max-w-full max-h-[85vh] object-contain rounded-sm"
             />
 

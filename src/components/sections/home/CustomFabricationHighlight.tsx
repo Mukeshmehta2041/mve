@@ -7,7 +7,7 @@ import { ASSETS } from '../../../lib/assets';
 export const CustomFabricationHighlight: React.FC = () => {
   return (
     <section className="py-16 md:py-24 bg-navy-950 text-white border-b border-slate-800 text-left">
-      <Container className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+      <Container className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
         {/* Left Column - Content */}
         <div className="lg:col-span-7 space-y-6">
           <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight font-heading">
@@ -24,7 +24,7 @@ export const CustomFabricationHighlight: React.FC = () => {
             <Button
               href="/custom-fabrication"
               variant="primary"
-              className="w-full sm:w-auto shadow-sm"
+              className="w-full sm:w-auto shadow-card"
             >
               See what we can make
             </Button>

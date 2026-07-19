@@ -81,7 +81,7 @@ export const DesktopNavigation: React.FC = () => {
                 aria-expanded={dropdownOpen}
                 aria-haspopup="true"
                 className={cn(
-                  'flex items-center text-sm font-semibold py-2 transition-all cursor-pointer focus-ring rounded-sm text-slate-600 hover:text-navy-950',
+                  'flex items-center text-sm font-semibold py-2 transition cursor-pointer focus-ring rounded-sm text-slate-600 hover:text-navy-950',
                   dropdownOpen ? 'text-primary-ink' : ''
                 )}
               >
@@ -104,7 +104,7 @@ export const DesktopNavigation: React.FC = () => {
               <div
                 ref={dropdownRef}
                 className={cn(
-                  'absolute top-full left-0 w-64 bg-white border border-border shadow-floating rounded-card py-2 mt-1.5 z-50 transition-all duration-150 origin-top-left',
+                  'absolute top-full left-0 w-64 bg-white border border-border shadow-floating rounded-card py-2 mt-1.5 z-50 transition duration-150 origin-top-left',
                   dropdownOpen
                     ? 'opacity-100 scale-100 translate-y-0 visible'
                     : 'opacity-0 scale-95 -translate-y-2 invisible pointer-events-none'
@@ -155,7 +155,7 @@ export const DesktopNavigation: React.FC = () => {
             <a
               key={item.name}
               href={item.href}
-              className="text-sm font-semibold py-2 transition-all relative group focus-ring rounded-sm text-slate-600 hover:text-navy-950"
+              className="text-sm font-semibold py-2 transition relative group focus-ring rounded-sm text-slate-600 hover:text-navy-950"
             >
               <span>{item.name}</span>
               <span
@@ -173,7 +173,7 @@ export const DesktopNavigation: React.FC = () => {
             end={item.href === '/'}
             className={({ isActive }) =>
               cn(
-                'text-sm font-semibold py-2 transition-all relative group focus-ring rounded-sm',
+                'text-sm font-semibold py-2 transition relative group focus-ring rounded-sm',
                 isActive ? 'text-slate-800 font-bold' : 'text-slate-600 hover:text-navy-950'
               )
             }

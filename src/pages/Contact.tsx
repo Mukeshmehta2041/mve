@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { SiteLayout, SEO, PageCTA } from '../components/layout';
-import { Container, Section, Button, Breadcrumb } from '../components/ui';
+import { SiteLayout, SEO, PageCTA, PageHeroShell } from '../components/layout';
+import { Container, Section, Button } from '../components/ui';
 import { Input, Select, Textarea, Checkbox, FormErrorMessage } from '../components/ui/FormControls';
 import { contactData } from '../data';
 import { getBreadcrumbSchema, getLocalBusinessSchema } from '../lib/seo';
@@ -134,56 +134,40 @@ export const Contact: React.FC = () => {
         schemaJson={contactSchemas}
       />
 
-      {/* Hero Section */}
-      <Section className="bg-navy-950 text-white pt-6 pb-12 md:pb-16 text-left relative overflow-hidden border-b border-slate-900">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
-        <Container className="relative z-10">
-          <Breadcrumb onDark 
-            items={[{ label: 'Contact Us' }]} 
-            className="mb-6"
-          />
-
-          <div className="max-w-3xl">
-            <div className="space-y-6">
-              <div>
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight font-heading">
-                  Contact Us
-                </h1>
-              </div>
-
-              <p className="text-base md:text-lg text-slate-400 leading-relaxed max-w-xl font-sans">
-                Speak with our team about industrial products, custom fabrication, drawings, dimensions, or project requirements.
-              </p>
-
-              <div className="flex flex-wrap gap-4 pt-2">
-                {verifiedPhone && (
-                  <Button
-                    href={`tel:${verifiedPhone}`}
-                    variant="primary"
-                    className="font-bold text-sm tracking-wider uppercase h-12 flex-grow sm:flex-grow-0"
-                    onClick={() => trackEvent('contact_phone_click', { position: 'hero' })}
-                  >
-                    Call Us Now
-                  </Button>
-                )}
-                {hasWhatsapp && (
-                  <Button
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    variant="outline-light"
-                    className="font-bold text-sm tracking-wider uppercase h-12 flex-grow sm:flex-grow-0"
-                    onClick={() => trackEvent('contact_whatsapp_click', { position: 'hero' })}
-                  >
-                    Chat on WhatsApp
-                  </Button>
-                )}
-              </div>
-            </div>
-
-          </div>
-        </Container>
-      </Section>
+      {/* Single-column PageHeroShell, not PageHeroSplit: this hero has no
+          image, just a button row - a genuinely different shape from the
+          four two-column heroes, not the same pattern with different words. */}
+      <PageHeroShell
+        breadcrumb={[{ label: 'Contact Us' }]}
+        title="Contact Us"
+        description="Speak with our team about industrial products, custom fabrication, drawings, dimensions, or project requirements."
+        actions={
+          <>
+            {verifiedPhone && (
+              <Button
+                href={`tel:${verifiedPhone}`}
+                variant="primary"
+                className="font-bold text-sm tracking-wider uppercase h-12 flex-grow sm:flex-grow-0"
+                onClick={() => trackEvent('contact_phone_click', { position: 'hero' })}
+              >
+                Call Us Now
+              </Button>
+            )}
+            {hasWhatsapp && (
+              <Button
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="outline-light"
+                className="font-bold text-sm tracking-wider uppercase h-12 flex-grow sm:flex-grow-0"
+                onClick={() => trackEvent('contact_whatsapp_click', { position: 'hero' })}
+              >
+                Chat on WhatsApp
+              </Button>
+            )}
+          </>
+        }
+      />
 
       {/* Contact Method Cards Grid */}
       <Section className="bg-white border-b border-border text-left">
@@ -191,10 +175,10 @@ export const Contact: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 font-sans">
             {/* Phone Card */}
             {verifiedPhone && (
-              <div className="bg-slate-50 border border-border p-6 rounded-card shadow-sm flex flex-col justify-between">
+              <div className="bg-slate-50 border border-border p-6 rounded-card shadow-card flex flex-col justify-between">
                 <div className="space-y-4">
                   <div className="w-10 h-10 rounded-sm bg-primary-soft text-primary flex items-center justify-center">
-                    <img src={ASSETS.icons.phone} alt="" aria-hidden="true" className="w-5 h-5 object-contain" />
+                    <img src={ASSETS.icons.phone} alt="" aria-hidden="true" className="w-5 h-5 object-contain" width={20} height={20} decoding="async" />
                   </div>
                   <div>
                     <h3 className="font-bold text-navy-950 text-sm mb-1 uppercase tracking-wide">Call Directly</h3>
@@ -204,9 +188,9 @@ export const Contact: React.FC = () => {
                   </div>
                 </div>
                 <div className="pt-4 mt-6 border-t border-slate-200">
-                  {contactData.phones.map((phoneNo, idx) => (
+                  {contactData.phones.map((phoneNo) => (
                     <a
-                      key={idx}
+                      key={phoneNo}
                       href={`tel:${phoneNo}`}
                       className="block font-bold text-navy-950 hover:text-primary transition-colors text-xs font-mono mb-1"
                       onClick={() => trackEvent('contact_phone_click', { position: 'card', numberIndex: idx })}
@@ -220,10 +204,10 @@ export const Contact: React.FC = () => {
 
             {/* WhatsApp Card */}
             {hasWhatsapp && (
-              <div className="bg-slate-50 border border-border p-6 rounded-card shadow-sm flex flex-col justify-between">
+              <div className="bg-slate-50 border border-border p-6 rounded-card shadow-card flex flex-col justify-between">
                 <div className="space-y-4">
                   <div className="w-10 h-10 rounded-sm bg-primary-soft text-primary flex items-center justify-center">
-                    <img src={ASSETS.icons.whatsapp} alt="" aria-hidden="true" className="w-5 h-5 object-contain" />
+                    <img src={ASSETS.icons.whatsapp} alt="" aria-hidden="true" className="w-5 h-5 object-contain" width={20} height={20} decoding="async" />
                   </div>
                   <div>
                     <h3 className="font-bold text-navy-950 text-sm mb-1 uppercase tracking-wide">WhatsApp Support</h3>
@@ -237,7 +221,7 @@ export const Contact: React.FC = () => {
                     href={whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block font-bold text-success hover:text-green-600 transition-colors text-xs font-mono"
+                    className="block font-bold text-success-ink hover:text-success-ink-hover transition-colors text-xs font-mono"
                     onClick={() => trackEvent('contact_whatsapp_click', { position: 'card' })}
                   >
                     +91-{contactData.whatsapp}
@@ -248,10 +232,10 @@ export const Contact: React.FC = () => {
 
             {/* Email Card */}
             {verifiedEmail && (
-              <div className="bg-slate-50 border border-border p-6 rounded-card shadow-sm flex flex-col justify-between">
+              <div className="bg-slate-50 border border-border p-6 rounded-card shadow-card flex flex-col justify-between">
                 <div className="space-y-4">
                   <div className="w-10 h-10 rounded-sm bg-primary-soft text-primary flex items-center justify-center">
-                    <img src={ASSETS.icons.email} alt="" aria-hidden="true" className="w-5 h-5 object-contain" />
+                    <img src={ASSETS.icons.email} alt="" aria-hidden="true" className="w-5 h-5 object-contain" width={20} height={20} decoding="async" />
                   </div>
                   <div>
                     <h3 className="font-bold text-navy-950 text-sm mb-1 uppercase tracking-wide">Email Inquiries</h3>
@@ -261,9 +245,9 @@ export const Contact: React.FC = () => {
                   </div>
                 </div>
                 <div className="pt-4 mt-6 border-t border-slate-200">
-                  {contactData.emails.map((mail, idx) => (
+                  {contactData.emails.map((mail) => (
                     <a
-                      key={idx}
+                      key={mail}
                       href={`mailto:${mail}?subject=Website%20Enquiry%20-%20Maa%20Vindhawasini%20Enterprises`}
                       className="block font-bold text-navy-950 hover:text-primary transition-colors text-xs truncate font-mono"
                       onClick={() => trackEvent('contact_email_click', { position: 'card', emailIndex: idx })}
@@ -276,10 +260,10 @@ export const Contact: React.FC = () => {
             )}
 
             {/* Quick Quote Card */}
-            <div className="bg-slate-50 border border-border p-6 rounded-card shadow-sm flex flex-col justify-between">
+            <div className="bg-slate-50 border border-border p-6 rounded-card shadow-card flex flex-col justify-between">
               <div className="space-y-4">
                 <div className="w-10 h-10 rounded-sm bg-primary-soft text-primary flex items-center justify-center">
-                  <img src={ASSETS.icons.fileText} alt="" aria-hidden="true" className="w-5 h-5 object-contain" />
+                  <img src={ASSETS.icons.fileText} alt="" aria-hidden="true" className="w-5 h-5 object-contain" width={20} height={20} decoding="async" />
                 </div>
                 <div>
                   <h3 className="font-bold text-navy-950 text-sm mb-1 uppercase tracking-wide">Request Quote</h3>
@@ -308,10 +292,10 @@ export const Contact: React.FC = () => {
       {/* Split Form & Map Section */}
       <Section className="bg-surface border-b border-border text-left">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             
             {/* Left General Inquiry Form */}
-            <div className="lg:col-span-6 bg-white border border-border p-6 md:p-8 rounded-card shadow-sm">
+            <div className="lg:col-span-6 bg-white border border-border p-6 md:p-8 rounded-card shadow-card">
               <h2 className="text-xl md:text-2xl font-extrabold text-navy-950 mb-1 leading-tight font-heading">
                 Submit an Enquiry
               </h2>
@@ -422,7 +406,7 @@ export const Contact: React.FC = () => {
                       </span>
                       <Link
                         to="/request-a-quote"
-                        className="inline-block bg-primary-ink text-white font-bold px-3 py-1.5 rounded-sm hover:bg-primary-ink-hover shadow-sm uppercase tracking-wide text-xs"
+                        className="inline-block bg-primary-ink text-white font-bold px-3 py-1.5 rounded-sm hover:bg-primary-ink-hover shadow-card uppercase tracking-wide text-xs"
                         onClick={() => trackEvent('contact_quote_click', { position: 'form_redirect' })}
                       >
                         Request Detailed Proposal
@@ -481,8 +465,10 @@ export const Contact: React.FC = () => {
               
               {/* Map embed Card */}
               {verifiedMapUrl && (
-                <div className="bg-white border border-border p-6 rounded-card shadow-sm space-y-4">
-                  <h3 className="text-base font-extrabold text-navy-950 font-heading">Workshop Location Map</h3>
+                <div className="bg-white border border-border p-6 rounded-card shadow-card space-y-4">
+                  {/* No font-heading override: Big Shoulders Display is a
+                      condensed face reserved for h1/h2 scale, not 16px labels */}
+                  <h3 className="text-base font-extrabold text-navy-950">Workshop Location Map</h3>
                   <div className="rounded-lg overflow-hidden border border-border aspect-[16/10] bg-slate-50 relative">
                     <iframe
                       src={contactData.mapEmbedUrl}
@@ -525,9 +511,9 @@ export const Contact: React.FC = () => {
 
               {/* Hours Card */}
               {verifiedHours && (
-                <div className="bg-white border border-border p-6 rounded-card shadow-sm flex items-start gap-4 font-sans">
+                <div className="bg-white border border-border p-6 rounded-card shadow-card flex items-start gap-4 font-sans">
                   <div className="w-10 h-10 rounded-sm bg-primary-soft text-primary flex items-center justify-center flex-shrink-0">
-                    <img src={ASSETS.icons.clock} alt="" aria-hidden="true" className="w-5 h-5 object-contain" />
+                    <img src={ASSETS.icons.clock} alt="" aria-hidden="true" className="w-5 h-5 object-contain" width={20} height={20} decoding="async" />
                   </div>
                   <div>
                     <h3 className="font-bold text-navy-950 text-sm mb-1 uppercase tracking-wide">Business Hours</h3>

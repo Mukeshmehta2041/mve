@@ -30,7 +30,7 @@ export const Footer: React.FC = () => {
           {/* Links Column mapping */}
           {footerLinksData.slice(0, 2).map((group) => (
             <div key={group.title} className="space-y-4">
-              <h3 className="text-white text-sm font-bold uppercase tracking-wider font-heading">
+              <h3 className="text-white text-sm font-bold uppercase tracking-wider">
                 {group.title}
               </h3>
               {/* -my-1 keeps the visual spacing while each link carries a real
@@ -52,21 +52,21 @@ export const Footer: React.FC = () => {
 
           {/* Corporate Details Column */}
           <div className="space-y-4">
-            <h3 className="text-white text-sm font-bold uppercase tracking-wider font-heading">
+            <h3 className="text-white text-sm font-bold uppercase tracking-wider">
               Corporate Office
             </h3>
             <div className="space-y-3.5 text-sm font-sans">
               {/* Only show address if it is verified (doesn't contain pending) */}
               {!contactData.officeAddress.includes('pending verification') && (
                 <div className="flex items-start">
-                  <img src={ASSETS.icons.mapPin} alt="" aria-hidden="true" className="w-4 h-4 mr-2.5 mt-0.5 text-primary" />
+                  <img src={ASSETS.icons.mapPin} alt="" aria-hidden="true" className="w-4 h-4 mr-2.5 mt-0.5 text-primary" width={16} height={16} decoding="async" />
                   <p>{contactData.officeAddress}</p>
                 </div>
               )}
 
               {verifiedPhones.map((phone) => (
                 <div key={phone} className="flex items-center">
-                  <img src={ASSETS.icons.phone} alt="" aria-hidden="true" className="w-4 h-4 mr-2.5 text-primary" />
+                  <img src={ASSETS.icons.phone} alt="" aria-hidden="true" className="w-4 h-4 mr-2.5 text-primary" width={16} height={16} decoding="async" />
                   <a href={`tel:${phone}`} className="hover:text-primary hover:underline">
                     {phone}
                   </a>
@@ -75,7 +75,7 @@ export const Footer: React.FC = () => {
 
               {verifiedEmails.map((email) => (
                 <div key={email} className="flex items-center">
-                  <img src={ASSETS.icons.email} alt="" aria-hidden="true" className="w-4 h-4 mr-2.5 text-primary" />
+                  <img src={ASSETS.icons.email} alt="" aria-hidden="true" className="w-4 h-4 mr-2.5 text-primary" width={16} height={16} decoding="async" />
                   <a href={`mailto:${email}`} className="hover:text-primary hover:underline">
                     {email}
                   </a>
@@ -83,7 +83,7 @@ export const Footer: React.FC = () => {
               ))}
 
               <div className="flex items-center">
-                <img src={ASSETS.icons.clock} alt="" aria-hidden="true" className="w-4 h-4 mr-2.5 text-primary" />
+                <img src={ASSETS.icons.clock} alt="" aria-hidden="true" className="w-4 h-4 mr-2.5 text-primary" width={16} height={16} decoding="async" />
                 <span>{contactData.businessHours}</span>
               </div>
             </div>

@@ -13,17 +13,26 @@
     <link rel="canonical" href="https://www.maavindhawasini.com/" />
 
     <!--
-      Fonts load here rather than via @import in index.css. A CSS @import is
-      render-blocking and serially discovered: the browser had to fetch and parse
-      the stylesheet before it even learned the font URLs. preconnect opens the
-      gstatic connection in parallel.
-      Poppins 400/500 are omitted - headings never render below semibold.
+      Fonts load here rather than via @import in index.css - see the comment
+      there for why (render-blocking @import vs parallel preconnect+link).
+
+      Archivo (body) + Big Shoulders Display (headings): a deliberate pairing,
+      not the Inter+Poppins reflex - those are two same-genre humanist sans
+      faces with almost no contrast between body and heading. Big Shoulders
+      Display is modeled on stamped steel-structure lettering from Chicago
+      ironwork signage, which is the literal physical object this brand is
+      building (structural steel assemblies) - condensed, heavy, industrial.
+      Archivo carries the body copy: a neutral grotesque with real weight
+      range, legible at small sizes, no attitude of its own so it doesn't
+      compete with the display face.
+      Weights are trimmed to what's used: headings never render below
+      semibold, body never needs 800+.
     -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Big+Shoulders+Display:wght@600;700;800&display=swap"
     />
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website" />

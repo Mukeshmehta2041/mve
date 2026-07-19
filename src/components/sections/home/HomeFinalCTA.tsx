@@ -14,12 +14,9 @@ export const HomeFinalCTA: React.FC = () => {
   )}`;
 
   return (
-    <section className="py-16 md:py-20 lg:py-24 bg-slate-50 border-t border-b border-border text-center relative overflow-hidden">
-      {/* Structural background overlays */}
-      <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(var(--color-primary) 1.5px, transparent 1.5px)', backgroundSize: '32px 32px' }}></div>
-
-      <Container className="relative z-10 max-w-4xl space-y-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-navy-950 leading-tight font-heading">
+    <section className="py-16 md:py-20 lg:py-24 bg-slate-50 border-t border-b border-border text-center">
+      <Container className="max-w-4xl space-y-6">
+        <h2 className="text-3xl md:text-4xl font-bold text-navy-950 leading-tight font-heading text-balance">
           Tell us what you need built
         </h2>
 
@@ -29,7 +26,7 @@ export const HomeFinalCTA: React.FC = () => {
         </p>
 
         <div className="flex flex-wrap gap-4 justify-center items-center pt-4">
-          <Button href="/request-a-quote" variant="primary" size="md" className="w-full sm:w-auto shadow-sm">
+          <Button href="/request-a-quote" variant="primary" size="md" className="w-full sm:w-auto">
             Request a Quote
           </Button>
 
@@ -47,7 +44,7 @@ export const HomeFinalCTA: React.FC = () => {
                   alt="" 
                   aria-hidden="true"
                   className="w-5 h-5 brightness-0 invert" 
-                />
+                 width={20} height={20} decoding="async"/>
               }
               iconPosition="left"
             >
@@ -67,7 +64,7 @@ export const HomeFinalCTA: React.FC = () => {
                   alt="" 
                   aria-hidden="true"
                   className="w-4 h-4" 
-                />
+                 width={16} height={16} decoding="async"/>
               }
               iconPosition="left"
             >

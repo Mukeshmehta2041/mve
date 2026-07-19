@@ -15,12 +15,12 @@ export const TextLink: React.FC<TextLinkProps> = ({
     <a
       href={href}
       className={cn(
-        'inline-flex items-center text-primary-ink hover:text-primary-ink-hover font-semibold transition-all group focus-ring rounded-sm',
+        'inline-flex items-center text-primary-ink hover:text-primary-ink-hover font-semibold transition group focus-ring rounded-sm',
         className
       )}
       {...props}
     >
-      <span className="border-b border-transparent group-hover:border-primary-hover transition-all duration-150">
+      <span className="border-b border-transparent group-hover:border-primary-hover transition duration-150">
         {children}
       </span>
       {/* 

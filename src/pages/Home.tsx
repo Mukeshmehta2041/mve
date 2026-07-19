@@ -1,6 +1,7 @@
 import React from 'react';
 import { SiteLayout, SEO } from '../components/layout';
 import { getLocalBusinessSchema, getOrganizationSchema } from '../lib/seo';
+import { ASSETS } from '../lib/assets';
 import {
   HomeHero,
   TrustIndicators,
@@ -22,6 +23,7 @@ export const Home: React.FC = () => {
         description="Maa Vindhawasini Enterprises specializes in custom MS steel fabrication, reaction vessels, storage tanks, chimneys, and industrial equipment manufacturing in Patna, Bihar."
         canonicalPath="/"
         schemaJson={homeSchemas}
+        preloadImage={ASSETS.hero.home}
       />
       
       {/* Homepage Sections */}
