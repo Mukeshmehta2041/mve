@@ -11,8 +11,7 @@ import { cn } from '../../lib/utils';
 export const SiteHeader: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [logoError, setLogoError] = useState(false);
-  
+
   const triggerRef = useRef<HTMLButtonElement | null>(null);
 
   // Monitor scroll state

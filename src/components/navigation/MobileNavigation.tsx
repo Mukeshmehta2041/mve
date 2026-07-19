@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { navigationData, contactData } from '../../data';
 import { ASSETS } from '../../lib/assets';
 import { Button, IconButton } from '../ui';
 import { cn } from '../../lib/utils';
+import { useFocusTrap } from '../../lib/useFocusTrap';
 
 interface MobileNavigationProps {
   isOpen: boolean;
@@ -28,71 +29,8 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
     setProductsExpanded((prev) => !prev);
   };
 
-  // Lock body scroll when drawer is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      // Focus the close button when opened
-      const focusable = drawerRef.current?.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex="0"]'
-      );
-      if (focusable && focusable.length > 0) {
-        (focusable[0] as HTMLElement).focus();
-      }
-    } else {
-      document.body.style.overflow = '';
-      // Restore focus to the trigger button
-      triggerRef.current?.focus();
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isOpen, triggerRef]);
-
-  // Focus Trapping and Key listeners
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (!isOpen) return;
-
-      if (e.key === 'Escape') {
-        onClose();
-        return;
-      }
-
-      if (e.key === 'Tab') {
-        if (!drawerRef.current) return;
-
-        const focusable = drawerRef.current.querySelectorAll<HTMLElement>(
-          'button, [href], input, select, textarea, [tabindex="0"]'
-        );
-        const focusableElements = Array.from(focusable).filter(
-          (el) => !el.hasAttribute('disabled') && el.getAttribute('tabindex') !== '-1'
-        );
-
-        if (focusableElements.length === 0) return;
-
-        const firstEl = focusableElements[0];
-        const lastEl = focusableElements[focusableElements.length - 1];
-
-        if (e.shiftKey) {
-          // If shift + tab and active on first element, wrap to last
-          if (document.activeElement === firstEl) {
-            lastEl.focus();
-            e.preventDefault();
-          }
-        } else {
-          // If tab and active on last element, wrap to first
-          if (document.activeElement === lastEl) {
-            firstEl.focus();
-            e.preventDefault();
-          }
-        }
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
+  // Scroll lock, focus trap, Escape, and focus restore to the hamburger
+  useFocusTrap({ isOpen, containerRef: drawerRef, onClose, restoreFocusTo: triggerRef });
 
   return (
     <div
@@ -118,7 +56,8 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
       <div
         ref={drawerRef}
         className={cn(
-          'absolute top-0 right-0 w-full max-w-sm h-full bg-white shadow-floating flex flex-col p-4 sm:p-6 transition-transform duration-300 ease-out transform safe-bottom',
+          // pb adds the iOS home-indicator strip on top of the panel's own padding
+          'absolute top-0 right-0 w-full max-w-sm h-full bg-white shadow-floating flex flex-col p-4 sm:p-6 pb-[calc(1rem+env(safe-area-inset-bottom))] sm:pb-[calc(1.5rem+env(safe-area-inset-bottom))] transition-transform duration-300 ease-out transform',
           isOpen ? 'translate-x-0' : 'translate-x-full'
         )}
       >
@@ -159,13 +98,13 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
                     type="button"
                     onClick={handleProductsClick}
                     aria-expanded={productsExpanded}
-                    className="w-full flex items-center justify-between text-base font-bold text-navy-950 py-2 px-2 rounded-sm transition-colors text-left cursor-pointer"
+                    className="w-full flex items-center justify-between text-base font-bold text-navy-950 min-h-11 py-2 px-2 rounded-sm transition-colors text-left cursor-pointer"
                   >
                     <span>{item.name}</span>
                     <svg
                       className={cn(
                         'w-4 h-4 transition-transform duration-200 text-slate-500',
-                        productsExpanded ? 'rotate-180 text-primary' : ''
+                        productsExpanded ? 'rotate-180 text-primary-ink' : ''
                       )}
                       fill="none"
                       stroke="currentColor"
@@ -189,8 +128,8 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
                       onClick={onClose}
                       className={({ isActive }) =>
                         cn(
-                          'block text-sm font-bold text-slate-500 hover:text-primary transition-colors py-1 px-2',
-                          isActive ? 'text-primary' : ''
+                          'flex items-center min-h-11 text-sm font-bold text-slate-500 hover:text-primary-ink transition-colors py-2 px-2',
+                          isActive ? 'text-primary-ink' : ''
                         )
                       }
                     >
@@ -203,8 +142,8 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
                         onClick={onClose}
                         className={({ isActive }) =>
                           cn(
-                            'block text-sm font-medium text-slate-600 hover:text-primary transition-colors py-1 px-2',
-                            isActive ? 'text-primary font-bold' : ''
+                            'flex items-center min-h-11 text-sm font-medium text-slate-600 hover:text-primary-ink transition-colors py-2 px-2',
+                            isActive ? 'text-primary-ink font-bold' : ''
                           )
                         }
                       >
@@ -224,8 +163,8 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
                 onClick={onClose}
                 className={({ isActive }) =>
                   cn(
-                    'block text-base font-bold text-navy-950 hover:text-primary py-2 px-2 hover:bg-slate-50 rounded-sm transition-colors',
-                    isActive ? 'text-primary bg-primary-soft/10' : ''
+                    'flex items-center min-h-11 text-base font-bold text-navy-950 hover:text-primary-ink py-2 px-2 hover:bg-slate-50 rounded-sm transition-colors',
+                    isActive ? 'text-primary-ink bg-primary-soft/10' : ''
                   )
                 }
               >
@@ -242,9 +181,9 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
               <a
                 key={phone}
                 href={`tel:${phone}`}
-                className="flex items-center text-sm font-bold text-navy-950 hover:text-primary bg-slate-50 border border-border p-2.5 rounded-card transition-all"
+                className="flex items-center min-h-11 text-sm font-bold text-navy-950 hover:text-primary-ink bg-slate-50 border border-border p-2.5 rounded-card transition-all"
               >
-                <img src={ASSETS.icons.phone} alt="" className="w-4 h-4 mr-2.5 text-primary" />
+                <img src={ASSETS.icons.phone} alt="" className="w-4 h-4 mr-2.5 text-primary-ink" />
                 <span>Call: {phone}</span>
               </a>
             ))}
@@ -254,7 +193,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
                 href={contactData.whatsappMessageUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center text-sm font-bold text-white bg-success hover:bg-green-600 p-2.5 rounded-card transition-all"
+                className="flex items-center min-h-11 text-sm font-bold text-white bg-success-ink hover:bg-success-ink-hover p-2.5 rounded-card transition-all"
               >
                 <img src={ASSETS.icons.whatsapp} alt="" className="w-4 h-4 mr-2.5 brightness-0 invert" />
                 <span>WhatsApp Message</span>

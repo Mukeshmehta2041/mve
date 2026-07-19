@@ -17,7 +17,9 @@ export const NotFound: React.FC = () => {
       />
       <Section className="bg-white py-16 md:py-24 text-center">
         <Container className="max-w-2xl font-sans space-y-6">
-          <div className="text-6xl md:text-8xl font-black text-slate-200 select-none tracking-tight font-heading">
+          {/* font-extrabold, not font-black: Poppins 900 is not loaded, so black
+              was rendering as a synthesized faux-weight */}
+          <div className="text-6xl md:text-8xl font-extrabold text-slate-200 select-none tracking-tight font-heading">
             404
           </div>
           

@@ -25,13 +25,22 @@ export const DesktopNavigation: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Keyboard navigation inside dropdown
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === 'Escape') {
-      setDropdownOpen(false);
-      buttonRef.current?.focus();
-    }
-  };
+  // Escape closes the dropdown. Bound at the document rather than on the panel:
+  // the previous panel-level handler only fired once focus was already inside,
+  // so Escape did nothing while focus sat on the trigger itself.
+  useEffect(() => {
+    if (!dropdownOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setDropdownOpen(false);
+        buttonRef.current?.focus();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [dropdownOpen]);
 
   const toggleDropdown = () => {
     setDropdownOpen((prev) => !prev);
@@ -73,14 +82,14 @@ export const DesktopNavigation: React.FC = () => {
                 aria-haspopup="true"
                 className={cn(
                   'flex items-center text-sm font-semibold py-2 transition-all cursor-pointer focus-ring rounded-sm text-slate-600 hover:text-navy-950',
-                  dropdownOpen ? 'text-primary' : ''
+                  dropdownOpen ? 'text-primary-ink' : ''
                 )}
               >
                 <span>{item.name}</span>
                 <svg
                   className={cn(
                     'w-4 h-4 ml-1.5 transition-transform duration-200',
-                    dropdownOpen ? 'rotate-180 text-primary' : 'text-slate-400'
+                    dropdownOpen ? 'rotate-180 text-primary-ink' : 'text-slate-500'
                   )}
                   fill="none"
                   stroke="currentColor"
@@ -94,7 +103,6 @@ export const DesktopNavigation: React.FC = () => {
               {/* Accessible Dropdown Menu */}
               <div
                 ref={dropdownRef}
-                onKeyDown={handleKeyDown}
                 className={cn(
                   'absolute top-full left-0 w-64 bg-white border border-border shadow-floating rounded-card py-2 mt-1.5 z-50 transition-all duration-150 origin-top-left',
                   dropdownOpen
@@ -110,8 +118,8 @@ export const DesktopNavigation: React.FC = () => {
                   onClick={() => setDropdownOpen(false)}
                   className={({ isActive }) =>
                     cn(
-                      'block px-4 py-2 text-sm font-bold border-b border-border/55 text-slate-600 hover:text-primary hover:bg-slate-50 transition-colors',
-                      isActive ? 'text-primary bg-primary-soft/10' : ''
+                      'block px-4 py-2 text-sm font-bold border-b border-border/55 text-slate-600 hover:text-primary-ink hover:bg-slate-50 transition-colors',
+                      isActive ? 'text-primary-ink bg-primary-soft/10' : ''
                     )
                   }
                   role="menuitem"
@@ -126,8 +134,8 @@ export const DesktopNavigation: React.FC = () => {
                     onClick={() => setDropdownOpen(false)}
                     className={({ isActive }) =>
                       cn(
-                        'block px-4 py-2 text-sm font-medium text-slate-600 hover:text-primary hover:bg-slate-50 transition-colors',
-                        isActive ? 'text-primary font-semibold bg-primary-soft/10' : ''
+                        'block px-4 py-2 text-sm font-medium text-slate-600 hover:text-primary-ink hover:bg-slate-50 transition-colors',
+                        isActive ? 'text-primary-ink font-semibold bg-primary-soft/10' : ''
                       )
                     }
                     role="menuitem"

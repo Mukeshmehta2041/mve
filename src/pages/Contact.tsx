@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { SiteLayout, SEO } from '../components/layout';
+import { SiteLayout, SEO, PageCTA } from '../components/layout';
 import { Container, Section, Button, Breadcrumb } from '../components/ui';
 import { Input, Select, Textarea, Checkbox, FormErrorMessage } from '../components/ui/FormControls';
 import { contactData } from '../data';
@@ -315,13 +315,19 @@ export const Contact: React.FC = () => {
               <h2 className="text-xl md:text-2xl font-extrabold text-navy-950 mb-1 leading-tight font-heading">
                 Submit an Enquiry
               </h2>
-              <p className="text-xs text-slate-400 mb-6 font-sans">
+              <p className="text-xs text-slate-500 mb-6 font-sans">
                 Have a general question regarding our fabrication services or order terms? Drop us a line.
               </p>
 
               {isSuccess ? (
-                <div className="p-6 bg-green-50 border border-green-200 rounded-card text-center space-y-4 font-sans">
-                  <div className="w-12 h-12 bg-green-100 text-success rounded-full flex items-center justify-center mx-auto shadow-sm">
+                // role=status so the outcome is announced; tabIndex lets the
+                // confirmation be reached directly after submit
+                <div
+                  role="status"
+                  tabIndex={-1}
+                  className="p-6 bg-success-ink/5 border border-success-ink/20 rounded-card text-center space-y-4 font-sans"
+                >
+                  <div className="w-12 h-12 bg-success-ink/10 text-success-ink rounded-full flex items-center justify-center mx-auto">
                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm3.707-9.293a1 1 0 0 0-1.414-1.414L9 10.586 7.707 9.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4z" clipRule="evenodd" />
                     </svg>
@@ -416,7 +422,7 @@ export const Contact: React.FC = () => {
                       </span>
                       <Link
                         to="/request-a-quote"
-                        className="inline-block bg-primary text-white font-bold px-3 py-1.5 rounded-sm hover:bg-primary-hover shadow-sm uppercase tracking-wide text-xs"
+                        className="inline-block bg-primary-ink text-white font-bold px-3 py-1.5 rounded-sm hover:bg-primary-ink-hover shadow-sm uppercase tracking-wide text-xs"
                         onClick={() => trackEvent('contact_quote_click', { position: 'form_redirect' })}
                       >
                         Request Detailed Proposal
@@ -451,7 +457,11 @@ export const Contact: React.FC = () => {
                     onChange={(e) => setConsentChecked(e.target.checked)}
                   />
 
-                  {submitError && <FormErrorMessage message={submitError} />}
+                  {/* Submit-level failure is announced; field-level errors are not,
+                      to avoid firing an alert per keystroke during validation */}
+                  <div role="alert">
+                    {submitError && <FormErrorMessage message={submitError} />}
+                  </div>
 
                   <Button
                     type="submit"
@@ -488,14 +498,14 @@ export const Contact: React.FC = () => {
 
                   <div className="space-y-3 font-sans pt-2">
                     <div>
-                      <span className="text-xs text-slate-400 uppercase tracking-wider block font-bold">Physical Address</span>
+                      <span className="text-xs text-slate-500 uppercase tracking-wider block font-bold">Physical Address</span>
                       <p className="text-xs text-slate-600 leading-relaxed font-medium">
                         {displayAddress}
                       </p>
                     </div>
                     
                     <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
-                      <span className="text-xs text-slate-400 font-bold uppercase tracking-wider">Junction Guide:</span>
+                      <span className="text-xs text-slate-500 font-bold uppercase tracking-wider">Junction Guide:</span>
                       <a
                         href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(displayAddress)}`}
                         target="_blank"
@@ -536,36 +546,16 @@ export const Contact: React.FC = () => {
       </Section>
 
       {/* Quotation Enquiry CTA section */}
-      <Section background="dark" className="border-t border-slate-800 text-center py-14 md:py-20">
-        <Container className="max-w-4xl space-y-6 font-sans">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight text-white font-heading">
-            Have a Product or Custom Fabrication Requirement?
-          </h2>
-          <p className="text-sm md:text-base leading-relaxed text-slate-300 max-w-2xl mx-auto">
-            If you have dimensions, quantity ranges, material preferences, or CAD drawings, please request a quote directly to get an itemized commercial proposal.
-          </p>
-
-          <div className="flex flex-wrap gap-4 justify-center items-center pt-3">
-            <Button
-              href="/request-a-quote"
-              variant="primary"
-              size="md"
-              className="font-bold text-sm tracking-wider uppercase h-12"
-              onClick={() => trackEvent('contact_quote_click', { position: 'footer_cta' })}
-            >
-              Request a Detailed Quote
-            </Button>
-            <Button
-              href="/products"
-              variant="outline-light"
-              size="md"
-              className="font-bold text-sm tracking-wider uppercase h-12"
-            >
-              Explore Products
-            </Button>
-          </div>
-        </Container>
-      </Section>
+      <PageCTA
+        title="Have a Product or Custom Fabrication Requirement?"
+        description="If you have dimensions, quantity ranges, material preferences, or CAD drawings, please request a quote directly to get an itemized commercial proposal."
+        quote={{
+          label: 'Request a Detailed Quote',
+          onClick: () => trackEvent('contact_quote_click', { position: 'footer_cta' }),
+        }}
+        secondary={{ label: 'Explore Products', href: '/products' }}
+        showWhatsapp={false}
+      />
 
     </SiteLayout>
   );

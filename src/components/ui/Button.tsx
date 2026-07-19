@@ -28,18 +28,25 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
 }, ref) => {
   const baseClasses = 'inline-flex items-center justify-center font-semibold rounded-card transition-all duration-200 focus-ring disabled:opacity-50 disabled:pointer-events-none cursor-pointer';
   
+  // Variants that place white text on a colored fill, or colored text on a light
+  // surface, use the `-ink` tier: --color-primary is 3.02:1 against white and
+  // --color-success is 2.28:1, both below the WCAG AA 4.5:1 floor for the 14-16px
+  // semibold labels used here. On the navy heroes the base orange is 5.90:1 and
+  // stays as-is (`outline-light`).
   const variantClasses = {
-    primary: 'bg-primary text-white hover:bg-primary-hover shadow-sm',
-    secondary: 'bg-white border-2 border-navy-950 text-navy-950 hover:border-primary hover:text-primary',
+    primary: 'bg-primary-ink text-white hover:bg-primary-ink-hover shadow-sm',
+    secondary: 'bg-white border-2 border-navy-950 text-navy-950 hover:border-primary-ink hover:text-primary-ink',
     // For use on the dark navy page heroes, where `secondary` would be white-on-white
     'outline-light': 'bg-transparent border-2 border-white/70 text-white hover:border-primary hover:text-primary',
-    ghost: 'bg-transparent text-navy-950 hover:bg-slate-100 hover:text-primary',
-    whatsapp: 'bg-success text-white hover:bg-green-600 shadow-sm',
+    ghost: 'bg-transparent text-navy-950 hover:bg-slate-100 hover:text-primary-ink',
+    whatsapp: 'bg-success-ink text-white hover:bg-success-ink-hover shadow-sm',
   };
 
   const sizeClasses = {
-    // Normal minimum sizes: 48px desktop (h-12), 46px mobile (h-[46px])
-    sm: 'h-10 px-4 text-sm',
+    // Normal minimum sizes: 48px desktop (h-12), 46px mobile (h-[46px]).
+    // `sm` is 44px, not 40px: it carries the primary CTA pair on every product
+    // and project card, so it has to clear the WCAG 2.5.5 touch-target minimum.
+    sm: 'h-11 px-4 text-sm',
     md: 'h-[46px] md:h-12 px-[22px] md:px-[26px] text-base',
     lg: 'h-14 px-8 text-lg',
   };

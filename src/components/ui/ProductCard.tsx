@@ -61,7 +61,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             variant="secondary"
             size="sm"
             href={`/products/${product.slug}`}
-            className="flex-1 text-xs whitespace-nowrap"
+            className="w-full sm:flex-1 text-xs whitespace-nowrap"
           >
             View Details
           </Button>
@@ -69,7 +69,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             variant="primary"
             size="sm"
             href={getQuoteUrl({ product: product.slug })}
-            className="flex-1 text-xs whitespace-nowrap"
+            className="w-full sm:flex-1 text-xs whitespace-nowrap"
           >
             Get Quote
           </Button>

@@ -15,7 +15,7 @@ export const Badge: React.FC<BadgeProps> = ({
   
   const variantClasses = {
     neutral: 'bg-slate-100 text-slate-600',
-    primary: 'bg-primary-soft text-primary',
+    primary: 'bg-primary-soft text-primary-ink',
     success: 'bg-green-50 text-success border border-green-200',
     warning: 'bg-yellow-50 text-yellow-800 border border-yellow-200',
   };
@@ -59,7 +59,7 @@ export const TrustBadge: React.FC<TrustBadgeProps> = ({
         </div>
       )}
       <div>
-        <span className="text-[12px] leading-none tracking-wider text-slate-400 font-semibold uppercase block mb-1">
+        <span className="text-[12px] leading-none tracking-wider text-slate-500 font-semibold uppercase block mb-1">
           {label}
         </span>
         <h4 className="text-base font-bold text-navy-950 leading-tight mb-1">

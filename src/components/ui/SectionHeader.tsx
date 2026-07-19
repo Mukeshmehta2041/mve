@@ -31,7 +31,8 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         <span
           className={cn(
             'text-[12px] leading-[18px] tracking-[0.1em] uppercase font-semibold block mb-3',
-            darkBg ? 'text-primary' : 'text-primary'
+            // Base orange is 5.90:1 on navy but only 3.02:1 on white
+            darkBg ? 'text-primary' : 'text-primary-ink'
           )}
         >
           {eyebrow}

@@ -25,7 +25,7 @@ export const TrustIndicators: React.FC = () => {
                 
                 {/* Content */}
                 <div className="text-left">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block">
                     {indicator.label}
                   </span>
                   <span className="text-sm md:text-base font-bold text-navy-950 block mt-0.5">

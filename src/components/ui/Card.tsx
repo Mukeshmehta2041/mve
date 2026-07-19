@@ -16,10 +16,14 @@ export const Card: React.FC<CardProps> = ({
   return (
     <Component
       className={cn(
+        // One elevation language, not two. This previously paired a 1px border
+        // with a 28px-blur shadow (escalating to 50px on hover) - the shadow
+        // already reads as elevation, so the border on top read as a stray
+        // outline. Resting state is the border; hover firms the border and
+        // lifts, which suits a precision-fabrication brand better than a float.
         'bg-white border border-border rounded-card p-5 md:p-6 text-left',
-        // Card hover: translateY(-3px) and slightly increase shadow (design.md Section 6 & 11)
-        hoverable && 'hover:-translate-y-[3px] hover:shadow-floating transition-all duration-200 shadow-card',
-        !hoverable && 'shadow-card',
+        hoverable &&
+          'hover:-translate-y-[3px] hover:border-slate-500 transition-[transform,border-color] duration-200',
         className
       )}
       {...props}

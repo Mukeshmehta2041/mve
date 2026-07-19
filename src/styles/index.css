@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+/* Fonts are loaded via <link> in index.html, not an @import here - see the
+   comment there for why. */
 @import "tailwindcss";
 
 :root {
@@ -6,28 +7,50 @@
   --brand-primary: #f26c21;
   --brand-primary-hover: #d95513;
   --brand-primary-soft: #fff2ea;
+  /* Ink tier: the accessible counterparts of primary/success, for any surface
+     that carries text. #f26c21 on white is 3.02:1 and fails WCAG AA for body
+     copy and for the semibold labels on our CTAs; #c2410c is 5.18:1 on white
+     and 4.72:1 on primary-soft. Keep --brand-primary for large display type,
+     borders, and fills that carry no text. */
+  --brand-primary-ink: #c2410c;
+  --brand-primary-ink-hover: #9a3412;
   --brand-navy-950: #0f172a;
   --brand-navy-900: #111827;
   --brand-slate-600: #475569;
+  /* #94a3b8 is 2.56:1 on white and 2.45:1 on --brand-surface. It stays valid on
+     navy (6.96:1) but must not carry text on light surfaces; --brand-slate-500
+     is the light-surface muted tier at 4.76:1 / 4.55:1. */
+  --brand-slate-500: #64748b;
   --brand-slate-400: #94a3b8;
   --brand-border: #e2e8f0;
   --brand-surface: #f8fafc;
   --brand-white: #ffffff;
   --brand-success: #22c55e;
+  /* White on #22c55e is 2.28:1 — the worst pairing on the site. 5.02:1 here. */
+  --brand-success-ink: #15803d;
+  --brand-success-ink-hover: #166534;
   --brand-error: #dc2626;
 
   /* Semantic UI tokens (as requested by user) */
   --color-primary: var(--brand-primary);
   --color-primary-hover: var(--brand-primary-hover);
   --color-primary-soft: var(--brand-primary-soft);
+  --color-primary-ink: var(--brand-primary-ink);
+  --color-primary-ink-hover: var(--brand-primary-ink-hover);
   --color-background: var(--brand-white);
   --color-foreground: var(--brand-navy-950);
   --color-surface: var(--brand-white);
   --color-surface-muted: var(--brand-surface);
   --color-border: var(--brand-border);
   --color-text-muted: var(--brand-slate-600);
+  /* Muted text on light surfaces. Was slate-400 (2.45:1) — now the ink tier. */
+  --color-text-subtle: var(--brand-slate-500);
+  /* slate-400 remains valid for text on navy sections and for genuinely
+     inactive/disabled controls, where 4.5:1 does not apply. */
   --color-text-inactive: var(--brand-slate-400);
   --color-success: var(--brand-success);
+  --color-success-ink: var(--brand-success-ink);
+  --color-success-ink-hover: var(--brand-success-ink-hover);
   --color-error: var(--brand-error);
 }
 
@@ -36,19 +59,25 @@
   --color-primary: var(--color-primary);
   --color-primary-hover: var(--color-primary-hover);
   --color-primary-soft: var(--color-primary-soft);
+  --color-primary-ink: var(--color-primary-ink);
+  --color-primary-ink-hover: var(--color-primary-ink-hover);
   --color-background: var(--color-background);
   --color-foreground: var(--color-foreground);
   --color-surface: var(--color-surface);
   --color-surface-muted: var(--color-surface-muted);
   --color-border: var(--color-border);
   --color-text-muted: var(--color-text-muted);
+  --color-text-subtle: var(--color-text-subtle);
   --color-text-inactive: var(--color-text-inactive);
   --color-success: var(--color-success);
+  --color-success-ink: var(--color-success-ink);
+  --color-success-ink-hover: var(--color-success-ink-hover);
   --color-error: var(--color-error);
-  
+
   --color-navy-950: var(--brand-navy-950);
   --color-navy-900: var(--brand-navy-900);
   --color-slate-600: var(--brand-slate-600);
+  --color-slate-500: var(--brand-slate-500);
   --color-slate-400: var(--brand-slate-400);
 
   /* Typography scale linkings (design.md Section 4) */
@@ -61,8 +90,13 @@
   --radius-lg: 16px;
   --radius-pill: 999px;
 
-  --shadow-card: 0 8px 28px rgba(15, 23, 42, 0.08);
-  --shadow-floating: 0 16px 50px rgba(15, 23, 42, 0.14);
+  /* shadow-card is paired with a 1px border in ~49 hand-rolled places. A 28px
+     blur next to a crisp border reads as two competing elevation cues, so this
+     is now a tight, defined shadow that sits under a border without fighting it.
+     shadow-floating stays broad but is for genuine overlays only - the sticky
+     bar, the nav drawer, the dropdown panel. */
+  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.06), 0 2px 6px rgba(15, 23, 42, 0.05);
+  --shadow-floating: 0 8px 24px rgba(15, 23, 42, 0.12);
 
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;

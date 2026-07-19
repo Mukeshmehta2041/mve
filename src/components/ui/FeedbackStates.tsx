@@ -57,7 +57,7 @@ export const EmptyGuard: React.FC<EmptyGuardProps> = ({
       )}
       {...props}
     >
-      <div className="w-12 h-12 bg-slate-200/60 rounded-full flex items-center justify-center text-slate-400 mb-4">
+      <div className="w-12 h-12 bg-slate-200/60 rounded-full flex items-center justify-center text-slate-500 mb-4">
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8">
           <path
             strokeLinecap="round"
@@ -72,7 +72,7 @@ export const EmptyGuard: React.FC<EmptyGuardProps> = ({
         <button
           type="button"
           onClick={onActionClick}
-          className="text-sm font-bold text-primary hover:text-primary-hover focus-ring px-3 py-1.5 rounded-sm"
+          className="text-sm font-bold text-primary-ink hover:text-primary-ink-hover focus-ring px-3 py-1.5 rounded-sm"
         >
           {actionText}
         </button>

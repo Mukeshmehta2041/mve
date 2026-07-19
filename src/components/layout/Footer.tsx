@@ -33,12 +33,14 @@ export const Footer: React.FC = () => {
               <h3 className="text-white text-sm font-bold uppercase tracking-wider font-heading">
                 {group.title}
               </h3>
-              <ul className="space-y-2.5 text-sm font-sans">
+              {/* -my-1 keeps the visual spacing while each link carries a real
+                  vertical hit area instead of bare 17px text */}
+              <ul className="text-sm font-sans -my-1">
                 {group.links.map((link) => (
                   <li key={link.label}>
                     <Link
                       to={link.href}
-                      className="hover:text-primary transition-colors hover:underline"
+                      className="inline-flex items-center min-h-11 py-1 hover:text-primary transition-colors hover:underline focus-ring rounded-sm"
                     >
                       {link.label}
                     </Link>
@@ -89,7 +91,9 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Footer Bottom Block */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 space-y-4 md:space-y-0 font-sans">
+        {/* slate-400, not slate-500: on navy the darker tier measures 3.75:1.
+            The light/dark muted tiers are inverses of each other. */}
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-slate-400 space-y-4 md:space-y-0 font-sans">
           <div>
             © {new Date().getFullYear()} Maa Vindhawasini Enterprises. All rights reserved.
           </div>

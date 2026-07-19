@@ -72,17 +72,17 @@ export const LegalContactBlock: React.FC = () => {
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-semibold text-navy-950 font-mono">
         <div className="bg-slate-50 border border-slate-100 p-3 rounded-sm">
-          <span className="text-xs text-slate-400 uppercase tracking-wider block mb-1">Company Entity</span>
+          <span className="text-xs text-slate-500 uppercase tracking-wider block mb-1">Company Entity</span>
           <span>{legalContactData.companyName}</span>
         </div>
         <div className="bg-slate-50 border border-slate-100 p-3 rounded-sm">
-          <span className="text-xs text-slate-400 uppercase tracking-wider block mb-1">Telephone</span>
+          <span className="text-xs text-slate-500 uppercase tracking-wider block mb-1">Telephone</span>
           <a href={`tel:${legalContactData.phone}`} className="hover:text-primary transition-colors">
             {legalContactData.phone}
           </a>
         </div>
         <div className="bg-slate-50 border border-slate-100 p-3 rounded-sm">
-          <span className="text-xs text-slate-400 uppercase tracking-wider block mb-1">Email Channel</span>
+          <span className="text-xs text-slate-500 uppercase tracking-wider block mb-1">Email Channel</span>
           <a href={`mailto:${legalContactData.email}`} className="hover:text-primary transition-colors">
             {legalContactData.email}
           </a>

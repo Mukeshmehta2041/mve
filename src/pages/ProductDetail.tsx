@@ -1,12 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { SiteLayout, SEO } from '../components/layout';
+import { SiteLayout, SEO, PageCTA } from '../components/layout';
 import { Container, Section, Button, Breadcrumb, EmptyGuard } from '../components/ui';
 import { productsData, contactData, processStepsData } from '../data';
 import { getProductSchema, getBreadcrumbSchema, getFAQSchema } from '../lib/seo';
 import { getQuoteUrl, cn } from '../lib/utils';
 import { trackEvent } from '../lib/analytics';
 import { ASSETS } from '../lib/assets';
+import { useFocusTrap } from '../lib/useFocusTrap';
 
 export const ProductDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -18,6 +19,11 @@ export const ProductDetail: React.FC = () => {
 
   const galleryRef = useRef<HTMLDivElement>(null);
   const lightboxCloseRef = useRef<HTMLButtonElement>(null);
+  const lightboxRef = useRef<HTMLDivElement>(null);
+  // The zoom trigger, so focus returns to it when the lightbox closes
+  const lightboxTriggerRef = useRef<HTMLButtonElement>(null);
+
+  const closeLightbox = useCallback(() => setIsLightboxOpen(false), []);
 
   // Track product detail page view
   useEffect(() => {
@@ -33,14 +39,20 @@ export const ProductDetail: React.FC = () => {
     ? product.gallery 
     : (product ? [product.image] : []);
 
-  // Keyboard navigation for lightbox
+  // Scroll lock, focus trap, Escape, and focus restore to the zoom trigger
+  useFocusTrap({
+    isOpen: isLightboxOpen,
+    containerRef: lightboxRef,
+    onClose: closeLightbox,
+    restoreFocusTo: lightboxTriggerRef,
+  });
+
+  // Arrow-key navigation between gallery images while the lightbox is open
   useEffect(() => {
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
       if (!isLightboxOpen) return;
 
-      if (e.key === 'Escape') {
-        setIsLightboxOpen(false);
-      } else if (e.key === 'ArrowLeft' && galleryImages.length > 1) {
+      if (e.key === 'ArrowLeft' && galleryImages.length > 1) {
         setActiveImgIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
       } else if (e.key === 'ArrowRight' && galleryImages.length > 1) {
         setActiveImgIndex((prev) => (prev + 1) % galleryImages.length);
@@ -50,13 +62,6 @@ export const ProductDetail: React.FC = () => {
     window.addEventListener('keydown', handleGlobalKeyDown);
     return () => window.removeEventListener('keydown', handleGlobalKeyDown);
   }, [isLightboxOpen, galleryImages.length]);
-
-  // Focus trap for lightbox
-  useEffect(() => {
-    if (isLightboxOpen && lightboxCloseRef.current) {
-      lightboxCloseRef.current.focus();
-    }
-  }, [isLightboxOpen]);
 
   if (!product) {
     return (
@@ -190,20 +195,30 @@ export const ProductDetail: React.FC = () => {
                 className="relative aspect-[4/3] w-full rounded-card overflow-hidden bg-slate-50 border border-border group focus:ring focus:outline-none"
                 aria-label="Product Image Gallery. Use Left and Right arrow keys to change images."
               >
-                {/* Active Image */}
-                <img
-                  src={galleryImages[activeImgIndex]}
-                  alt={`${product.name} - View ${activeImgIndex + 1}`}
-                  className="w-full h-full object-cover cursor-zoom-in"
+                {/* Active image. A real button, not an img with onClick: the
+                    zoom affordance was previously unreachable by keyboard. */}
+                <button
+                  ref={lightboxTriggerRef}
+                  type="button"
                   onClick={() => setIsLightboxOpen(true)}
-                />
+                  className="block w-full h-full cursor-zoom-in focus-ring"
+                  aria-label={`View ${product.name} image ${activeImgIndex + 1} fullscreen`}
+                >
+                  <img
+                    src={galleryImages[activeImgIndex]}
+                    alt={`${product.name} - View ${activeImgIndex + 1}`}
+                    width={800}
+                    height={600}
+                    className="w-full h-full object-cover"
+                  />
+                </button>
 
                 {/* Left/Right Navigation Arrows if multiple images */}
                 {galleryImages.length > 1 && (
                   <>
                     <button
                       onClick={handlePrevImage}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 bg-navy-950/70 hover:bg-navy-950 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors focus-ring z-10"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 bg-navy-950/70 hover:bg-navy-950 text-white w-11 h-11 rounded-full flex items-center justify-center transition-colors focus-ring z-10"
                       aria-label="Previous image"
                     >
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
@@ -212,7 +227,7 @@ export const ProductDetail: React.FC = () => {
                     </button>
                     <button
                       onClick={handleNextImage}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 bg-navy-950/70 hover:bg-navy-950 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors focus-ring z-10"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 bg-navy-950/70 hover:bg-navy-950 text-white w-11 h-11 rounded-full flex items-center justify-center transition-colors focus-ring z-10"
                       aria-label="Next image"
                     >
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
@@ -385,7 +400,7 @@ export const ProductDetail: React.FC = () => {
                   <div className="md:hidden space-y-3">
                     {validSpecs.map(([key, val]) => (
                       <div key={key} className="bg-white border border-border p-4 rounded-card shadow-sm flex flex-col gap-1 font-sans">
-                        <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">{key}</span>
+                        <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">{key}</span>
                         <span className="text-sm font-semibold text-navy-950">{val}</span>
                       </div>
                     ))}
@@ -542,7 +557,7 @@ export const ProductDetail: React.FC = () => {
                   >
                     <span className="text-sm md:text-base pr-4">{faq.question}</span>
                     <svg
-                      className={cn("w-4 h-4 text-slate-400 flex-shrink-0 transition-transform duration-200", isExpanded && "rotate-180")}
+                      className={cn("w-4 h-4 text-slate-500 flex-shrink-0 transition-transform duration-200", isExpanded && "rotate-180")}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -636,75 +651,38 @@ export const ProductDetail: React.FC = () => {
       </Section>
 
       {/* Product-Specific Final Quote CTA */}
-      <Section background="dark" className="border-t border-slate-800 text-center py-14 md:py-20">
-        <Container className="max-w-4xl space-y-6">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight text-white">
-            Need a Custom {product.name}?
-          </h2>
-          <p className="text-sm md:text-base leading-relaxed text-slate-300 max-w-2xl mx-auto font-sans">
-            Specify your dimensions, volume limits, plate gauge (thickness), application details, and installation needs. Our fabrication team will examine the drawings and supply a full pricing proposal.
-          </p>
-
-          <div className="flex flex-wrap gap-4 justify-center items-center pt-3">
-            <Button
-              href={getQuoteUrl({ product: product.slug })}
-              variant="primary"
-              size="md"
-              className="font-bold text-sm tracking-wider uppercase"
-              onClick={() => trackEvent('product_quote_click', { productSlug: product.slug, position: 'footer_cta' })}
-            >
-              Request a Quote
-            </Button>
-
-            {hasWhatsapp && (
-              <Button
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="whatsapp"
-                size="md"
-                className="font-bold text-sm tracking-wider uppercase"
-                onClick={() => trackEvent('product_whatsapp_click', { productSlug: product.slug, position: 'footer_cta' })}
-                icon={
-                  <img src={ASSETS.icons.whatsapp} alt="" className="w-5 h-5 brightness-0 invert" />
-                }
-                iconPosition="left"
-              >
-                WhatsApp Inquiry
-              </Button>
-            )}
-
-            {verifiedPhone && (
-              <Button
-                href={`tel:${verifiedPhone}`}
-                variant="outline-light"
-                size="md"
-                className="font-bold text-sm tracking-wider uppercase"
-                onClick={() => trackEvent('product_call_click', { productSlug: product.slug, position: 'footer_cta' })}
-                icon={
-                  <img src={ASSETS.icons.phone} alt="" className="w-4 h-4 filter invert" />
-                }
-                iconPosition="left"
-              >
-                Call: {verifiedPhone}
-              </Button>
-            )}
-          </div>
-        </Container>
-      </Section>
+      <PageCTA
+        title={`Need a Custom ${product.name}?`}
+        description="Specify your dimensions, volume limits, plate gauge (thickness), application details, and installation needs. Our fabrication team will examine the drawings and supply a full pricing proposal."
+        quote={{
+          href: getQuoteUrl({ product: product.slug }),
+          onClick: () =>
+            trackEvent('product_quote_click', { productSlug: product.slug, position: 'footer_cta' }),
+        }}
+        whatsappUrl={whatsappUrl}
+        whatsappLabel="WhatsApp Inquiry"
+        onWhatsappClick={() =>
+          trackEvent('product_whatsapp_click', { productSlug: product.slug, position: 'footer_cta' })
+        }
+        showCall
+        onCallClick={() =>
+          trackEvent('product_call_click', { productSlug: product.slug, position: 'footer_cta' })
+        }
+      />
 
       {/* Accessible Full-Screen Lightbox Portal Mock */}
       {isLightboxOpen && (
         <div
+          ref={lightboxRef}
           role="dialog"
           aria-modal="true"
           aria-label="Image gallery fullscreen preview"
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 select-none animate-fade-in"
+          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 select-none"
         >
           {/* Close lightbox button */}
           <button
             ref={lightboxCloseRef}
-            onClick={() => setIsLightboxOpen(false)}
+            onClick={closeLightbox}
             className="absolute top-4 right-4 bg-navy-950/80 hover:bg-navy-950 text-white w-12 h-12 rounded-full flex items-center justify-center transition-colors focus-ring cursor-pointer z-50"
             aria-label="Close fullscreen preview"
           >

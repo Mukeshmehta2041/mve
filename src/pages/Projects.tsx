@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SiteLayout, SEO } from '../components/layout';
+import { SiteLayout, SEO, PageCTA } from '../components/layout';
 import { Container, Section, SectionHeader, Button, Breadcrumb, ProjectCard } from '../components/ui';
 import { projectsData, contactData } from '../data';
 import { getBreadcrumbSchema } from '../lib/seo';
@@ -146,7 +146,7 @@ export const Projects: React.FC = () => {
                 <div>
                   <div className="flex flex-wrap gap-x-3 gap-y-1 mb-3 text-xs text-primary font-bold tracking-wider uppercase">
                     <span>{featuredProject.industry}</span>
-                    <span className="text-slate-300">•</span>
+                    <span aria-hidden="true" className="text-slate-300">•</span>
                     <span>{featuredProject.location}</span>
                   </div>
 
@@ -161,7 +161,7 @@ export const Projects: React.FC = () => {
                   {/* Scope of Work */}
                   {featuredProject.scope && featuredProject.scope.length > 0 && (
                     <div className="space-y-2 mb-6">
-                      <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
+                      <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
                         Scope of Work
                       </span>
                       <div className="flex flex-wrap gap-1.5">
@@ -184,7 +184,7 @@ export const Projects: React.FC = () => {
                     href={`/request-a-quote?source=project&project=${featuredProject.id}`}
                     variant="primary"
                     size="sm"
-                    className="font-bold text-xs uppercase tracking-wide flex-1 h-[42px]"
+                    className="font-bold text-xs uppercase tracking-wide w-full sm:flex-1"
                     onClick={() => trackEvent('project_similar_quote_click', { projectKey: featuredProject.id, position: 'featured' })}
                   >
                     Discuss Similar Project
@@ -195,7 +195,7 @@ export const Projects: React.FC = () => {
                       href={`/products/${featuredProject.productSlug}`}
                       variant="secondary"
                       size="sm"
-                      className="font-bold text-xs uppercase tracking-wide flex-1 h-[42px]"
+                      className="font-bold text-xs uppercase tracking-wide w-full sm:flex-1"
                       onClick={() => trackEvent('project_product_click', { projectKey: featuredProject.id, productSlug: featuredProject.productSlug, position: 'featured' })}
                     >
                       View Product Details
@@ -225,10 +225,12 @@ export const Projects: React.FC = () => {
                     key={cat}
                     onClick={() => handleCategorySelect(cat)}
                     className={cn(
-                      "px-3.5 py-1.5 rounded-sm text-xs font-bold transition-all cursor-pointer focus-ring",
+                      // min-h-11: these are the primary mobile filtering control
+                      // and were rendering ~28px tall, well under the 44px minimum
+                      "inline-flex items-center min-h-11 px-4 rounded-sm text-xs font-bold transition-colors cursor-pointer focus-ring",
                       isActive
-                        ? "bg-primary text-white shadow-sm"
-                        : "bg-white border border-border text-slate-600 hover:text-navy-950 hover:border-slate-300"
+                        ? "bg-primary-ink text-white"
+                        : "bg-white border border-border text-slate-600 hover:text-navy-950 hover:border-slate-500"
                     )}
                     aria-pressed={isActive}
                   >
@@ -357,36 +359,13 @@ export const Projects: React.FC = () => {
       </Section>
 
       {/* Final Conversion CTA */}
-      <Section background="dark" className="border-t border-slate-800 text-center py-14 md:py-20">
-        <Container className="max-w-4xl space-y-6">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight text-white font-heading">
-            Let’s Build the Right Solution for Your Project.
-          </h2>
-          <p className="text-sm md:text-base leading-relaxed text-slate-400 max-w-2xl mx-auto font-sans">
-            Submit your specifications or explore our catalog of reaction vessels, custom tanks, safety barriers, and material bins.
-          </p>
-
-          <div className="flex flex-wrap gap-4 justify-center items-center pt-3 font-sans">
-            <Button
-              href="/request-a-quote"
-              variant="primary"
-              size="md"
-              className="font-bold text-sm tracking-wider uppercase h-12"
-              onClick={() => trackEvent('projects_quote_click', { position: 'final_cta' })}
-            >
-              Request a Quote
-            </Button>
-            <Button
-              href="/products"
-              variant="outline-light"
-              size="md"
-              className="font-bold text-sm tracking-wider uppercase h-12"
-            >
-              View Products
-            </Button>
-          </div>
-        </Container>
-      </Section>
+      <PageCTA
+        title="Let’s Build the Right Solution for Your Project."
+        description="Submit your specifications or explore our catalog of reaction vessels, custom tanks, safety barriers, and material bins."
+        quote={{ onClick: () => trackEvent('projects_quote_click', { position: 'final_cta' }) }}
+        secondary={{ label: 'View Products', href: '/products' }}
+        showWhatsapp={false}
+      />
     </SiteLayout>
   );
 };

@@ -22,7 +22,8 @@ export const MobileStickyActionBar: React.FC = () => {
   const whatsappUrl = `https://wa.me/${contactData.whatsapp}?text=${encodeURIComponent(defaultMsg)}`;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-border shadow-floating lg:hidden px-4 py-2.5 flex items-center justify-between gap-3 safe-bottom">
+    // pb reserves the iOS home-indicator strip on top of the bar's own padding
+    <div className="fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-border shadow-floating lg:hidden px-4 pt-2.5 pb-[calc(0.625rem+env(safe-area-inset-bottom))] flex items-center justify-between gap-3">
       {/* Call button - fallback to contact route if phone is unverified */}
       {verifiedPhone ? (
         <a
@@ -48,7 +49,7 @@ export const MobileStickyActionBar: React.FC = () => {
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center bg-success hover:bg-green-600 text-white w-12 h-12 shrink-0 rounded-card focus-ring"
+          className="flex items-center justify-center bg-success-ink hover:bg-success-ink-hover text-white w-12 h-12 shrink-0 rounded-card focus-ring"
           aria-label="Message us on WhatsApp"
         >
           <img src={ASSETS.icons.whatsapp} alt="" className="w-5 h-5 object-contain brightness-0 invert" />
@@ -65,7 +66,7 @@ export const MobileStickyActionBar: React.FC = () => {
       {/* Request Quote Button (has largest weight) */}
       <a
         href="/request-a-quote"
-        className="flex-grow h-12 bg-primary hover:bg-primary-hover text-white text-sm font-bold uppercase tracking-wider rounded-card flex items-center justify-center gap-2 focus-ring shadow-sm whitespace-nowrap"
+        className="flex-grow h-12 bg-primary-ink hover:bg-primary-ink-hover text-white text-sm font-bold uppercase tracking-wider rounded-card flex items-center justify-center gap-2 focus-ring shadow-sm whitespace-nowrap"
       >
         <span>Request a Quote</span>
         <svg

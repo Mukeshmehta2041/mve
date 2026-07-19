@@ -28,23 +28,36 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
       )}
       {...props}
     >
-      <ol className="flex flex-wrap items-center space-x-2">
+      {/* -my-1.5 keeps the visual rhythm while the links themselves carry a
+          real vertical hit area rather than bare 16px text */}
+      <ol className="flex flex-wrap items-center gap-x-2 -my-1.5">
         <li>
-          <a href="/" className="hover:text-primary transition-colors flex items-center">
+          <a
+            href="/"
+            className={cn(
+              'inline-flex items-center py-1.5 rounded-sm focus-ring transition-colors',
+              onDark ? 'hover:text-primary' : 'hover:text-primary-ink'
+            )}
+          >
             Home
           </a>
         </li>
         {items.map((item, idx) => {
           const isLast = idx === items.length - 1;
           return (
-            <li key={idx} className="flex items-center space-x-2">
+            <li key={item.href ?? item.label} className="flex items-center gap-x-2">
               {/* Separator symbol */}
-              <span className={cn('select-none text-xs', onDark ? 'text-slate-500' : 'text-slate-400')}>/</span>
+              <span
+                aria-hidden="true"
+                className={cn('select-none text-xs', onDark ? 'text-slate-500' : 'text-slate-400')}
+              >
+                /
+              </span>
               {isLast || !item.href ? (
                 <span
                   aria-current="page"
                   className={cn(
-                    'font-medium font-sans truncate max-w-[150px] md:max-w-xs',
+                    'font-medium font-sans truncate max-w-[150px] md:max-w-xs py-1.5',
                     onDark ? 'text-white' : 'text-navy-950'
                   )}
                 >
@@ -53,7 +66,10 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
               ) : (
                 <a
                   href={item.href}
-                  className="hover:text-primary transition-colors truncate max-w-[150px] md:max-w-xs"
+                  className={cn(
+                    'inline-block py-1.5 rounded-sm focus-ring transition-colors truncate max-w-[150px] md:max-w-xs',
+                    onDark ? 'hover:text-primary' : 'hover:text-primary-ink'
+                  )}
                 >
                   {item.label}
                 </a>

@@ -15,6 +15,7 @@ export interface InputProps
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ label, error, required, className, id, ...props }, ref) => {
     const inputId = id || `input-${label.replace(/\s+/g, '-').toLowerCase()}`;
+    const errorId = `${inputId}-error`;
     return (
       <div className="w-full text-left mb-4">
         <label
@@ -22,19 +23,22 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           className="block text-sm font-semibold text-navy-950 mb-1.5"
         >
           {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
+          {required && <span className="text-error ml-1" aria-hidden="true">*</span>}
         </label>
         <input
           id={inputId}
           ref={ref}
+          required={required}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={error ? errorId : undefined}
           className={cn(
-            'w-full h-12 px-4 rounded-sm border border-slate-300 bg-white text-navy-950 placeholder-slate-400 focus-ring transition-colors focus:border-primary focus:outline-none text-base',
-            error ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' : '',
+            'w-full h-12 px-4 rounded-sm border border-border bg-white text-navy-950 placeholder-slate-500 focus-ring transition-colors focus:border-primary focus:outline-none text-base',
+            error ? 'border-error focus:border-error' : '',
             className
           )}
           {...props}
         />
-        {error && <FormErrorMessage message={error} />}
+        {error && <FormErrorMessage message={error} id={errorId} />}
       </div>
     );
   }
@@ -57,6 +61,7 @@ export interface SelectProps
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   ({ label, error, required, options, placeholder, className, id, ...props }, ref) => {
     const selectId = id || `select-${label.replace(/\s+/g, '-').toLowerCase()}`;
+    const errorId = `${selectId}-error`;
     return (
       <div className="w-full text-left mb-4">
         <label
@@ -64,15 +69,18 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           className="block text-sm font-semibold text-navy-950 mb-1.5"
         >
           {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
+          {required && <span className="text-error ml-1" aria-hidden="true">*</span>}
         </label>
         <div className="relative">
           <select
             id={selectId}
             ref={ref}
+            required={required}
+            aria-invalid={error ? true : undefined}
+            aria-describedby={error ? errorId : undefined}
             className={cn(
-              'w-full h-12 pl-4 pr-10 rounded-sm border border-slate-300 bg-white text-navy-950 focus-ring transition-colors focus:border-primary focus:outline-none text-base appearance-none cursor-pointer',
-              error ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' : '',
+              'w-full h-12 pl-4 pr-10 rounded-sm border border-border bg-white text-navy-950 focus-ring transition-colors focus:border-primary focus:outline-none text-base appearance-none cursor-pointer',
+              error ? 'border-error focus:border-error' : '',
               className
             )}
             {...props}
@@ -97,7 +105,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             </svg>
           </div>
         </div>
-        {error && <FormErrorMessage message={error} />}
+        {error && <FormErrorMessage message={error} id={errorId} />}
       </div>
     );
   }
@@ -112,6 +120,7 @@ export interface TextareaProps
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ label, error, required, className, id, ...props }, ref) => {
     const textareaId = id || `textarea-${label.replace(/\s+/g, '-').toLowerCase()}`;
+    const errorId = `${textareaId}-error`;
     return (
       <div className="w-full text-left mb-4">
         <label
@@ -119,20 +128,23 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           className="block text-sm font-semibold text-navy-950 mb-1.5"
         >
           {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
+          {required && <span className="text-error ml-1" aria-hidden="true">*</span>}
         </label>
         <textarea
           id={textareaId}
           ref={ref}
+          required={required}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={error ? errorId : undefined}
           className={cn(
             // Minimum height 140px (design.md Section 7)
-            'w-full min-h-[140px] p-4 rounded-sm border border-slate-300 bg-white text-navy-950 placeholder-slate-400 focus-ring transition-colors focus:border-primary focus:outline-none text-base resize-y',
-            error ? 'border-red-500 focus:border-red-500' : '',
+            'w-full min-h-[140px] p-4 rounded-sm border border-border bg-white text-navy-950 placeholder-slate-500 focus-ring transition-colors focus:border-primary focus:outline-none text-base resize-y',
+            error ? 'border-error focus:border-error' : '',
             className
           )}
           {...props}
         />
-        {error && <FormErrorMessage message={error} />}
+        {error && <FormErrorMessage message={error} id={errorId} />}
       </div>
     );
   }
@@ -148,7 +160,11 @@ export interface CheckboxProps
 
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   ({ label, error, required, className, id, ...props }, ref) => {
-    const checkboxId = id || `checkbox-${Math.random().toString(36).substr(2, 9)}`;
+    // useId, not Math.random: the previous id changed on every render, so the
+    // label/input association silently broke after the first re-render.
+    const generatedId = React.useId();
+    const checkboxId = id || `checkbox-${generatedId}`;
+    const errorId = `${checkboxId}-error`;
     return (
       <div className="w-full text-left mb-4">
         <div className="flex items-start">
@@ -156,22 +172,25 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
             id={checkboxId}
             type="checkbox"
             ref={ref}
+            required={required}
+            aria-invalid={error ? true : undefined}
+            aria-describedby={error ? errorId : undefined}
             className={cn(
-              'w-5 h-5 mt-0.5 text-primary border-slate-300 rounded focus-ring cursor-pointer',
-              error ? 'border-red-500' : '',
+              'w-5 h-5 mt-0.5 text-primary-ink border-border rounded focus-ring cursor-pointer',
+              error ? 'border-error' : '',
               className
             )}
             {...props}
           />
           <label
             htmlFor={checkboxId}
-            className="ml-2.5 text-sm text-slate-600 cursor-pointer select-none font-medium text-navy-950"
+            className="ml-2.5 text-sm cursor-pointer select-none font-medium text-navy-950"
           >
             {label}
-            {required && <span className="text-red-500 ml-1">*</span>}
+            {required && <span className="text-error ml-1" aria-hidden="true">*</span>}
           </label>
         </div>
-        {error && <FormErrorMessage message={error} className="mt-1" />}
+        {error && <FormErrorMessage message={error} className="mt-1" id={errorId} />}
       </div>
     );
   }
@@ -186,6 +205,8 @@ export interface FileUploadProps
   maxSizeLabel?: string;
   selectedFile?: File | null;
   onClearFile?: () => void;
+  /** Draws attention to the dropzone itself, so callers don't wrap it in another card. */
+  highlighted?: boolean;
 }
 
 export const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
@@ -198,6 +219,7 @@ export const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
       maxSizeLabel = '10MB',
       selectedFile,
       onClearFile,
+      highlighted = false,
       className,
       id,
       ...props
@@ -205,28 +227,33 @@ export const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
     ref
   ) => {
     const fileId = id || `file-${label.replace(/\s+/g, '-').toLowerCase()}`;
+    const errorId = `${fileId}-error`;
     return (
       <div className="w-full text-left mb-4">
-        <label className="block text-sm font-semibold text-navy-950 mb-1.5">
+        <label htmlFor={fileId} className="block text-sm font-semibold text-navy-950 mb-1.5">
           {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
+          {required && <span className="text-error ml-1" aria-hidden="true">*</span>}
         </label>
         <div
           className={cn(
-            'border-2 border-dashed border-slate-300 rounded-card p-5 bg-slate-50 hover:bg-slate-100/50 hover:border-slate-400 transition-colors flex flex-col items-center justify-center text-center relative cursor-pointer',
-            error ? 'border-red-500 bg-red-50/10' : ''
+            'border-2 border-dashed border-border rounded-card p-5 bg-surface-muted hover:bg-slate-100/50 hover:border-slate-500 transition-colors flex flex-col items-center justify-center text-center relative cursor-pointer',
+            highlighted && !error ? 'border-primary bg-primary-soft' : '',
+            error ? 'border-error bg-error/5' : ''
           )}
         >
           <input
             id={fileId}
             type="file"
             ref={ref}
+            required={required}
+            aria-invalid={error ? true : undefined}
+            aria-describedby={error ? errorId : undefined}
             className={cn('absolute inset-0 w-full h-full opacity-0 cursor-pointer', className)}
             {...props}
           />
           
           <svg
-            className="w-8 h-8 text-slate-400 mb-2.5"
+            className="w-8 h-8 text-slate-500 mb-2.5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -252,8 +279,10 @@ export const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
                     e.preventDefault();
                     onClearFile();
                   }}
-                  className="ml-2 text-slate-400 hover:text-red-500"
-                  aria-label="Remove file"
+                  // 44px hit area: a near-miss on the old 16px icon fell through
+                  // to the full-cover file input behind it and reopened the picker
+                  className="ml-1 -mr-1.5 inline-flex items-center justify-center min-w-[44px] min-h-[44px] text-slate-500 hover:text-error focus-ring rounded-sm"
+                  aria-label={`Remove ${selectedFile.name}`}
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
@@ -266,26 +295,30 @@ export const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
               <span className="text-sm font-semibold text-navy-950">
                 Click to upload drawing or document
               </span>
-              <span className="text-xs text-slate-400 mt-1">
+              <span className="text-xs text-slate-500 mt-1">
                 Accepted: {formatsLabel} (Max: {maxSizeLabel})
               </span>
             </>
           )}
         </div>
-        {error && <FormErrorMessage message={error} />}
+        {error && <FormErrorMessage message={error} id={errorId} />}
       </div>
     );
   }
 );
 FileUpload.displayName = 'FileUpload';
 
-// Form Error Message component
-export const FormErrorMessage: React.FC<{ message: string; className?: string }> = ({
+// Form Error Message component.
+// `id` is what each control points its aria-describedby at, so the message is
+// read out with the field rather than being visual-only.
+export const FormErrorMessage: React.FC<{ message: string; className?: string; id?: string }> = ({
   message,
   className,
+  id,
 }) => {
   return (
     <p
+      id={id}
       className={cn('text-sm text-error font-medium flex items-center mt-1.5', className)}
     >
       <svg
@@ -311,13 +344,14 @@ export const FormSuccessMessage: React.FC<{ message: string; className?: string 
 }) => {
   return (
     <div
+      role="status"
       className={cn(
-        'p-4 bg-green-50 border border-green-200 text-green-800 rounded-card flex items-start text-left',
+        'p-4 bg-success-ink/5 border border-success-ink/20 text-navy-950 rounded-card flex items-start text-left',
         className
       )}
     >
       <svg
-        className="w-5 h-5 text-success mr-2.5 mt-0.5 flex-shrink-0"
+        className="w-5 h-5 text-success-ink mr-2.5 mt-0.5 flex-shrink-0"
         fill="currentColor"
         viewBox="0 0 20 20"
       >
@@ -329,7 +363,7 @@ export const FormSuccessMessage: React.FC<{ message: string; className?: string 
       </svg>
       <div>
         <p className="text-base font-bold leading-tight">Submission Successful</p>
-        <p className="text-sm text-green-700 leading-normal mt-1">{message}</p>
+        <p className="text-sm text-slate-600 leading-normal mt-1">{message}</p>
       </div>
     </div>
   );

@@ -29,7 +29,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           loading="lazy"
         />
         {project.isFeatured && (
-          <span className="absolute top-3 left-3 bg-primary text-white text-[11px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-sm">
+          <span className="absolute top-3 left-3 bg-primary-ink text-white text-[11px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-sm">
             Featured
           </span>
         )}
@@ -37,9 +37,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
       <div className="flex-grow flex flex-col">
         {/* Project Meta Row */}
-        <div className="flex flex-wrap gap-x-3 gap-y-1 mb-2 text-xs text-slate-400 font-semibold tracking-wider uppercase">
+        <div className="flex flex-wrap gap-x-3 gap-y-1 mb-2 text-xs text-slate-500 font-semibold tracking-wider uppercase">
           <span>{project.industry}</span>
-          <span className="text-slate-300">•</span>
+          <span aria-hidden="true" className="text-slate-300">•</span>
           <span>{project.location}</span>
         </div>
 
@@ -53,7 +53,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
         {project.scope && project.scope.length > 0 && (
           <div className="mt-auto pt-3 border-t border-border">
-            <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-2">
+            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block mb-2">
               Scope of Work
             </span>
             <div className="flex flex-wrap gap-1.5">
@@ -77,7 +77,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 variant="secondary"
                 size="sm"
                 href={`/products/${project.productSlug}`}
-                className="text-xs font-bold leading-none h-[38px] px-1 truncate"
+                className="text-xs font-bold leading-none px-2"
                 onClick={() => trackEvent('project_product_click', { projectKey: project.id, productSlug: project.productSlug })}
               >
                 View Product
@@ -89,7 +89,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               variant="primary"
               size="sm"
               href={`/request-a-quote?source=project&project=${project.id}`}
-              className="text-xs font-bold leading-none h-[38px] px-1 truncate"
+              className="text-xs font-bold leading-none px-2"
               onClick={() => trackEvent('project_similar_quote_click', { projectKey: project.id })}
             >
               Discuss Project

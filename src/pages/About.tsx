@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { SiteLayout, SEO } from '../components/layout';
+import { SiteLayout, SEO, PageCTA } from '../components/layout';
 import { getBreadcrumbSchema, getOrganizationSchema } from '../lib/seo';
 import { Container, Section, Button, Breadcrumb, SectionHeader } from '../components/ui';
 import {
@@ -19,7 +19,6 @@ export const About: React.FC = () => {
     trackEvent('about_page_view');
   }, []);
 
-  const hasWhatsapp = contactData.whatsapp !== 'pending verification';
 
   const whatsappMsg = 'Hello Maa Vindhawasini Enterprises, I am looking at your company details and would like to discuss my fabrication requirement.';
   const whatsappUrl = `https://wa.me/${contactData.whatsapp}?text=${encodeURIComponent(whatsappMsg)}`;
@@ -135,7 +134,7 @@ export const About: React.FC = () => {
                 <Button
                   href="/products"
                   variant="primary"
-                  className="font-bold text-xs uppercase tracking-wide h-10 px-5"
+                  className="font-bold text-xs uppercase tracking-wide h-11 px-5"
                 >
                   Explore Catalog Products
                 </Button>
@@ -312,7 +311,7 @@ export const About: React.FC = () => {
                 <Button
                   href="/quality-certifications"
                   variant="primary"
-                  className="font-bold text-xs uppercase tracking-wide h-10 px-5"
+                  className="font-bold text-xs uppercase tracking-wide h-11 px-5"
                   onClick={() => trackEvent('about_quality_click')}
                 >
                   View our quality process
@@ -335,54 +334,14 @@ export const About: React.FC = () => {
       </Section>
 
       {/* Final Action CTA Block */}
-      <Section background="dark" className="border-t border-slate-800 text-center py-14 md:py-20">
-        <Container className="max-w-4xl space-y-6 font-sans">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight text-white font-heading">
-            Let’s Discuss Your Industrial Requirement.
-          </h2>
-          <p className="text-sm md:text-base leading-relaxed text-slate-300 max-w-2xl mx-auto">
-            Submit your engineering sketches, target capacity limits, plate thickness specifications, or call our estimating team directly.
-          </p>
-
-          <div className="flex flex-wrap gap-4 justify-center items-center pt-3">
-            <Button
-              href="/request-a-quote"
-              variant="primary"
-              size="md"
-              className="font-bold text-sm tracking-wider uppercase h-12"
-              onClick={() => trackEvent('about_quote_click', { position: 'footer_cta' })}
-            >
-              Request a Quote
-            </Button>
-            <Button
-              href="/products"
-              variant="outline-light"
-              size="md"
-              className="font-bold text-sm tracking-wider uppercase h-12"
-            >
-              View Products
-            </Button>
-
-            {hasWhatsapp && (
-              <Button
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="whatsapp"
-                size="md"
-                className="font-bold text-sm tracking-wider uppercase h-12"
-                onClick={() => trackEvent('about_whatsapp_click')}
-                icon={
-                  <img src={ASSETS.icons.whatsapp} alt="" aria-hidden="true" className="w-5 h-5 brightness-0 invert" />
-                }
-                iconPosition="left"
-              >
-                WhatsApp Us
-              </Button>
-            )}
-          </div>
-        </Container>
-      </Section>
+      <PageCTA
+        title="Let’s Discuss Your Industrial Requirement."
+        description="Submit your engineering sketches, target capacity limits, plate thickness specifications, or call our estimating team directly."
+        quote={{ onClick: () => trackEvent('about_quote_click', { position: 'footer_cta' }) }}
+        secondary={{ label: 'View Products', href: '/products' }}
+        whatsappUrl={whatsappUrl}
+        onWhatsappClick={() => trackEvent('about_whatsapp_click')}
+      />
     </SiteLayout>
   );
 };

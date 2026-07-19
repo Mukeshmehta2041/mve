@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { SiteLayout, SEO } from '../components/layout';
+import { SiteLayout, SEO, PageCTA } from '../components/layout';
 import { Container, Section, SectionHeader, Button, Breadcrumb } from '../components/ui';
 import { getBreadcrumbSchema } from '../lib/seo';
 import {
@@ -18,8 +18,6 @@ export const QualityCertifications: React.FC = () => {
     trackEvent('quality_page_view');
   }, []);
 
-  const verifiedPhone = contactData.phones.find((p) => p !== 'pending verification');
-  const hasWhatsapp = contactData.whatsapp !== 'pending verification';
 
   const whatsappMsg = 'Hello Maa Vindhawasini Enterprises, I am looking at your quality certifications and would like to discuss my project specifications.';
   const whatsappUrl = `https://wa.me/${contactData.whatsapp}?text=${encodeURIComponent(whatsappMsg)}`;
@@ -241,61 +239,17 @@ export const QualityCertifications: React.FC = () => {
       </Section>
 
       {/* Quality Final Quote CTA Section */}
-      <Section background="dark" className="border-t border-slate-800 text-center py-14 md:py-20">
-        <Container className="max-w-4xl space-y-6 font-sans">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight text-white font-heading">
-            Need Quality-Focused Industrial Fabrication?
-          </h2>
-          <p className="text-sm md:text-base leading-relaxed text-slate-300 max-w-2xl mx-auto">
-            Provide your raw measurements, sketches, plate gauges, or target capacity limits. Our team will review the parameters to compile a detailed cost proposal.
-          </p>
-
-          <div className="flex flex-wrap gap-4 justify-center items-center pt-3">
-            <Button
-              href="/request-a-quote?source=quality"
-              variant="primary"
-              size="md"
-              className="font-bold text-sm tracking-wider uppercase h-12"
-              onClick={() => trackEvent('quality_quote_click', { position: 'footer_cta' })}
-            >
-              Request a Quote
-            </Button>
-
-            {hasWhatsapp && (
-              <Button
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="whatsapp"
-                size="md"
-                className="font-bold text-sm tracking-wider uppercase h-12"
-                onClick={() => trackEvent('quality_whatsapp_click', { position: 'footer_cta' })}
-                icon={
-                  <img src={ASSETS.icons.whatsapp} alt="" aria-hidden="true" className="w-5 h-5 brightness-0 invert" />
-                }
-                iconPosition="left"
-              >
-                WhatsApp Us
-              </Button>
-            )}
-
-            {verifiedPhone && (
-              <Button
-                href={`tel:${verifiedPhone}`}
-                variant="outline-light"
-                size="md"
-                className="font-bold text-sm tracking-wider uppercase h-12"
-                icon={
-                  <img src={ASSETS.icons.phone} alt="" aria-hidden="true" className="w-4 h-4 filter invert" />
-                }
-                iconPosition="left"
-              >
-                Call: {verifiedPhone}
-              </Button>
-            )}
-          </div>
-        </Container>
-      </Section>
+      <PageCTA
+        title="Need Quality-Focused Industrial Fabrication?"
+        description="Provide your raw measurements, sketches, plate gauges, or target capacity limits. Our team will review the parameters to compile a detailed cost proposal."
+        quote={{
+          href: '/request-a-quote?source=quality',
+          onClick: () => trackEvent('quality_quote_click', { position: 'footer_cta' }),
+        }}
+        whatsappUrl={whatsappUrl}
+        onWhatsappClick={() => trackEvent('quality_whatsapp_click', { position: 'footer_cta' })}
+        showCall
+      />
     </SiteLayout>
   );
 };

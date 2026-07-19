@@ -27,6 +27,10 @@ export const Products: React.FC = () => {
 
       <Section>
         <Container>
+          {/* The cards render h3, so without this the page jumped h1 -> h3.
+              Visually hidden rather than printed: a "Products" heading directly
+              under the "Products" hero would just be redundant copy. */}
+          <h2 className="sr-only">Product catalogue</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {productsData.map((product) => (
               <ProductCard key={product.id} product={product} />

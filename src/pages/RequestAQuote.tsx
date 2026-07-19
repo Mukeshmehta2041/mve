@@ -66,6 +66,12 @@ export const RequestAQuote: React.FC = () => {
   const [rfqReference, setRfqReference] = useState('');
   const [submitError, setSubmitError] = useState<string | null>(null);
 
+  // Focus target for the post-submit confirmation screen
+  const successRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (isSuccess) successRef.current?.focus();
+  }, [isSuccess]);
+
   // Prefill metadata labels
   const [relatedProjectTitle, setRelatedProjectTitle] = useState('');
   const [highlightUpload, setHighlightUpload] = useState(false);
@@ -293,8 +299,11 @@ export const RequestAQuote: React.FC = () => {
       <SiteLayout>
         <SEO title="Quote Request Submitted | Maa Vindhawasini Enterprises" description="Thank you for submitting your quote request details." noindex={true} />
         <Section className="bg-white py-16 md:py-24 text-center">
+          {/* The whole page swaps to this on submit, so it announces itself and
+              takes focus rather than leaving the user on a detached button */}
           <Container className="max-w-2xl font-sans">
-            <div className="w-16 h-16 bg-green-50 border border-green-200 rounded-full flex items-center justify-center text-success mx-auto mb-6 shadow-sm">
+            <div ref={successRef} role="status" tabIndex={-1} className="outline-none">
+            <div className="w-16 h-16 bg-success-ink/5 border border-success-ink/20 rounded-full flex items-center justify-center text-success-ink mx-auto mb-6">
               <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm3.707-9.293a1 1 0 0 0-1.414-1.414L9 10.586 7.707 9.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4z" clipRule="evenodd" />
               </svg>
@@ -351,6 +360,7 @@ export const RequestAQuote: React.FC = () => {
               <Button href="/" variant="secondary" className="font-bold text-xs uppercase tracking-wide">
                 Go to Homepage
               </Button>
+            </div>
             </div>
           </Container>
         </Section>
@@ -633,12 +643,13 @@ export const RequestAQuote: React.FC = () => {
                 </div>
 
                 {/* Section D: File uploads (Option 3 metadata handler) */}
-                <div 
+                {/* The highlight state used to add a third card surface around
+                    an already-carded dropzone inside an already-carded form.
+                    A left-side emphasis rule would be worse; a plain marker
+                    line plus the dropzone's own highlight carries it. */}
+                <div
                   ref={uploadAreaRef}
-                  className={cn(
-                    "pt-6 border-t border-slate-200 transition-all rounded-card duration-300",
-                    highlightUpload ? "p-4 bg-primary-soft border border-primary/20 ring-2 ring-primary/25" : ""
-                  )}
+                  className="pt-6 border-t border-border transition-colors duration-300"
                 >
                   <FileUpload
                     label="Attach Engineering Drawing or Specifications"
@@ -650,10 +661,11 @@ export const RequestAQuote: React.FC = () => {
                     onChange={handleFileChange}
                     error={fileError || undefined}
                     id="input-file"
+                    highlighted={highlightUpload}
                   />
                   {highlightUpload && (
-                    <span className="text-xs font-bold text-primary uppercase block mt-1 font-sans">
-                      Highlight: Recommended upload area for blueprint files.
+                    <span className="text-xs font-bold text-primary-ink uppercase block mt-1 font-sans">
+                      Recommended upload area for blueprint files.
                     </span>
                   )}
                 </div>
@@ -662,7 +674,7 @@ export const RequestAQuote: React.FC = () => {
                 <div className="pt-6 border-t border-slate-200 grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="md:col-span-2">
                     <label className="block text-sm font-bold text-navy-950 mb-1">Contact & Dispatch Parameters</label>
-                    <span className="text-[11px] text-slate-400 font-medium">Please supply accurate details so our technicians can reach you.</span>
+                    <span className="text-[11px] text-slate-500 font-medium">Please supply accurate details so our technicians can reach you.</span>
                   </div>
 
                   <Input
@@ -752,7 +764,11 @@ export const RequestAQuote: React.FC = () => {
                     onChange={(e) => setConsentChecked(e.target.checked)}
                   />
 
-                  {submitError && <FormErrorMessage message={submitError} />}
+                  {/* Submit-level failure is announced; field-level errors are not,
+                      to avoid firing an alert per keystroke during validation */}
+                  <div role="alert">
+                    {submitError && <FormErrorMessage message={submitError} />}
+                  </div>
 
                   <Button
                     type="submit"
@@ -783,7 +799,7 @@ export const RequestAQuote: React.FC = () => {
                       href={whatsappUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 text-xs font-bold text-white bg-success hover:bg-green-600 px-4 py-2.5 rounded-card w-full text-center shadow-sm"
+                      className="flex items-center justify-center min-h-11 gap-2 text-xs font-bold text-white bg-success-ink hover:bg-success-ink-hover px-4 py-2.5 rounded-card w-full text-center shadow-sm"
                       onClick={() => trackEvent('quote_alternative_contact_click', { channel: 'whatsapp' })}
                     >
                       <img src={ASSETS.icons.whatsapp} alt="" aria-hidden="true" className="w-4 h-4 brightness-0 invert" />

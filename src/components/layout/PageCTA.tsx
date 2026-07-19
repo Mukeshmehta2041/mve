@@ -1,85 +1,140 @@
 import React from 'react';
 import { Container } from '../ui/Container';
+import { Section } from '../ui/Section';
 import { Button } from '../ui/Button';
 import { contactData } from '../../data';
 import { ASSETS } from '../../lib/assets';
 import { cn } from '../../lib/utils';
 
-interface PageCTAProps {
-  className?: string;
-  dark?: boolean;
+interface CTAAction {
+  label: string;
+  href: string;
+  onClick?: () => void;
 }
 
+interface PageCTAProps {
+  title: string;
+  description: string;
+  /** Primary action. Defaults to the plain quote route. */
+  quote?: Partial<CTAAction>;
+  /** Optional third action, e.g. "View Products" or a tel: link. */
+  secondary?: CTAAction;
+  /** WhatsApp is shown whenever a number is verified; opt out per page. */
+  showWhatsapp?: boolean;
+  whatsappLabel?: string;
+  /**
+   * Page-specific prefilled WhatsApp message URL. Pages that set this get a
+   * message naming what the visitor was looking at; without it the generic
+   * site-wide message is used.
+   */
+  whatsappUrl?: string;
+  onWhatsappClick?: () => void;
+  /** Renders a tel: button when a verified number exists. */
+  showCall?: boolean;
+  onCallClick?: () => void;
+  className?: string;
+}
+
+const actionClasses = 'font-bold text-sm tracking-wider uppercase h-12';
+
+/**
+ * The closing call-to-action band shared by every content page.
+ *
+ * Each page previously hand-rolled ~35 lines of this, so the six copies had
+ * already drifted (two different muted-text tokens, inconsistent button sets).
+ * Copy and analytics stay per-page; the structure does not.
+ */
 export const PageCTA: React.FC<PageCTAProps> = ({
+  title,
+  description,
+  quote,
+  secondary,
+  showWhatsapp = true,
+  whatsappLabel = 'WhatsApp Us',
+  whatsappUrl,
+  onWhatsappClick,
+  showCall = false,
+  onCallClick,
   className,
-  dark = false,
 }) => {
   const verifiedPhone = contactData.phones.find((p) => p !== 'pending verification');
   const hasWhatsapp = contactData.whatsapp !== 'pending verification';
 
   return (
-    <section
-      className={cn(
-        'py-14 md:py-18 lg:py-20 border-t border-b border-border text-center relative overflow-hidden',
-        dark ? 'bg-navy-950 text-white border-slate-800' : 'bg-slate-50 text-navy-950',
-        className
-      )}
+    <Section
+      background="dark"
+      className={cn('border-t border-slate-800 text-center py-14 md:py-20', className)}
     >
-      <Container className="relative z-10 max-w-4xl space-y-6">
-        <h2
-          className={cn(
-            'text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight',
-            dark ? 'text-white' : 'text-navy-950'
-          )}
-        >
-          Have a Custom Fabrication Requirement?
+      <Container className="max-w-4xl space-y-6 font-sans">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight text-white font-heading text-balance">
+          {title}
         </h2>
-        <p
-          className={cn(
-            'text-base md:text-lg leading-relaxed max-w-2xl mx-auto font-sans',
-            dark ? 'text-slate-400' : 'text-slate-600'
-          )}
-        >
-          Send us your engineering drawings or dimensional requirements. Our technicians will review and draft a complete itemized pricing proposal.
+        <p className="text-sm md:text-base leading-relaxed text-slate-300 max-w-2xl mx-auto">
+          {description}
         </p>
-        
+
         <div className="flex flex-wrap gap-4 justify-center items-center pt-3">
-          <Button href="/request-a-quote" variant="primary" size="md">
-            Request a Quote
+          <Button
+            href={quote?.href ?? '/request-a-quote'}
+            variant="primary"
+            size="md"
+            className={actionClasses}
+            onClick={quote?.onClick}
+          >
+            {quote?.label ?? 'Request a Quote'}
           </Button>
 
-          {verifiedPhone && (
+          {showWhatsapp && hasWhatsapp && (
+            <Button
+              href={whatsappUrl ?? contactData.whatsappMessageUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="whatsapp"
+              size="md"
+              className={actionClasses}
+              onClick={onWhatsappClick}
+              icon={
+                <img
+                  src={ASSETS.icons.whatsapp}
+                  alt=""
+                  aria-hidden="true"
+                  className="w-5 h-5 brightness-0 invert"
+                />
+              }
+              iconPosition="left"
+            >
+              {whatsappLabel}
+            </Button>
+          )}
+
+          {showCall && verifiedPhone && (
             <Button
               href={`tel:${verifiedPhone}`}
-              variant="secondary"
+              variant="outline-light"
               size="md"
-              icon={
-                <img src={ASSETS.icons.phone} alt="" className="w-4 h-4" />
-              }
+              className={actionClasses}
+              onClick={onCallClick}
+              icon={<img src={ASSETS.icons.phone} alt="" aria-hidden="true" className="w-4 h-4" />}
               iconPosition="left"
             >
               Call: {verifiedPhone}
             </Button>
           )}
 
-          {hasWhatsapp && (
+          {secondary && (
             <Button
-              href={contactData.whatsappMessageUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              variant="whatsapp"
+              href={secondary.href}
+              variant="outline-light"
               size="md"
-              icon={
-                <img src={ASSETS.icons.whatsapp} alt="" className="w-4 h-4 brightness-0 invert" />
-              }
-              iconPosition="left"
+              className={actionClasses}
+              onClick={secondary.onClick}
             >
-              Chat on WhatsApp
+              {secondary.label}
             </Button>
           )}
         </div>
       </Container>
-    </section>
+    </Section>
   );
 };
 export default PageCTA;

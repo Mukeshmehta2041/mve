@@ -53,7 +53,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
 
       {/* Error Fallback */}
       {error ? (
-        <div className="absolute inset-0 flex flex-col items-center justify-center p-4 bg-slate-100 text-slate-400">
+        <div className="absolute inset-0 flex flex-col items-center justify-center p-4 bg-slate-100 text-slate-500">
           <svg className="w-8 h-8 mb-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
             <path
               strokeLinecap="round"
