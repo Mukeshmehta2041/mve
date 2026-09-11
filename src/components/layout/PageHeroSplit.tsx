@@ -105,6 +105,8 @@ export const PageHeroSplit: React.FC<PageHeroSplitProps> = ({
                 className="w-full h-full object-cover"
                 width={image.width ?? 800}
                 height={image.height ?? (image.aspect === '4/3' ? 600 : 500)}
+                loading="eager"
+                fetchPriority="high"
                 decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy-950/40 to-transparent pointer-events-none" />

@@ -122,16 +122,16 @@ export const QualityCertifications: React.FC = () => {
                 className="bg-slate-50 border border-border rounded-card p-6 flex flex-col justify-between hover:translate-y-[-3px] transition duration-300 shadow-card"
               >
                 <div>
-                  <div className="w-10 h-10 rounded-sm bg-primary-soft text-primary flex items-center justify-center mb-4">
+                  <div className="w-10 h-10 rounded-sm bg-primary-soft text-primary-ink flex items-center justify-center mb-4">
                     <img src={method.icon} alt="" aria-hidden="true" className="w-5 h-5 object-contain" width={20} height={20} decoding="async" />
                   </div>
                   <h3 className="text-base font-bold text-navy-950 mb-2 leading-snug">{method.title}</h3>
                   <p className="text-xs text-slate-600 leading-relaxed mb-4">{method.desc}</p>
                 </div>
 
-                <span className="text-xs font-bold text-primary block pt-2 border-t border-slate-200 mt-auto">
+                <span className="text-xs font-bold text-primary-ink block pt-2 border-t border-slate-200 mt-auto">
                   {method.scopeLabel}
-</span>
+                </span>
                 
               </div>
             ))}
@@ -155,7 +155,7 @@ export const QualityCertifications: React.FC = () => {
               <div className="flex flex-wrap gap-4 pt-2">
                 <Link
                   to="/products"
-                  className="text-primary hover:text-primary-hover font-bold text-sm flex items-center gap-1 group"
+                  className="text-primary-ink hover:text-primary-ink-hover font-bold text-sm flex items-center gap-1 group"
                   onClick={() => trackEvent('quality_products_click')}
                 >
                   View Product Catalog
@@ -165,7 +165,7 @@ export const QualityCertifications: React.FC = () => {
                 </Link>|
                 <Link
                   to="/custom-fabrication"
-                  className="text-primary hover:text-primary-hover font-bold text-sm flex items-center gap-1 group"
+                  className="text-primary-ink hover:text-primary-ink-hover font-bold text-sm flex items-center gap-1 group"
                   onClick={() => trackEvent('quality_custom_fabrication_click')}
                 >
                   Explore Custom Fabrication
@@ -175,7 +175,7 @@ export const QualityCertifications: React.FC = () => {
                 </Link>|
                 <Link
                   to="/projects"
-                  className="text-primary hover:text-primary-hover font-bold text-sm flex items-center gap-1 group"
+                  className="text-primary-ink hover:text-primary-ink-hover font-bold text-sm flex items-center gap-1 group"
                   onClick={() => trackEvent('quality_projects_click')}
                 >
                   Browse Case Projects

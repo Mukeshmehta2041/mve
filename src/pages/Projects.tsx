@@ -4,7 +4,7 @@ import { Container, Section, SectionHeader, Button, ProjectCard } from '../compo
 import { projectsData, contactData } from '../data';
 import { getBreadcrumbSchema } from '../lib/seo';
 import { trackEvent } from '../lib/analytics';
-import { getQuoteUrl, cn } from '../lib/utils';
+import { getQuoteUrl, cn, getTelUrl } from '../lib/utils';
 import { ASSETS } from '../lib/assets';
 
 export const Projects: React.FC = () => {
@@ -27,7 +27,7 @@ export const Projects: React.FC = () => {
     } else if (selectedCategory === 'Chimneys') {
       setFilteredProjects(projectsData.filter((p) => p.productSlug === 'industrial-chimney'));
     } else if (selectedCategory === 'Structural Fabrication') {
-      setFilteredProjects(projectsData.filter((p) => p.productSlug === 'resin-glue-kettle' || p.productSlug === 'shuttering-plate' || p.productSlug === 'railway-height-gauge'));
+      setFilteredProjects(projectsData.filter((p) => p.productSlug === 'resin-glue-kettle' || p.productSlug === 'shuttering-plate' || p.productSlug === 'height-gauge'));
     }
   }, [selectedCategory]);
 
@@ -101,13 +101,14 @@ export const Projects: React.FC = () => {
                   src={featuredProject.image}
                   alt={featuredProject.title}
                   className="absolute inset-0 w-full h-full object-cover" width={800} height={500} decoding="async"
+                  loading="lazy"
                 />
               </div>
 
               {/* Right Column Content */}
               <div className="lg:col-span-5 p-6 md:p-8 flex flex-col justify-between">
                 <div>
-                  <div className="flex flex-wrap gap-x-3 gap-y-1 mb-3 text-xs text-primary font-bold tracking-wider uppercase">
+                  <div className="flex flex-wrap gap-x-3 gap-y-1 mb-3 text-xs text-primary-ink font-bold tracking-wider uppercase">
                     <span>{featuredProject.industry}</span>
                     <span aria-hidden="true" className="text-slate-300">•</span>
                     <span>{featuredProject.location}</span>
@@ -263,6 +264,7 @@ export const Projects: React.FC = () => {
                   src={ASSETS.fabrication.productsBanner}
                   alt="Welder performing arc welding at a workshop station"
                   className="w-full h-full object-cover" width={800} height={450} decoding="async"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy-950/40 to-transparent pointer-events-none"></div>
               </div>
@@ -308,7 +310,7 @@ export const Projects: React.FC = () => {
 
               {verifiedPhone && (
                 <Button
-                  href={`tel:${verifiedPhone}`}
+                  href={getTelUrl(verifiedPhone)}
                   variant="secondary"
                   className="font-bold text-xs uppercase tracking-wide h-11 w-full bg-white text-navy-950 border-navy-950"
                 >

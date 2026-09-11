@@ -1,22 +1,17 @@
 import React, { useRef, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { navigationData, contactData } from '../../data';
+import { Link, NavLink } from 'react-router-dom';
+import { contactData, navigationData } from '../../data';
 import { ASSETS } from '../../lib/assets';
 import { Button, IconButton } from '../ui';
-import { cn } from '../../lib/utils';
+import { cn, getTelUrl } from '../../lib/utils';
 import { useFocusTrap } from '../../lib/useFocusTrap';
 
 interface MobileNavigationProps {
   isOpen: boolean;
   onClose: () => void;
-  triggerRef: React.RefObject<HTMLButtonElement | null>;
 }
 
-export const MobileNavigation: React.FC<MobileNavigationProps> = ({
-  isOpen,
-  onClose,
-  triggerRef,
-}) => {
+export const MobileNavigation: React.FC<MobileNavigationProps> = ({ isOpen, onClose }) => {
   const [productsExpanded, setProductsExpanded] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
 
@@ -29,23 +24,23 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
     setProductsExpanded((prev) => !prev);
   };
 
-  // Scroll lock, focus trap, Escape, and focus restore to the hamburger
-  useFocusTrap({ isOpen, containerRef: drawerRef, onClose, restoreFocusTo: triggerRef });
+  // Focus trap + Escape to close + scroll lock + focus restore.
+  useFocusTrap({ isOpen, containerRef: drawerRef, onClose });
 
   return (
     <div
       className={cn(
-        'fixed inset-0 z-50 transition duration-300 lg:hidden',
-        isOpen ? 'visible' : 'invisible pointer-events-none'
+        'fixed inset-0 z-50 lg:hidden transition-all duration-300 ease-in-out',
+        isOpen ? 'visible opacity-100 pointer-events-auto' : 'invisible opacity-0 pointer-events-none'
       )}
       role="dialog"
       aria-modal="true"
-      aria-label="Mobile Navigation Menu"
+      aria-label="Navigation drawer"
     >
       {/* Backdrop overlay */}
       <div
         className={cn(
-          'absolute inset-0 bg-navy-950/40 backdrop-blur-xs transition-opacity duration-300',
+          'fixed inset-0 bg-navy-950/60 backdrop-blur-xs transition-opacity duration-300',
           isOpen ? 'opacity-100' : 'opacity-0'
         )}
         onClick={onClose}
@@ -57,7 +52,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
         ref={drawerRef}
         className={cn(
           // pb adds the iOS home-indicator strip on top of the panel's own padding
-          'absolute top-0 right-0 w-full max-w-sm h-full bg-white shadow-floating flex flex-col p-4 sm:p-6 pb-[calc(1rem+env(safe-area-inset-bottom))] sm:pb-[calc(1.5rem+env(safe-area-inset-bottom))] transition-transform duration-300 ease-out transform',
+          'absolute top-0 right-0 w-full max-w-sm h-full bg-white shadow-floating flex flex-col p-4 sm:p-6 pb-[calc(1rem_+_env(safe-area-inset-bottom,_0px))] sm:pb-[calc(1.5rem_+_env(safe-area-inset-bottom,_0px))] transition-transform duration-300 ease-out transform',
           isOpen ? 'translate-x-0' : 'translate-x-full'
         )}
       >
@@ -159,6 +154,19 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
               );
             }
 
+            if (item.href.includes('#')) {
+              return (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  onClick={onClose}
+                  className="flex items-center min-h-11 text-base font-bold text-navy-950 hover:text-primary-ink py-2 px-2 hover:bg-slate-50 rounded-sm transition-colors"
+                >
+                  {item.name}
+                </Link>
+              );
+            }
+
             return (
               <NavLink
                 key={item.name}
@@ -184,7 +192,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
             {verifiedPhones.map((phone) => (
               <a
                 key={phone}
-                href={`tel:${phone}`}
+                href={getTelUrl(phone)}
                 className="flex items-center min-h-11 text-sm font-bold text-navy-950 hover:text-primary-ink bg-slate-50 border border-border p-2.5 rounded-card transition"
               >
                 <img src={ASSETS.icons.phone} alt="" className="w-4 h-4 mr-2.5 text-primary-ink" width={16} height={16} decoding="async" />

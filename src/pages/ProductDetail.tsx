@@ -1,16 +1,17 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import { SiteLayout, SEO, PageCTA } from '../components/layout';
 import { Container, Section, Button, Breadcrumb, EmptyGuard, ProcessTimeline } from '../components/ui';
 import { productsData, contactData, processStepsData } from '../data';
 import { getProductSchema, getBreadcrumbSchema, getFAQSchema } from '../lib/seo';
-import { getQuoteUrl, cn } from '../lib/utils';
+import { getQuoteUrl, cn, getTelUrl } from '../lib/utils';
 import { trackEvent } from '../lib/analytics';
 import { ASSETS } from '../lib/assets';
 import { useFocusTrap } from '../lib/useFocusTrap';
 
 export const ProductDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
   const product = productsData.find((p) => p.slug === slug);
 
   const [activeImgIndex, setActiveImgIndex] = useState(0);
@@ -66,16 +67,14 @@ export const ProductDetail: React.FC = () => {
   if (!product) {
     return (
       <SiteLayout>
-        <SEO title="Product Not Found" description="The requested industrial product is unavailable." />
+        <SEO title="Product Not Found" description="The requested industrial product is unavailable." noindex={true} />
         <Section>
           <Container>
             <EmptyGuard
               title="Product Details Unavailable"
               message="The product you are trying to view does not exist in our catalog or is pending client verification."
               actionText="Return to Catalogue"
-              onActionClick={() => {
-                window.location.href = '/products';
-              }}
+              onActionClick={() => navigate('/products')}
             />
           </Container>
         </Section>
@@ -173,7 +172,7 @@ export const ProductDetail: React.FC = () => {
   return (
     <SiteLayout>
       <SEO
-        title={product.seoTitle || `${product.name} Manufacturer Patna | Custom Steel Fabrication`}
+        title={product.seoTitle || `${product.name} Manufacturer Patna`}
         description={product.seoDescription || product.description}
         canonicalPath={`/products/${product.slug}`}
         ogImage={product.image}
@@ -272,8 +271,8 @@ export const ProductDetail: React.FC = () => {
             {/* Product Overview & Action Panel */}
             <div className="lg:col-span-5 flex flex-col gap-8">
               <div>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-[11px] font-bold uppercase tracking-wider bg-primary-soft text-primary mb-3">
-                  <img src={product.categoryIcon} alt="" className="w-3.5 h-3.5 object-contain" width={14} height={14} decoding="async" />
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-[11px] font-bold uppercase tracking-wider bg-primary-soft text-primary-ink mb-3">
+                  <img src={product.categoryIcon} alt="" aria-hidden="true" className="w-3.5 h-3.5 object-contain" width={14} height={14} decoding="async" />
                   {product.category}
                 </span>
 
@@ -288,7 +287,7 @@ export const ProductDetail: React.FC = () => {
                 {/* Key Benefits Bullet Indicators */}
                 <div className="space-y-3 mb-8">
                   <div className="flex items-center gap-3 text-sm text-navy-950 font-semibold font-sans">
-                    <div className="w-5 h-5 bg-primary-soft text-primary rounded-full flex items-center justify-center flex-shrink-0">
+                    <div className="w-5 h-5 bg-primary-soft text-primary-ink rounded-full flex items-center justify-center flex-shrink-0">
                       <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
                         <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                       </svg>
@@ -296,7 +295,7 @@ export const ProductDetail: React.FC = () => {
                     <span>Heavy-duty Structural MS/SS Build</span>
                   </div>
                   <div className="flex items-center gap-3 text-sm text-navy-950 font-semibold font-sans">
-                    <div className="w-5 h-5 bg-primary-soft text-primary rounded-full flex items-center justify-center flex-shrink-0">
+                    <div className="w-5 h-5 bg-primary-soft text-primary-ink rounded-full flex items-center justify-center flex-shrink-0">
                       <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
                         <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                       </svg>
@@ -304,7 +303,7 @@ export const ProductDetail: React.FC = () => {
                     <span>Custom Engineered to Project Specs</span>
                   </div>
                   <div className="flex items-center gap-3 text-sm text-navy-950 font-semibold font-sans">
-                    <div className="w-5 h-5 bg-primary-soft text-primary rounded-full flex items-center justify-center flex-shrink-0">
+                    <div className="w-5 h-5 bg-primary-soft text-primary-ink rounded-full flex items-center justify-center flex-shrink-0">
                       <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
                         <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                       </svg>
@@ -335,7 +334,7 @@ export const ProductDetail: React.FC = () => {
                       className="flex-1 font-bold text-sm tracking-wider uppercase h-12"
                       onClick={() => trackEvent('product_whatsapp_click', { productSlug: product.slug, position: 'hero' })}
                       icon={
-                        <img src={ASSETS.icons.whatsapp} alt="" className="w-5 h-5 brightness-0 invert" width={20} height={20} decoding="async" />
+                        <img src={ASSETS.icons.whatsapp} alt="" aria-hidden="true" className="w-5 h-5 brightness-0 invert" width={20} height={20} decoding="async" />
                       }
                       iconPosition="left"
                     >
@@ -346,12 +345,12 @@ export const ProductDetail: React.FC = () => {
 
                 {verifiedPhone && (
                   <Button
-                    href={`tel:${verifiedPhone}`}
+                    href={getTelUrl(verifiedPhone)}
                     variant="secondary"
                     className="w-full font-bold text-sm tracking-wider uppercase h-12"
                     onClick={() => trackEvent('product_call_click', { productSlug: product.slug, position: 'hero' })}
                     icon={
-                      <img src={ASSETS.icons.phone} alt="" className="w-4 h-4" width={16} height={16} decoding="async" />
+                      <img src={ASSETS.icons.phone} alt="" aria-hidden="true" className="w-4 h-4" width={16} height={16} decoding="async" />
                     }
                     iconPosition="left"
                   >
@@ -500,7 +499,7 @@ export const ProductDetail: React.FC = () => {
       <Section className="bg-white border-b border-border py-12 md:py-16 text-left">
         <Container>
           <div className="max-w-3xl mb-8 md:mb-12">
-            <span className="text-[11px] leading-[18px] tracking-[0.1em] uppercase font-bold text-primary block mb-2">Workflow Standards</span>
+            <span className="text-[11px] leading-[18px] tracking-[0.1em] uppercase font-bold text-primary-ink block mb-2">Workflow Standards</span>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-navy-950">Manufacturing & Quality Controls</h2>
             <p className="mt-3 text-base text-slate-600 font-sans">
               We apply standardized engineering reviews, dimensional alignment checklists, and material validation steps to safeguard every fabrication batch.
@@ -515,7 +514,7 @@ export const ProductDetail: React.FC = () => {
       <Section className="bg-surface border-b border-border py-12 md:py-16 text-left">
         <Container className="max-w-4xl">
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-primary">Inquiries</span>
+            <span className="text-[11px] font-bold uppercase tracking-wider text-primary-ink">Inquiries</span>
             <h2 className="text-2xl md:text-3xl font-extrabold text-navy-950 mt-1">Frequently Asked Questions</h2>
           </div>
 
@@ -571,10 +570,10 @@ export const ProductDetail: React.FC = () => {
         <Container>
           <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-primary block mb-1">Catalog Links</span>
+              <span className="text-[11px] font-bold uppercase tracking-wider text-primary-ink block mb-1">Catalog Links</span>
               <h2 className="text-2xl md:text-3xl font-extrabold text-navy-950">Related Industrial Products</h2>
             </div>
-            <Link to="/products" className="text-primary hover:text-primary-hover font-bold text-sm flex items-center gap-1 group font-sans">
+            <Link to="/products" className="text-primary-ink hover:text-primary-ink-hover font-bold text-sm flex items-center gap-1 group font-sans">
               View Entire Catalogue 
               <svg className="w-4 h-4 transform transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
@@ -616,7 +615,7 @@ export const ProductDetail: React.FC = () => {
                           {p.description}
                         </p>
 
-                        <div className="mt-auto pt-3 border-t border-border flex items-center justify-between text-xs text-primary font-bold font-sans">
+                        <div className="mt-auto pt-3 border-t border-border flex items-center justify-between text-xs text-primary-ink font-bold font-sans">
                           <span>View Details</span>
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
                             <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />

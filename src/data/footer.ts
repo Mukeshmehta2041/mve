@@ -4,13 +4,15 @@ export const footerLinksData: FooterLinkGroup[] = [
   {
     title: 'Products Catalogue',
     links: [
-      { label: 'Resin Glue Kettle', href: '/products/resin-glue-kettle' },
-      { label: 'Storage Tank', href: '/products/storage-tank' },
-      { label: 'Shuttering Plate', href: '/products/shuttering-plate' },
-      { label: 'Hopper', href: '/products/hopper' },
+      { label: 'Plywood Glue Kettle', href: '/products/resin-glue-kettle' },
       { label: 'Industrial Chimney', href: '/products/industrial-chimney' },
-      { label: 'Hot Water Generator', href: '/products/hot-water-generator' },
-      { label: 'Railway Height Gauge', href: '/products/railway-height-gauge' },
+      { label: 'MS Shuttering Plate', href: '/products/shuttering-plate' },
+      { label: 'MS Hopper', href: '/products/hopper' },
+      { label: 'MS Storage Tank', href: '/products/storage-tank' },
+      { label: 'Borewell / Casing Pipe', href: '/products/borewell-casing-pipe' },
+      { label: 'Height Gauge', href: '/products/height-gauge' },
+      { label: 'Fabrication as per Design', href: '/products/fabrication-as-per-design' },
+      { label: 'Bentonite Tank', href: '/products/bentonite-tank' },
     ],
   },
   {

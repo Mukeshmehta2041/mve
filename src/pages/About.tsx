@@ -31,7 +31,7 @@ export const About: React.FC = () => {
   return (
     <SiteLayout>
       <SEO
-        title="About Us | Industrial Steel Fabrication Experts Patna"
+        title="About Us"
         description="Learn about Maa Vindhawasini Enterprises, leading manufacturers of custom MS & stainless steel industrial equipment, reaction vessels, and heavy structures in Patna, Bihar."
         canonicalPath="/about"
         schemaJson={aboutSchemas}
@@ -68,6 +68,7 @@ export const About: React.FC = () => {
                   src={ASSETS.products.resinGlueKettle}
                   alt="Stainless steel jacketed reaction vessel with top motor"
                   className="w-full h-full object-cover" width={800} height={600} decoding="async"
+                  loading="lazy"
                 />
               </div>
             </div>
@@ -174,6 +175,7 @@ export const About: React.FC = () => {
                   src={ASSETS.products.storageTank}
                   alt="A large cylindrical steel storage tank with access ladder"
                   className="w-full h-full object-cover" width={800} height={500} decoding="async"
+                  loading="lazy"
                 />
               </div>
             </div>
@@ -194,7 +196,7 @@ export const About: React.FC = () => {
             {aboutCapabilitiesData.map((cap) => (
               <div key={cap.name} className="bg-slate-50 border border-border p-6 rounded-card shadow-card flex flex-col justify-between">
                 <div>
-                  <div className="w-10 h-10 rounded-sm bg-primary-soft text-primary flex items-center justify-center mb-4">
+                  <div className="w-10 h-10 rounded-sm bg-primary-soft text-primary-ink flex items-center justify-center mb-4">
                     <img src={cap.icon} alt="" aria-hidden="true" className="w-5 h-5 object-contain" width={20} height={20} decoding="async" />
                   </div>
                   <h3 className="text-base font-bold text-navy-950 mb-2 leading-snug">{cap.name}</h3>
@@ -205,7 +207,7 @@ export const About: React.FC = () => {
                   <ul className="space-y-1">
                     {cap.details.map((detail, dIdx) => (
                       <li key={dIdx} className="text-xs font-medium text-slate-600 flex items-center">
-                        <span className="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary-ink mr-2"></span>
                         {detail}
                       </li>
                     ))}
@@ -257,7 +259,7 @@ export const About: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 {aboutQualityHighlightsData.map((item) => (
                   <div key={item.title} className="flex gap-2.5">
-                    <span className="text-primary font-bold text-sm mt-0.5">✓</span>
+                    <span className="text-primary-ink font-bold text-sm mt-0.5">✓</span>
                     <div>
                       <h3 className="font-semibold text-sm text-navy-950 mb-1 leading-snug">{item.title}</h3>
                       <p className="text-sm text-slate-600 leading-relaxed">{item.desc}</p>
@@ -285,6 +287,7 @@ export const About: React.FC = () => {
                   src={ASSETS.hero.quality}
                   alt="A welder laying a clean weld seam on a curved steel shell"
                   className="w-full h-full object-cover" width={800} height={600} decoding="async"
+                  loading="lazy"
                 />
               </div>
             </div>

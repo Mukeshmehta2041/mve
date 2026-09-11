@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { navigationData } from '../../data/navigation';
 import { Button } from '../ui/Button';
 import { cn } from '../../lib/utils';
@@ -148,13 +148,13 @@ export const DesktopNavigation: React.FC = () => {
           );
         }
 
-        // Anchor links (e.g. "/#industries") would otherwise match the "/" route and
-        // render as active alongside Home. Render them as plain links instead.
+        // Hash links (e.g. "/#industries") would otherwise match the "/" route
+        // and render as active alongside Home. Render them separately.
         if (item.href.includes('#')) {
           return (
-            <a
+            <Link
               key={item.name}
-              href={item.href}
+              to={item.href}
               className="text-sm font-semibold py-2 transition relative group focus-ring rounded-sm text-slate-600 hover:text-navy-950"
             >
               <span>{item.name}</span>
@@ -162,7 +162,7 @@ export const DesktopNavigation: React.FC = () => {
                 className="absolute bottom-0 left-0 w-full h-[2px] bg-primary transition-transform duration-200 origin-left scale-x-0 group-hover:scale-x-100"
                 aria-hidden="true"
               />
-            </a>
+            </Link>
           );
         }
 

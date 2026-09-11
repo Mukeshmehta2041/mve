@@ -14,7 +14,7 @@ export const Products: React.FC = () => {
     <SiteLayout>
       <SEO
         title="Industrial Equipment & Steel Fabrication Products"
-        description="Browse our catalogue of custom MS & SS industrial equipment: resin glue kettles, storage tanks, shuttering plates, hoppers, chimneys, and hot water generators."
+        description="Browse custom industrial equipment and fabrication services: resin reactors, storage tanks, shuttering plates, hoppers, chimneys, casing pipes, height barriers, and bentonite tanks."
         canonicalPath="/products"
         schemaJson={productsSchemas}
       />
@@ -22,7 +22,7 @@ export const Products: React.FC = () => {
       <PageHeroShell
         breadcrumb={[{ label: 'Products' }]}
         title="Products"
-        description="Seven product lines, all made to order. Every capacity, dimension, and material grade below can be changed to suit your drawing."
+        description="Nine equipment and fabrication lines, made to order. Capacities, dimensions, materials, and finishes can be adapted to your drawing."
       />
 
       <Section>

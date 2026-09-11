@@ -2,6 +2,8 @@ import React from 'react';
 import { SiteLayout, SEO, PageHeroShell } from '../layout';
 import { Container, Section } from '../ui';
 import { legalLastUpdated, legalContactData } from '../../data';
+import { getBreadcrumbSchema } from '../../lib/seo';
+import { getTelUrl } from '../../lib/utils';
 
 interface LegalPageLayoutProps {
   title: string;
@@ -18,7 +20,12 @@ export const LegalPageLayout: React.FC<LegalPageLayoutProps> = ({
 }) => {
   return (
     <SiteLayout>
-      <SEO title={title} description={description} canonicalPath={canonicalPath} />
+      <SEO
+        title={title}
+        description={description}
+        canonicalPath={canonicalPath}
+        schemaJson={getBreadcrumbSchema([{ label: title, href: canonicalPath }])}
+      />
       
       <PageHeroShell
         breadcrumb={[{ label: title }]}
@@ -77,13 +84,13 @@ export const LegalContactBlock: React.FC = () => {
         </div>
         <div className="bg-slate-50 border border-slate-100 p-3 rounded-sm">
           <span className="text-xs text-slate-500 uppercase tracking-wider block mb-1">Telephone</span>
-          <a href={`tel:${legalContactData.phone}`} className="hover:text-primary transition-colors">
+          <a href={getTelUrl(legalContactData.phone)} className="hover:text-primary-ink transition-colors inline-flex items-center min-h-[44px] -my-2">
             {legalContactData.phone}
           </a>
         </div>
         <div className="bg-slate-50 border border-slate-100 p-3 rounded-sm">
           <span className="text-xs text-slate-500 uppercase tracking-wider block mb-1">Email Channel</span>
-          <a href={`mailto:${legalContactData.email}`} className="hover:text-primary transition-colors">
+          <a href={`mailto:${legalContactData.email}`} className="hover:text-primary-ink transition-colors inline-flex items-center min-h-[44px] -my-2">
             {legalContactData.email}
           </a>
         </div>

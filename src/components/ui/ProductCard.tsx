@@ -66,7 +66,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             href={`/products/${product.slug}`}
             className="w-full sm:flex-1 text-xs whitespace-nowrap"
           >
-            View Details
+            {product.entryType === 'service' ? 'View Service' : 'View Details'}
           </Button>
           <Button
             variant="primary"
@@ -74,7 +74,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             href={getQuoteUrl({ product: product.slug })}
             className="w-full sm:flex-1 text-xs whitespace-nowrap"
           >
-            Get Quote
+            {product.entryType === 'service' ? 'Discuss Service' : 'Get Quote'}
           </Button>
         </div>
       </div>

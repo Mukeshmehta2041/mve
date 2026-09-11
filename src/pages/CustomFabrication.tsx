@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { SiteLayout, SEO, PageCTA } from '../components/layout';
+import { SiteLayout, SEO, PageCTA, PageHeroSplit } from '../components/layout';
 import { Container, Section, SectionHeader, ProjectCard, ProcessTimeline } from '../components/ui';
 import { getBreadcrumbSchema, getServiceSchema } from '../lib/seo';
 import {
@@ -84,7 +84,7 @@ export const CustomFabrication: React.FC = () => {
                 className="bg-slate-50 border border-border rounded-card p-6 flex flex-col justify-between hover:translate-y-[-3px] transition duration-300 shadow-card"
               >
                 <div>
-                  <div className="w-10 h-10 rounded-sm bg-primary-soft text-primary flex items-center justify-center mb-4">
+                  <div className="w-10 h-10 rounded-sm bg-primary-soft text-primary-ink flex items-center justify-center mb-4">
                     <img src={cat.icon} alt="" aria-hidden="true" className="w-5 h-5 object-contain" width={20} height={20} decoding="async" />
                   </div>
                   <h3 className="text-lg font-bold text-navy-950 mb-2 leading-snug">{cat.name}</h3>
@@ -94,7 +94,7 @@ export const CustomFabrication: React.FC = () => {
                 {cat.productSlug && (
                   <Link
                     to={`/products/${cat.productSlug}`}
-                    className="text-xs font-bold text-primary hover:text-primary-hover flex items-center gap-1 mt-auto pt-2 border-t border-slate-200/60"
+                    className="text-xs font-bold text-primary-ink hover:text-primary-ink-hover flex items-center gap-1 mt-auto pt-2 border-t border-slate-200/60"
                   >
                     View Product Details
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
@@ -164,7 +164,7 @@ export const CustomFabrication: React.FC = () => {
                   <div key={mat.name} className="bg-white border border-border p-5 rounded-card shadow-card space-y-1">
                     <div className="flex items-center justify-between">
                       <span className="font-bold text-navy-950 text-base">{mat.name}</span>
-                      <span className="text-[11px] font-bold text-primary bg-primary-soft px-2.5 py-0.5 rounded-sm uppercase tracking-wide">
+                      <span className="text-[11px] font-bold text-primary-ink bg-primary-soft px-2.5 py-0.5 rounded-sm uppercase tracking-wide">
                         {mat.type}
                       </span>
                     </div>
@@ -174,16 +174,16 @@ export const CustomFabrication: React.FC = () => {
               </div>
             </div>
 
-            {/* Right Column - Workshop capabilities list */}
-            <div className="lg:col-span-6 space-y-6 bg-white p-6 md:p-8 rounded-card border border-border shadow-card text-left font-sans">
-              <h3 className="text-lg md:text-xl font-bold text-navy-950 mb-4 pb-2 border-b border-border flex items-center gap-2">
+            {/* Right Capabilities Column */}
+            <div className="lg:col-span-6 bg-white border border-border p-6 md:p-8 rounded-card shadow-card">
+              <h3 className="text-lg font-bold text-navy-950 mb-6 flex items-center gap-2">
                 <img src={ASSETS.icons.wrench} alt="" aria-hidden="true" className="w-5 h-5 object-contain" width={20} height={20} decoding="async" />
                 Workshop Capabilities
               </h3>
               
               <ul className="space-y-4 text-sm text-slate-600">
                 <li className="flex items-start">
-                  <div className="w-5 h-5 rounded-full bg-primary-soft text-primary flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                  <div className="w-5 h-5 rounded-full bg-primary-soft text-primary-ink flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
                       <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                     </svg>
@@ -194,7 +194,7 @@ export const CustomFabrication: React.FC = () => {
                   </div>
                 </li>
                 <li className="flex items-start">
-                  <div className="w-5 h-5 rounded-full bg-primary-soft text-primary flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                  <div className="w-5 h-5 rounded-full bg-primary-soft text-primary-ink flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
                       <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                     </svg>
@@ -205,7 +205,7 @@ export const CustomFabrication: React.FC = () => {
                   </div>
                 </li>
                 <li className="flex items-start">
-                  <div className="w-5 h-5 rounded-full bg-primary-soft text-primary flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                  <div className="w-5 h-5 rounded-full bg-primary-soft text-primary-ink flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
                       <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                     </svg>
@@ -216,7 +216,7 @@ export const CustomFabrication: React.FC = () => {
                   </div>
                 </li>
                 <li className="flex items-start">
-                  <div className="w-5 h-5 rounded-full bg-primary-soft text-primary flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                  <div className="w-5 h-5 rounded-full bg-primary-soft text-primary-ink flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
                       <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                     </svg>
@@ -241,7 +241,7 @@ export const CustomFabrication: React.FC = () => {
             </div>
             <Link
               to="/quality-certifications"
-              className="text-primary hover:text-primary-hover font-bold text-sm flex items-center gap-1 group font-sans"
+              className="text-primary-ink hover:text-primary-ink-hover font-bold text-sm flex items-center gap-1 group font-sans"
               onClick={() => trackEvent('custom_quality_click')}
             >
               View Quality & Certifications
@@ -277,7 +277,7 @@ export const CustomFabrication: React.FC = () => {
               </div>
               <Link
                 to="/projects"
-                className="text-primary hover:text-primary-hover font-bold text-sm flex items-center gap-1 group font-sans"
+                className="text-primary-ink hover:text-primary-ink-hover font-bold text-sm flex items-center gap-1 group font-sans"
               >
                 View Our Complete Portfolio
                 <svg className="w-4 h-4 transform transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">

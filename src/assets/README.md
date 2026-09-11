@@ -7,7 +7,7 @@ This ZIP was assembled from the approved modern UI concept boards created in the
 - `source-mockups/` — full concept boards for Home, About, Products, Product Detail, Custom Fabrication, Projects, Quality, Contact, and Request a Quote.
 - `images/` — raster assets cropped from those boards.
 - `icons/general/` — reusable custom line icons in SVG.
-- `icons/products/` — seven product-category SVG icons.
+- `icons/products/` — product-category SVG icons reused across catalogue entries.
 - `design.md` — complete visual design and implementation guidance.
 - `asset-manifest.json` — source and crop metadata for every extracted raster asset.
 

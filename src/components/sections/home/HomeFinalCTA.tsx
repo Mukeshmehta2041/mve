@@ -3,6 +3,7 @@ import { Container } from '../../ui/Container';
 import { Button } from '../../ui/Button';
 import { contactData } from '../../../data/contact';
 import { ASSETS } from '../../../lib/assets';
+import { getTelUrl } from '../../../lib/utils';
 
 export const HomeFinalCTA: React.FC = () => {
   const verifiedPhone = contactData.phones.find((p) => p !== 'pending verification');
@@ -54,7 +55,7 @@ export const HomeFinalCTA: React.FC = () => {
 
           {verifiedPhone && (
             <Button
-              href={`tel:${verifiedPhone}`}
+              href={getTelUrl(verifiedPhone)}
               variant="secondary"
               size="md"
               className="w-full sm:w-auto"

@@ -6,7 +6,7 @@ import { IconButton } from '../ui/Button';
 import { DesktopNavigation } from '../navigation/DesktopNavigation';
 import { MobileNavigation } from '../navigation/MobileNavigation';
 import { contactData } from '../../data';
-import { cn } from '../../lib/utils';
+import { cn, getTelUrl } from '../../lib/utils';
 
 export const SiteHeader: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -41,14 +41,14 @@ export const SiteHeader: React.FC = () => {
       <div className="hidden lg:block bg-slate-50 border-b border-slate-100 py-2 text-xs text-slate-600 font-sans">
         <Container className="flex justify-end items-center space-x-6">
           {verifiedEmail && (
-            <a href={`mailto:${verifiedEmail}`} className="flex items-center hover:text-primary transition-colors">
+            <a href={`mailto:${verifiedEmail}`} className="flex items-center hover:text-primary-ink transition-colors">
               <img src={ASSETS.icons.email} alt="" aria-hidden="true" className="w-3.5 h-3.5 mr-2 opacity-70" width={14} height={14} decoding="async" />
               <span>{verifiedEmail}</span>
             </a>
           )}
           
           {verifiedPhone && (
-            <a href={`tel:${verifiedPhone}`} className="flex items-center hover:text-primary transition-colors font-mono">
+            <a href={getTelUrl(verifiedPhone)} className="flex items-center hover:text-primary-ink transition-colors font-mono">
               <img src={ASSETS.icons.phone} alt="" aria-hidden="true" className="w-3.5 h-3.5 mr-2 opacity-70" width={14} height={14} decoding="async" />
               <span>{verifiedPhone}</span>
             </a>

@@ -27,8 +27,11 @@ export const SEO: React.FC<SEOProps> = ({
   const path = canonicalPath !== undefined 
     ? canonicalPath 
     : (typeof window !== 'undefined' ? window.location.pathname : '');
-  const canonicalUrl = `${siteUrl}${path.startsWith('/') ? path : `/${path}`}`.replace(/\/+$/, '') || siteUrl;
-  const socialImage = ogImage ? (ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`) : `${siteUrl}/favicon.svg`;
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  const canonicalUrl = cleanPath === '/' ? `${siteUrl}/` : `${siteUrl}${cleanPath.replace(/\/+$/, '')}`;
+  const socialImage = ogImage
+    ? (ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage.startsWith('/') ? ogImage : `/${ogImage}`}`)
+    : `${siteUrl}/og-image.jpg`;
 
   return (
     <Helmet>
@@ -36,7 +39,7 @@ export const SEO: React.FC<SEOProps> = ({
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
       <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
-      <link rel="canonical" href={canonicalUrl} />
+      {!noindex && <link rel="canonical" href={canonicalUrl} />}
       {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
 
       {/* Open Graph / Facebook / LinkedIn */}

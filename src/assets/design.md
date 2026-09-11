@@ -286,7 +286,7 @@ The images in this ZIP are extracted from concept boards. Replace them with orig
 ### Products
 
 - Short hero and simple category chips.
-- Seven product cards.
+- Nine catalogue cards.
 - Each card provides “View Details” and “Request Quote”.
 - Do not add complex filtering until the catalogue grows.
 

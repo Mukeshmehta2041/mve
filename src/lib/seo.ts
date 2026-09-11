@@ -9,16 +9,17 @@ const SITE_URL = 'https://www.maavindhawasini.com';
 export function getLocalBusinessSchema() {
   const phone = contactData.phones.find((p) => p !== 'pending verification');
   const email = contactData.emails.find((e) => e !== 'pending verification');
+  const cleanPhone = phone ? phone.replace(/\s+/g, '') : undefined;
 
   return {
     '@context': 'https://schema.org',
-    '@type': ['LocalBusiness', 'Manufacturer'],
+    '@type': 'LocalBusiness',
     'name': companyData.legalName,
     'description': companyData.tagline || 'Custom MS Fabrication & Industrial Equipment Manufacturing in Patna, Bihar',
-    'image': `${SITE_URL}/favicon.svg`,
+    'image': `${SITE_URL}/logo.png`,
     'url': SITE_URL,
     'priceRange': '$$',
-    ...(phone && { 'telephone': phone }),
+    ...(cleanPhone && { 'telephone': cleanPhone }),
     ...(email && { 'email': email }),
     'address': {
       '@type': 'PostalAddress',
@@ -42,7 +43,7 @@ export function getLocalBusinessSchema() {
       'closes': '18:00',
     },
     'areaServed': {
-      '@type': 'AdministrativeArea',
+      '@type': 'Country',
       'name': 'India',
     },
   };
@@ -54,18 +55,19 @@ export function getLocalBusinessSchema() {
 export function getOrganizationSchema() {
   const phone = contactData.phones.find((p) => p !== 'pending verification');
   const email = contactData.emails.find((e) => e !== 'pending verification');
+  const cleanPhone = phone ? phone.replace(/\s+/g, '') : undefined;
 
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     'name': companyData.legalName,
     'url': SITE_URL,
-    'logo': `${SITE_URL}/favicon.svg`,
-    ...(phone || email ? {
+    'logo': `${SITE_URL}/logo.png`,
+    ...(cleanPhone || email ? {
       'contactPoint': {
         '@type': 'ContactPoint',
         'contactType': 'customer support',
-        ...(phone && { 'telephone': phone }),
+        ...(cleanPhone && { 'telephone': cleanPhone }),
         ...(email && { 'email': email }),
         'areaServed': 'IN',
         'availableLanguage': ['en', 'hi'],
@@ -78,7 +80,25 @@ export function getOrganizationSchema() {
  * Generates JSON-LD schema for a specific product
  */
 export function getProductSchema(product: Product) {
-  const imageUrl = product.image.startsWith('http') ? product.image : `${SITE_URL}${product.image}`;
+  const cleanImg = product.image.startsWith('/') ? product.image : `/${product.image}`;
+  const imageUrl = product.image.startsWith('http') ? product.image : `${SITE_URL}${cleanImg}`;
+
+  if (product.entryType === 'service') {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      'name': product.name,
+      'image': imageUrl,
+      'description': product.description,
+      'serviceType': product.category,
+      'provider': {
+        '@type': 'Organization',
+        'name': companyData.legalName,
+      },
+      'areaServed': 'IN',
+      'url': `${SITE_URL}/products/${product.slug}`,
+    };
+  }
 
   return {
     '@context': 'https://schema.org',
@@ -87,6 +107,8 @@ export function getProductSchema(product: Product) {
     'image': imageUrl,
     'description': product.description,
     'category': product.category,
+    'sku': product.id,
+    'mpn': product.slug,
     'brand': {
       '@type': 'Brand',
       'name': companyData.legalName,
@@ -98,8 +120,8 @@ export function getProductSchema(product: Product) {
     'offers': {
       '@type': 'Offer',
       'priceCurrency': 'INR',
-      'price': '0',
-      'priceValidUntil': '2026-12-31',
+      'price': '50000',
+      'priceValidUntil': `${new Date().getFullYear() + 1}-12-31`,
       'availability': 'https://schema.org/InStock',
       'url': `${SITE_URL}/products/${product.slug}`,
       'seller': {
@@ -122,12 +144,17 @@ export function getBreadcrumbSchema(items: { label: string; href?: string }[]) {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    'itemListElement': breadcrumbItems.map((item, idx) => ({
-      '@type': 'ListItem',
-      'position': idx + 1,
-      'name': item.label,
-      'item': item.href ? (item.href.startsWith('http') ? item.href : `${SITE_URL}${item.href}`) : SITE_URL,
-    })),
+    'itemListElement': breadcrumbItems.map((item, idx) => {
+      const url = item.href
+        ? (item.href.startsWith('http') ? item.href : `${SITE_URL}${item.href.startsWith('/') ? item.href : `/${item.href}`}`)
+        : undefined;
+      return {
+        '@type': 'ListItem',
+        'position': idx + 1,
+        'name': item.label,
+        ...(url && { 'item': url }),
+      };
+    }),
   };
 }
 
@@ -204,4 +231,3 @@ export function getItemListSchema(products: Product[]) {
     })),
   };
 }
-

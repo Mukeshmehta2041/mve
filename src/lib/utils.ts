@@ -34,3 +34,10 @@ export function getQuoteUrl(params: { product?: string; service?: string; type?:
   return `/request-a-quote${queryParts.length > 0 ? `?${queryParts.join('&')}` : ''}`;
 }
 
+/**
+ * Formats a phone number into an RFC 3966 compliant tel: URI without whitespace.
+ */
+export function getTelUrl(phone: string): string {
+  return `tel:${phone.replace(/\s+/g, '')}`;
+}
+

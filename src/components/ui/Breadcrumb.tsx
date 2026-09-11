@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { cn } from '../../lib/utils';
 
 export interface BreadcrumbItem {
@@ -32,15 +33,15 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
           real vertical hit area rather than bare 16px text */}
       <ol className="flex flex-wrap items-center gap-x-2 -my-1.5">
         <li>
-          <a
-            href="/"
+          <Link
+            to="/"
             className={cn(
               'inline-flex items-center py-1.5 rounded-sm focus-ring transition-colors',
               onDark ? 'hover:text-primary' : 'hover:text-primary-ink'
             )}
           >
             Home
-          </a>
+          </Link>
         </li>
         {items.map((item, idx) => {
           const isLast = idx === items.length - 1;
@@ -49,7 +50,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
               {/* Separator symbol */}
               <span
                 aria-hidden="true"
-                className={cn('select-none text-xs', onDark ? 'text-slate-500' : 'text-slate-400')}
+                className={cn('select-none text-xs', onDark ? 'text-slate-400' : 'text-slate-500')}
               >
                 /
               </span>
@@ -64,15 +65,15 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
                   {item.label}
                 </span>
               ) : (
-                <a
-                  href={item.href}
+                <Link
+                  to={item.href}
                   className={cn(
                     'inline-block py-1.5 rounded-sm focus-ring transition-colors truncate max-w-[150px] md:max-w-xs',
                     onDark ? 'hover:text-primary' : 'hover:text-primary-ink'
                   )}
                 >
                   {item.label}
-                </a>
+                </Link>
               )}
             </li>
           );

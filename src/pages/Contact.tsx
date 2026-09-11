@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { SiteLayout, SEO, PageCTA, PageHeroShell } from '../components/layout';
 import { Container, Section, Button } from '../components/ui';
@@ -7,6 +7,7 @@ import { contactData } from '../data';
 import { getBreadcrumbSchema, getLocalBusinessSchema } from '../lib/seo';
 import { trackEvent } from '../lib/analytics';
 import { ASSETS } from '../lib/assets';
+import { getTelUrl } from '../lib/utils';
 
 export const Contact: React.FC = () => {
   // Form Field States
@@ -23,6 +24,14 @@ export const Contact: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const successRef = useRef<HTMLDivElement>(null);
+
+  // Focus success status announcement upon successful submission
+  useEffect(() => {
+    if (isSuccess) {
+      successRef.current?.focus();
+    }
+  }, [isSuccess]);
 
   // Track page view
   useEffect(() => {
@@ -145,7 +154,7 @@ export const Contact: React.FC = () => {
           <>
             {verifiedPhone && (
               <Button
-                href={`tel:${verifiedPhone}`}
+                href={getTelUrl(verifiedPhone)}
                 variant="primary"
                 className="font-bold text-sm tracking-wider uppercase h-12 flex-grow sm:flex-grow-0"
                 onClick={() => trackEvent('contact_phone_click', { position: 'hero' })}
@@ -177,7 +186,7 @@ export const Contact: React.FC = () => {
             {verifiedPhone && (
               <div className="bg-slate-50 border border-border p-6 rounded-card shadow-card flex flex-col justify-between">
                 <div className="space-y-4">
-                  <div className="w-10 h-10 rounded-sm bg-primary-soft text-primary flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-sm bg-primary-soft text-primary-ink flex items-center justify-center">
                     <img src={ASSETS.icons.phone} alt="" aria-hidden="true" className="w-5 h-5 object-contain" width={20} height={20} decoding="async" />
                   </div>
                   <div>
@@ -188,11 +197,11 @@ export const Contact: React.FC = () => {
                   </div>
                 </div>
                 <div className="pt-4 mt-6 border-t border-slate-200">
-                  {contactData.phones.map((phoneNo) => (
+                  {contactData.phones.map((phoneNo, idx) => (
                     <a
                       key={phoneNo}
-                      href={`tel:${phoneNo}`}
-                      className="block font-bold text-navy-950 hover:text-primary transition-colors text-xs font-mono mb-1"
+                      href={getTelUrl(phoneNo)}
+                      className="block font-bold text-navy-950 hover:text-primary-ink transition-colors text-xs font-mono mb-1"
                       onClick={() => trackEvent('contact_phone_click', { position: 'card', numberIndex: idx })}
                     >
                       {phoneNo}
@@ -206,7 +215,7 @@ export const Contact: React.FC = () => {
             {hasWhatsapp && (
               <div className="bg-slate-50 border border-border p-6 rounded-card shadow-card flex flex-col justify-between">
                 <div className="space-y-4">
-                  <div className="w-10 h-10 rounded-sm bg-primary-soft text-primary flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-sm bg-primary-soft text-primary-ink flex items-center justify-center">
                     <img src={ASSETS.icons.whatsapp} alt="" aria-hidden="true" className="w-5 h-5 object-contain" width={20} height={20} decoding="async" />
                   </div>
                   <div>
@@ -224,7 +233,7 @@ export const Contact: React.FC = () => {
                     className="block font-bold text-success-ink hover:text-success-ink-hover transition-colors text-xs font-mono"
                     onClick={() => trackEvent('contact_whatsapp_click', { position: 'card' })}
                   >
-                    +91-{contactData.whatsapp}
+                    {contactData.phones[0]}
                   </a>
                 </div>
               </div>
@@ -262,7 +271,7 @@ export const Contact: React.FC = () => {
             {/* Quick Quote Card */}
             <div className="bg-slate-50 border border-border p-6 rounded-card shadow-card flex flex-col justify-between">
               <div className="space-y-4">
-                <div className="w-10 h-10 rounded-sm bg-primary-soft text-primary flex items-center justify-center">
+                <div className="w-10 h-10 rounded-sm bg-primary-soft text-primary-ink flex items-center justify-center">
                   <img src={ASSETS.icons.fileText} alt="" aria-hidden="true" className="w-5 h-5 object-contain" width={20} height={20} decoding="async" />
                 </div>
                 <div>
@@ -275,7 +284,7 @@ export const Contact: React.FC = () => {
               <div className="pt-4 mt-6 border-t border-slate-200">
                 <Link
                   to="/request-a-quote"
-                  className="font-bold text-primary hover:text-primary-hover transition-colors text-xs flex items-center gap-1 group"
+                  className="font-bold text-primary-ink hover:text-primary-ink-hover transition-colors text-xs flex items-center gap-1 group"
                   onClick={() => trackEvent('contact_quote_click', { position: 'card' })}
                 >
                   Go to Quote Form
@@ -304,12 +313,13 @@ export const Contact: React.FC = () => {
               </p>
 
               {isSuccess ? (
-                // role=status so the outcome is announced; tabIndex lets the
-                // confirmation be reached directly after submit
+                // role=status so the outcome is announced; ref+tabIndex lets the
+                // confirmation be focused directly after submit
                 <div
+                  ref={successRef}
                   role="status"
                   tabIndex={-1}
-                  className="p-6 bg-success-ink/5 border border-success-ink/20 rounded-card text-center space-y-4 font-sans"
+                  className="outline-none p-6 bg-success-ink/5 border border-success-ink/20 rounded-card text-center space-y-4 font-sans"
                 >
                   <div className="w-12 h-12 bg-success-ink/10 text-success-ink rounded-full flex items-center justify-center mx-auto">
                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
@@ -317,25 +327,44 @@ export const Contact: React.FC = () => {
                     </svg>
                   </div>
                   <h4 className="font-bold text-navy-950 text-base">Message Sent Successfully</h4>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    Thank you. We have received your query. Our administrators will review the details and get back to you soon.
+                  <p className="text-xs text-slate-600 leading-relaxed max-w-md mx-auto">
+                    Thank you. We have received your query. Our team will review the details and get back to you promptly.
                   </p>
-                  <Button
-                    type="button"
-                    variant="secondary"
-                    size="sm"
-                    className="font-bold text-xs uppercase tracking-wide"
-                    onClick={() => {
-                      setIsSuccess(false);
-                      setFullName('');
-                      setPhone('');
-                      setEmail('');
-                      setMessage('');
-                      setConsentChecked(false);
-                    }}
-                  >
-                    Send Another Message
-                  </Button>
+                  
+                  {/* Instant WhatsApp forward action */}
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+                    {hasWhatsapp && (
+                      <Button
+                        href={`https://wa.me/${contactData.whatsapp}?text=${encodeURIComponent(
+                          `Hello Maa Vindhawasini Enterprises, I submitted an enquiry on your website:\nName: ${fullName}\nCompany: ${company || 'N/A'}\nPhone: ${phone}\nType: ${enquiryType}\nMessage: ${message}`
+                        )}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        variant="secondary"
+                        size="sm"
+                        className="font-bold text-xs uppercase tracking-wide bg-success-ink hover:bg-success-ink-hover text-white border-transparent flex items-center justify-center gap-1.5"
+                      >
+                        <img src={ASSETS.icons.whatsapp} alt="" aria-hidden="true" className="w-4 h-4 brightness-0 invert" />
+                        <span>Forward to WhatsApp</span>
+                      </Button>
+                    )}
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      size="sm"
+                      className="font-bold text-xs uppercase tracking-wide"
+                      onClick={() => {
+                        setIsSuccess(false);
+                        setFullName('');
+                        setPhone('');
+                        setEmail('');
+                        setMessage('');
+                        setConsentChecked(false);
+                      }}
+                    >
+                      Send Another Message
+                    </Button>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -345,6 +374,7 @@ export const Contact: React.FC = () => {
                     placeholder="Enter your name"
                     value={fullName}
                     id="input-fullName"
+                    autoComplete="name"
                     error={errors.fullName}
                     required
                     onChange={(e) => {
@@ -358,6 +388,7 @@ export const Contact: React.FC = () => {
                     placeholder="e.g. Steel Works Ltd. (Optional)"
                     value={company}
                     id="input-company"
+                    autoComplete="organization"
                     onChange={(e) => setCompany(e.target.value)}
                   />
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -367,6 +398,7 @@ export const Contact: React.FC = () => {
                       placeholder="e.g. +91-XXXXX-XXXXX"
                       value={phone}
                       id="input-phone"
+                      autoComplete="tel"
                       error={errors.phone}
                       required
                       onChange={(e) => setPhone(e.target.value)}
@@ -377,6 +409,7 @@ export const Contact: React.FC = () => {
                       placeholder="e.g. name@email.com (Optional)"
                       value={email}
                       id="input-email"
+                      autoComplete="email"
                       error={errors.email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
@@ -399,7 +432,7 @@ export const Contact: React.FC = () => {
 
                   {/* Redirect notice if quote request is more appropriate */}
                   {(enquiryType === 'product' || enquiryType === 'custom') && (
-                    <div className="bg-primary-soft text-primary border border-primary/20 p-4 rounded-card text-xs font-sans space-y-2">
+                    <div className="bg-primary-soft text-primary-ink border border-primary-ink/20 p-4 rounded-card text-xs font-sans space-y-2">
                       <span className="font-bold block">Looking for a Detailed Sizing Quote?</span>
                       <span className="leading-relaxed block text-slate-700">
                         If you have CAD drawings, raw capacity limits, or custom material requirements, using our Request a Quote form will ensure faster technical engineering reviews.
@@ -428,7 +461,7 @@ export const Contact: React.FC = () => {
                     label={
                       <span>
                         I agree that Maa Vindhawasini Enterprises may use my contact details to reply to my query. Read our{' '}
-                        <Link to="/privacy-policy" className="text-primary underline font-bold">
+                        <Link to="/privacy-policy" className="text-primary-ink underline font-bold">
                           Privacy Policy
                         </Link>
                         .
@@ -463,12 +496,11 @@ export const Contact: React.FC = () => {
             {/* Right Map & Hours Column */}
             <div className="lg:col-span-6 space-y-6">
               
-              {/* Map embed Card */}
-              {verifiedMapUrl && (
-                <div className="bg-white border border-border p-6 rounded-card shadow-card space-y-4">
-                  {/* No font-heading override: Big Shoulders Display is a
-                      condensed face reserved for h1/h2 scale, not 16px labels */}
-                  <h3 className="text-base font-extrabold text-navy-950">Workshop Location Map</h3>
+              {/* Location and Map Card */}
+              <div className="bg-white border border-border p-6 rounded-card shadow-card space-y-4">
+                <h3 className="text-base font-extrabold text-navy-950">Workshop & Office Location</h3>
+                
+                {verifiedMapUrl && (
                   <div className="rounded-lg overflow-hidden border border-border aspect-[16/10] bg-slate-50 relative">
                     <iframe
                       src={contactData.mapEmbedUrl}
@@ -481,33 +513,33 @@ export const Contact: React.FC = () => {
                       title="Maa Vindhawasini Enterprises workshop location map"
                     ></iframe>
                   </div>
+                )}
 
-                  <div className="space-y-3 font-sans pt-2">
-                    <div>
-                      <span className="text-xs text-slate-500 uppercase tracking-wider block font-bold">Physical Address</span>
-                      <p className="text-xs text-slate-600 leading-relaxed font-medium">
-                        {displayAddress}
-                      </p>
-                    </div>
-                    
-                    <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
-                      <span className="text-xs text-slate-500 font-bold uppercase tracking-wider">Junction Guide:</span>
-                      <a
-                        href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(displayAddress)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center text-xs font-bold text-primary hover:text-primary-hover group"
-                        onClick={() => trackEvent('contact_directions_click')}
-                      >
-                        Get Directions
-                        <svg className="w-3.5 h-3.5 ml-1 transform transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                        </svg>
-                      </a>
-                    </div>
+                <div className="space-y-3 font-sans pt-2">
+                  <div>
+                    <span className="text-xs text-slate-500 uppercase tracking-wider block font-bold">Physical Address</span>
+                    <p className="text-xs text-slate-600 leading-relaxed font-medium">
+                      {displayAddress}
+                    </p>
+                  </div>
+                  
+                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
+                    <span className="text-xs text-slate-500 font-bold uppercase tracking-wider">Navigation Guide:</span>
+                    <a
+                      href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(displayAddress)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center text-xs font-bold text-primary-ink hover:text-primary-ink-hover group"
+                      onClick={() => trackEvent('contact_directions_click')}
+                    >
+                      Get Directions
+                      <svg className="w-3.5 h-3.5 ml-1 transform transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                      </svg>
+                    </a>
                   </div>
                 </div>
-              )}
+              </div>
 
               {/* Hours Card */}
               {verifiedHours && (

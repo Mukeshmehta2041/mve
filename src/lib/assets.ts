@@ -20,13 +20,35 @@ import manufacturingFacility from '../assets/images/facilities/manufacturing-fac
 
 // Products
 import resinGlueKettle from '../assets/images/products/resin-glue-kettle.jpg';
-import storageTank from '../assets/images/products/storage-tank.jpg';
+import storageTank from '../assets/images/products/storage-tank-indiamart.jpg';
 import shutteringPlate from '../assets/images/products/shuttering-plate.jpg';
 import hopper from '../assets/images/products/hopper.jpg';
 import industrialChimney from '../assets/images/products/industrial-chimney.jpg';
-import hotWaterGenerator from '../assets/images/products/hot-water-generator.jpg';
 import railwayHeightGauge from '../assets/images/products/railway-height-gauge.jpg';
-import storageTankMain from '../assets/images/products/storage-tank-main.jpg';
+import borewellCasingPipe from '../assets/images/products/borewell-casing-pipe.jpg';
+import fabricationWorks from '../assets/images/products/fabrication-works.jpg';
+import bentoniteTank from '../assets/images/products/bentonite-tank.jpg';
+import resinGlueKettle2 from '../assets/images/products/gallery/resin-glue-kettle-2.jpg';
+import resinGlueKettle3 from '../assets/images/products/gallery/resin-glue-kettle-3.jpg';
+import resinGlueKettle4 from '../assets/images/products/gallery/resin-glue-kettle-4.jpg';
+import industrialChimney2 from '../assets/images/products/gallery/industrial-chimney-2.jpg';
+import industrialChimney3 from '../assets/images/products/gallery/industrial-chimney-3.jpg';
+import industrialChimney4 from '../assets/images/products/gallery/industrial-chimney-4.jpg';
+import shutteringPlate2 from '../assets/images/products/gallery/shuttering-plate-2.jpg';
+import shutteringPlate3 from '../assets/images/products/gallery/shuttering-plate-3.jpg';
+import shutteringPlate4 from '../assets/images/products/gallery/shuttering-plate-4.jpg';
+import storageTank2 from '../assets/images/products/gallery/storage-tank-2.jpg';
+import storageTank3 from '../assets/images/products/gallery/storage-tank-3.jpg';
+import storageTank4 from '../assets/images/products/gallery/storage-tank-4.jpg';
+import borewellCasingPipe2 from '../assets/images/products/gallery/borewell-casing-pipe-2.jpg';
+import borewellCasingPipe3 from '../assets/images/products/gallery/borewell-casing-pipe-3.jpg';
+import borewellCasingPipe4 from '../assets/images/products/gallery/borewell-casing-pipe-4.jpg';
+import fabricationWorks2 from '../assets/images/products/gallery/fabrication-works-2.jpg';
+import fabricationWorks3 from '../assets/images/products/gallery/fabrication-works-3.jpg';
+import fabricationWorks4 from '../assets/images/products/gallery/fabrication-works-4.jpg';
+import bentoniteTank2 from '../assets/images/products/gallery/bentonite-tank-2.jpg';
+import bentoniteTank3 from '../assets/images/products/gallery/bentonite-tank-3.jpg';
+import bentoniteTank4 from '../assets/images/products/gallery/bentonite-tank-4.jpg';
 
 // Fabrication
 import productsWeldingBanner from '../assets/images/fabrication/products-page-welding-banner.jpg';
@@ -80,7 +102,6 @@ import iconUsers from '../assets/icons/general/users.svg';
 import prodIconGauge from '../assets/icons/products/railway-height-gauge.svg';
 import prodIconTank from '../assets/icons/products/storage-tank.svg';
 import prodIconChimney from '../assets/icons/products/industrial-chimney.svg';
-import prodIconGenerator from '../assets/icons/products/hot-water-generator.svg';
 import prodIconPlate from '../assets/icons/products/shuttering-plate.svg';
 import prodIconKettle from '../assets/icons/products/resin-glue-kettle.svg';
 import prodIconHopper from '../assets/icons/products/hopper.svg';
@@ -110,9 +131,19 @@ export const ASSETS = {
     shutteringPlate,
     hopper,
     industrialChimney,
-    hotWaterGenerator,
     railwayHeightGauge,
-    storageTankMain,
+    borewellCasingPipe,
+    fabricationWorks,
+    bentoniteTank,
+  },
+  productGallery: {
+    resinGlueKettle: [resinGlueKettle, resinGlueKettle2, resinGlueKettle3, resinGlueKettle4],
+    industrialChimney: [industrialChimney, industrialChimney2, industrialChimney3, industrialChimney4],
+    shutteringPlate: [shutteringPlate, shutteringPlate2, shutteringPlate3, shutteringPlate4],
+    storageTank: [storageTank, storageTank2, storageTank3, storageTank4],
+    borewellCasingPipe: [borewellCasingPipe, borewellCasingPipe2, borewellCasingPipe3, borewellCasingPipe4],
+    fabricationWorks: [fabricationWorks, fabricationWorks2, fabricationWorks3, fabricationWorks4],
+    bentoniteTank: [bentoniteTank, bentoniteTank2, bentoniteTank3, bentoniteTank4],
   },
   fabrication: {
     productsBanner: productsWeldingBanner,
@@ -166,7 +197,6 @@ export const ASSETS = {
     railwayHeightGauge: prodIconGauge,
     storageTank: prodIconTank,
     industrialChimney: prodIconChimney,
-    hotWaterGenerator: prodIconGenerator,
     shutteringPlate: prodIconPlate,
     resinGlueKettle: prodIconKettle,
     hopper: prodIconHopper,

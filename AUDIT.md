@@ -274,7 +274,7 @@ Re-run `$impeccable audit` after fixes to see the score improve.
 All P0 and P1 items above are fixed. `tsc --noEmit`, `eslint .`, and `npm run build` are clean; every page was re-checked in a real 390px viewport.
 
 **P0**
-- `safe-bottom` replaced with explicit `pb-[calc(<base>+env(safe-area-inset-bottom))]` at both call sites. The utility was *not* simply defined: as a utility it would have overridden the elements' existing `py-2.5` / `p-4` bottom padding and set it to `0` on non-notched devices, trading one bug for another.
+- `safe-bottom` replaced with explicit `padding-bottom: calc(base + env(safe-area-inset-bottom))` at both call sites. The utility was *not* simply defined: as a utility it would have overridden the elements' existing `py-2.5` / `p-4` bottom padding and set it to `0` on non-notched devices, trading one bug for another.
 - Added a `-ink` tier: `--color-primary-ink` `#c2410c` (5.18:1 on white, 4.72:1 on `primary-soft`), `--color-success-ink` `#15803d` (5.02:1), plus hover steps. Applied to every button, badge, and link that carries text on a light surface. Base `#f26c21` is retained on navy, where it measures 5.90:1.
 - Light-surface `slate-400` text (2.45–2.56:1) moved to a new `slate-500` tier (4.55–4.76:1) across 20 call sites. Found the **inverse** bug in the footer bottom bar, which used `slate-500` on navy at 3.75:1 — that one went the other way, to `slate-400`.
 

@@ -11,7 +11,7 @@ export const FeaturedProducts: React.FC = () => {
       <Container>
         <SectionHeader
           title="What we build"
-          description="Seven standard product lines, each made to order. Capacities, dimensions, and materials are set by your specification."
+          description="Nine equipment and fabrication lines, each made to order. Capacities, dimensions, materials, and finishes are set by your specification."
           align="center"
         />
 

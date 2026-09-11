@@ -22,7 +22,7 @@ import {
   quoteConsentText,
 } from '../data';
 import { trackEvent } from '../lib/analytics';
-import { cn } from '../lib/utils';
+import { cn, getTelUrl } from '../lib/utils';
 import { ASSETS } from '../lib/assets';
 
 export const RequestAQuote: React.FC = () => {
@@ -354,6 +354,20 @@ export const RequestAQuote: React.FC = () => {
             </p>
 
             <div className="flex flex-wrap gap-4 justify-center">
+              {hasWhatsapp && (
+                <Button
+                  href={`https://wa.me/${contactData.whatsapp}?text=${encodeURIComponent(
+                    `Hello Maa Vindhawasini Enterprises, I submitted a Quote Request on your website:\nRef: ${rfqReference}\nType: ${reqType}\nName: ${fullName}\nPhone: ${phone}${company ? `\nCompany: ${company}` : ''}${city ? `\nCity: ${city}` : ''}${additionalNotes ? `\nNotes: ${additionalNotes}` : ''}`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="secondary"
+                  className="font-bold text-xs uppercase tracking-wide bg-success-ink hover:bg-success-ink-hover text-white border-transparent flex items-center justify-center gap-1.5"
+                >
+                  <img src={ASSETS.icons.whatsapp} alt="" aria-hidden="true" className="w-4 h-4 brightness-0 invert" />
+                  <span>Forward RFQ to WhatsApp</span>
+                </Button>
+              )}
               <Button href="/products" variant="primary" className="font-bold text-xs uppercase tracking-wide">
                 Return to Products
               </Button>
@@ -441,22 +455,24 @@ export const RequestAQuote: React.FC = () => {
                 )}
 
                 {/* Section A: Requirement type */}
-                <div>
-                  <label className="block text-sm font-semibold text-navy-950 mb-3">
+                <fieldset className="space-y-3">
+                  <legend className="block text-sm font-semibold text-navy-950 mb-3">
                     Select Requirement Type <span className="text-error" aria-hidden="true">*</span>
-                  </label>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 font-sans">
+                  </legend>
+                  <div role="radiogroup" aria-label="Requirement Type" className="grid grid-cols-1 md:grid-cols-3 gap-3 font-sans">
                     {quoteRequirementTypesData.map((type) => {
                       const isSelected = reqType === type.value;
                       return (
                         <button
                           key={type.value}
                           type="button"
+                          role="radio"
+                          aria-checked={isSelected}
                           onClick={() => handleReqTypeChange(type.value as 'standard' | 'custom' | 'general')}
                           className={cn(
                             "p-4 rounded-card border-2 text-left cursor-pointer transition focus:outline-none focus-ring",
                             isSelected
-                              ? "bg-white border-primary border-2 text-navy-950 shadow-card"
+                              ? "bg-white border-primary-ink border-2 text-navy-950 shadow-card"
                               : "bg-white border-border text-slate-600 hover:border-slate-400"
                           )}
                           id={`input-reqType-${type.value}`}
@@ -467,7 +483,7 @@ export const RequestAQuote: React.FC = () => {
                       );
                     })}
                   </div>
-                </div>
+                </fieldset>
 
                 {/* Section B/C: Fields based on requirement type */}
                 <div className="pt-4 border-t border-slate-200 space-y-4">
@@ -682,6 +698,7 @@ export const RequestAQuote: React.FC = () => {
                     placeholder="Enter your name"
                     value={fullName}
                     id="input-fullName"
+                    autoComplete="name"
                     error={errors.fullName}
                     required
                     onChange={(e) => setFullName(e.target.value)}
@@ -692,6 +709,7 @@ export const RequestAQuote: React.FC = () => {
                     placeholder="e.g. +91-XXXXX-XXXXX"
                     value={phone}
                     id="input-phone"
+                    autoComplete="tel"
                     error={errors.phone}
                     required
                     onChange={(e) => setPhone(e.target.value)}
@@ -702,6 +720,7 @@ export const RequestAQuote: React.FC = () => {
                     placeholder="e.g. name@company.com (Optional)"
                     value={email}
                     id="input-email"
+                    autoComplete="email"
                     error={errors.email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -711,6 +730,7 @@ export const RequestAQuote: React.FC = () => {
                     placeholder="e.g. Industrial Ltd. (Optional)"
                     value={company}
                     id="input-company"
+                    autoComplete="organization"
                     onChange={(e) => setCompany(e.target.value)}
                   />
                   <Input
@@ -719,6 +739,7 @@ export const RequestAQuote: React.FC = () => {
                     placeholder="e.g. Patna, Bihar (Optional)"
                     value={city}
                     id="input-city"
+                    autoComplete="address-level2"
                     onChange={(e) => setCity(e.target.value)}
                   />
                   <Input
@@ -751,7 +772,7 @@ export const RequestAQuote: React.FC = () => {
                     label={
                       <span>
                         {quoteConsentText}{' '}
-                        <Link to="/privacy-policy" className="text-primary underline font-bold">
+                        <Link to="/privacy-policy" className="text-primary-ink underline font-bold">
                           Privacy Policy
                         </Link>
                       </span>
@@ -808,7 +829,7 @@ export const RequestAQuote: React.FC = () => {
 
                   {verifiedPhone && (
                     <a
-                      href={`tel:${verifiedPhone}`}
+                      href={getTelUrl(verifiedPhone)}
                       className="flex items-center justify-center gap-2 text-xs font-bold text-navy-950 bg-white border border-navy-950 hover:bg-slate-50 px-4 py-2.5 rounded-card w-full text-center"
                       onClick={() => trackEvent('quote_alternative_contact_click', { channel: 'call' })}
                     >

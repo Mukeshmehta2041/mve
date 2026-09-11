@@ -67,7 +67,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
       ) : (
         <img
           src={src}
-          alt={alt === '' ? undefined : alt}
+          alt={alt}
           role={alt === '' ? 'presentation' : undefined}
           aria-hidden={alt === '' ? true : undefined}
           loading={loading}

@@ -39,6 +39,8 @@ export interface Product {
   image: string;
   categoryIcon: string;
   category: string;
+  entryType?: 'product' | 'service';
+  alternateNames?: string[];
   specifications: Record<string, string>;
   features: string[];
   applications: string[];

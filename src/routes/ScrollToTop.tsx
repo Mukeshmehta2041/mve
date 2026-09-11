@@ -12,7 +12,26 @@ export const ScrollToTop: React.FC = () => {
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    if (hash) return;
+    if (hash) {
+      const targetId = decodeURIComponent(hash.slice(1));
+      let attempts = 0;
+
+      const scrollToHash = () => {
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ block: 'start' });
+          return;
+        }
+
+        attempts += 1;
+        if (attempts < 10) {
+          window.setTimeout(scrollToHash, 50);
+        }
+      };
+
+      scrollToHash();
+      return;
+    }
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     window.scrollTo({ top: 0, left: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });

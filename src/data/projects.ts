@@ -40,7 +40,7 @@ export const projectsData: Project[] = [
     title: 'Custom Structural Fabrication',
     description: 'Precision structural column frames and platform assemblies welded to support processing machinery and utility piping systems.',
     image: ASSETS.projects.reactorVessel,
-    productSlug: 'resin-glue-kettle',
+    productSlug: 'fabrication-as-per-design',
     industry: 'Chemical & Adhesive Plants',
     location: 'Patna, Bihar',
     scope: ['Section Cutting', 'Arc Welding', 'Dimension Inspection'],

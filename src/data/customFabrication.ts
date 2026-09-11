@@ -67,7 +67,7 @@ export const customCategoriesData: FabricationCategory[] = [
     name: 'Safety Height Barriers',
     desc: 'Heavy-duty structural portal frames built to protect railway OHE lines and low underpasses from overhead impact.',
     icon: ASSETS.productIcons.railwayHeightGauge,
-    productSlug: 'railway-height-gauge',
+    productSlug: 'height-gauge',
   },
   {
     id: 'cat-6',

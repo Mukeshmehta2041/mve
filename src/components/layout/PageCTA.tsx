@@ -4,7 +4,7 @@ import { Section } from '../ui/Section';
 import { Button } from '../ui/Button';
 import { contactData } from '../../data';
 import { ASSETS } from '../../lib/assets';
-import { cn } from '../../lib/utils';
+import { cn, getTelUrl } from '../../lib/utils';
 
 interface CTAAction {
   label: string;
@@ -109,7 +109,7 @@ export const PageCTA: React.FC<PageCTAProps> = ({
 
           {showCall && verifiedPhone && (
             <Button
-              href={`tel:${verifiedPhone}`}
+              href={getTelUrl(verifiedPhone)}
               variant="outline-light"
               size="md"
               className={actionClasses}

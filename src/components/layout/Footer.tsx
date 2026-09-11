@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { footerLinksData, contactData } from '../../data';
 import { ASSETS } from '../../lib/assets';
 import { Container } from '../ui/Container';
+import { getTelUrl } from '../../lib/utils';
 
 export const Footer: React.FC = () => {
   const verifiedPhones = contactData.phones.filter((p) => p !== 'pending verification');
@@ -67,7 +68,7 @@ export const Footer: React.FC = () => {
               {verifiedPhones.map((phone) => (
                 <div key={phone} className="flex items-center">
                   <img src={ASSETS.icons.phone} alt="" aria-hidden="true" className="w-4 h-4 mr-2.5 text-primary" width={16} height={16} decoding="async" />
-                  <a href={`tel:${phone}`} className="hover:text-primary hover:underline">
+                  <a href={getTelUrl(phone)} className="hover:text-primary hover:underline">
                     {phone}
                   </a>
                 </div>
@@ -97,11 +98,11 @@ export const Footer: React.FC = () => {
           <div>
             © {new Date().getFullYear()} Maa Vindhawasini Enterprises. All rights reserved.
           </div>
-          <div className="flex flex-wrap gap-x-6 gap-y-2">
-            <Link to="/privacy-policy" className="hover:text-primary">Privacy Policy</Link>
-            <Link to="/terms" className="hover:text-primary">Terms of Use</Link>
-            <Link to="/disclaimer" className="hover:text-primary">Disclaimer</Link>
-            <Link to="/quality-certifications" className="hover:text-primary">Quality</Link>
+          <div className="flex flex-wrap gap-x-6 -my-1.5">
+            <Link to="/privacy-policy" className="inline-flex items-center min-h-11 py-1.5 hover:text-primary transition-colors focus-ring rounded-sm">Privacy Policy</Link>
+            <Link to="/terms" className="inline-flex items-center min-h-11 py-1.5 hover:text-primary transition-colors focus-ring rounded-sm">Terms of Use</Link>
+            <Link to="/disclaimer" className="inline-flex items-center min-h-11 py-1.5 hover:text-primary transition-colors focus-ring rounded-sm">Disclaimer</Link>
+            <Link to="/quality-certifications" className="inline-flex items-center min-h-11 py-1.5 hover:text-primary transition-colors focus-ring rounded-sm">Quality</Link>
           </div>
         </div>
       </Container>

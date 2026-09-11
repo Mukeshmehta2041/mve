@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Home } from '../pages/Home';
 import { Products } from '../pages/Products';
 import { ScrollToTop } from './ScrollToTop';
@@ -46,6 +46,8 @@ export const AppRoutes: React.FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/products/hot-water-generator" element={<Navigate to="/products" replace />} />
+          <Route path="/products/railway-height-gauge" element={<Navigate to="/products/height-gauge" replace />} />
           <Route path="/products/:slug" element={<ProductDetail />} />
           <Route path="/custom-fabrication" element={<CustomFabrication />} />
           <Route path="/projects" element={<Projects />} />

@@ -247,7 +247,7 @@ export const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
             ref={ref}
             required={required}
             aria-invalid={error ? true : undefined}
-            aria-describedby={error ? errorId : undefined}
+            aria-describedby={error ? `${errorId} ${fileId}-hint` : `${fileId}-hint`}
             className={cn('absolute inset-0 w-full h-full opacity-0 cursor-pointer', className)}
             {...props}
           />
@@ -295,7 +295,7 @@ export const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
               <span className="text-sm font-semibold text-navy-950">
                 Click to upload drawing or document
               </span>
-              <span className="text-xs text-slate-500 mt-1">
+              <span id={`${fileId}-hint`} className="text-xs text-slate-500 mt-1">
                 Accepted: {formatsLabel} (Max: {maxSizeLabel})
               </span>
             </>

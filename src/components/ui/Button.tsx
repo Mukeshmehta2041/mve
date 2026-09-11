@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { cn } from '../../lib/utils';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -52,6 +53,7 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
   };
 
   const widthClass = fullWidth ? 'w-full' : '';
+  const isInternalHref = href?.startsWith('/') && !href.startsWith('//') && !target;
 
   const renderContent = () => (
     <>
@@ -63,6 +65,21 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
 
   if (href) {
     const anchorProps = props as unknown as React.AnchorHTMLAttributes<HTMLAnchorElement>;
+    const linkProps = anchorProps as React.ComponentPropsWithoutRef<typeof Link>;
+
+    if (isInternalHref) {
+      return (
+        <Link
+          to={href}
+          className={cn(baseClasses, variantClasses[variant], sizeClasses[size], widthClass, className)}
+          ref={ref as React.Ref<HTMLAnchorElement>}
+          {...linkProps}
+        >
+          {renderContent()}
+        </Link>
+      );
+    }
+
     return (
       <a
         href={href}
@@ -112,6 +129,23 @@ export const IconButton = React.forwardRef<HTMLButtonElement | HTMLAnchorElement
 
   if (href) {
     const anchorProps = props as unknown as React.AnchorHTMLAttributes<HTMLAnchorElement>;
+    const linkProps = anchorProps as React.ComponentPropsWithoutRef<typeof Link>;
+    const isInternalHref = href.startsWith('/') && !href.startsWith('//') && !target;
+
+    if (isInternalHref) {
+      return (
+        <Link
+          to={href}
+          aria-label={ariaLabel}
+          className={cn(baseClasses, className)}
+          ref={ref as React.Ref<HTMLAnchorElement>}
+          {...linkProps}
+        >
+          {children}
+        </Link>
+      );
+    }
+
     return (
       <a
         href={href}
