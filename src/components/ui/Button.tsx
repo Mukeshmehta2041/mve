@@ -27,7 +27,7 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
   rel,
   ...props
 }, ref) => {
-  const baseClasses = 'inline-flex items-center justify-center font-semibold rounded-card transition duration-200 focus-ring disabled:opacity-50 disabled:pointer-events-none cursor-pointer';
+  const baseClasses = 'inline-flex min-w-0 items-center justify-center font-semibold rounded-card transition duration-200 focus-ring disabled:opacity-50 disabled:pointer-events-none cursor-pointer';
   
   // Variants that place white text on a colored fill, or colored text on a light
   // surface, use the `-ink` tier: --color-primary is 3.02:1 against white and
@@ -58,7 +58,7 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
   const renderContent = () => (
     <>
       {icon && iconPosition === 'left' && <span className="mr-2 inline-flex shrink-0">{icon}</span>}
-      <span className="inline-flex items-center justify-center gap-1.5 whitespace-nowrap">{children}</span>
+      <span className="inline-flex min-w-0 items-center justify-center gap-1.5 text-center leading-tight">{children}</span>
       {icon && iconPosition === 'right' && <span className="ml-2 inline-flex shrink-0">{icon}</span>}
     </>
   );

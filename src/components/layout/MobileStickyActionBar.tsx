@@ -24,7 +24,7 @@ export const MobileStickyActionBar: React.FC = () => {
 
   return (
     // pb reserves the iOS home-indicator strip on top of the bar's own padding
-    <div className="fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-border shadow-floating lg:hidden px-4 pt-2.5 pb-[calc(0.625rem_+_env(safe-area-inset-bottom,_0px))] flex items-center justify-between gap-3">
+    <div className="fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-border shadow-floating lg:hidden px-3 min-[360px]:px-4 pt-2.5 pb-[calc(0.625rem_+_env(safe-area-inset-bottom,_0px))] flex items-center justify-between gap-2.5 min-[360px]:gap-3">
       {/* Call button - fallback to contact route if phone is unverified */}
       {verifiedPhone ? (
         <a
@@ -67,7 +67,7 @@ export const MobileStickyActionBar: React.FC = () => {
       {/* Request Quote Button (has largest weight) */}
       <Link
         to="/request-a-quote"
-        className="flex-grow h-12 bg-primary-ink hover:bg-primary-ink-hover text-white text-sm font-bold uppercase tracking-wider rounded-card flex items-center justify-center gap-2 focus-ring shadow-card whitespace-nowrap"
+        className="min-w-0 flex-1 h-12 bg-primary-ink hover:bg-primary-ink-hover text-white text-xs min-[360px]:text-sm font-bold uppercase tracking-wider rounded-card flex items-center justify-center gap-2 px-3 focus-ring shadow-card whitespace-nowrap"
       >
         <span>Request a Quote</span>
         <svg

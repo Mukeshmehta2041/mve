@@ -316,7 +316,7 @@ export const RequestAQuote: React.FC = () => {
 
             <div className="bg-slate-50 border border-border p-6 rounded-card text-left space-y-4 mb-8">
               <h4 className="font-bold text-navy-950 text-sm pb-2 border-b border-border">Submitted Summary</h4>
-              <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-xs">
                 <span className="text-slate-500 font-semibold">Requirement:</span>
                 <span className="text-navy-950 font-bold capitalize">{reqType}</span>
                 {reqType === 'standard' && productSlug && (

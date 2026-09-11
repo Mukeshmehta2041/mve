@@ -33,8 +33,7 @@ export const ScrollToTop: React.FC = () => {
       return;
     }
 
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    window.scrollTo({ top: 0, left: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
 
     // Focus the main landmark so assistive tech lands on the new page content.
     // preventScroll keeps this from fighting the scroll above.

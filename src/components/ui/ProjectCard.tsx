@@ -74,7 +74,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
         {/* Dynamic Actions block for Projects list Page */}
         {showActions && (
-          <div className="grid grid-cols-2 gap-2 mt-4 pt-4 border-t border-border">
+          <div className="grid grid-cols-1 min-[360px]:grid-cols-2 gap-2 mt-4 pt-4 border-t border-border">
             {project.productSlug ? (
               <Button
                 variant="secondary"

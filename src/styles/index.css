@@ -113,11 +113,22 @@
     font-family: var(--font-sans);
     color: var(--color-foreground);
     background-color: var(--color-surface-muted);
+    width: 100%;
+    min-width: 0;
+    overflow-x: clip;
   }
   
   body {
     @apply antialiased text-base leading-relaxed;
     background-color: var(--color-surface-muted);
+    width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+  }
+
+  #root {
+    width: 100%;
+    min-width: 0;
   }
 
   /* Accessible focus states (design.md Section 12) */

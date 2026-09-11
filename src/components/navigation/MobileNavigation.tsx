@@ -30,7 +30,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({ isOpen, onCl
   return (
     <div
       className={cn(
-        'fixed inset-0 z-50 lg:hidden transition-all duration-300 ease-in-out',
+        'fixed inset-0 z-50 lg:hidden overflow-x-hidden transition-all duration-300 ease-in-out',
         isOpen ? 'visible opacity-100 pointer-events-auto' : 'invisible opacity-0 pointer-events-none'
       )}
       role="dialog"
